@@ -59,3 +59,15 @@ tsc --init -target es2015 --lib es2023 --outdir ./dist
 
 # Declaration from JS
 tsc ./src/lib.js --allowJS true --declaration --emitDeclarationOnly true
+
+# Semver
+https://semver.org 
+https://semver.npmjs.com/
+
+# npm outdated
+Package  Current  Wanted  Latest  Location  Depended by
+jquery   MISSING   3.1.1   3.7.1  -         1_migracja_z_js
+react    MISSING  18.3.1  18.3.1  -         1_migracja_z_js
+
+npm install jquery@^3
+npm install jquery@latest

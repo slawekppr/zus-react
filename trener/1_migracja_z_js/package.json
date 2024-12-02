@@ -8,5 +8,9 @@
   "keywords": [],
   "author": "",
   "license": "ISC",
-  "description": ""
+  "description": "",
+  "dependencies": {
+    "jquery": "^3.7.1",
+    "react": "^18.3.1"
+  }
 }
