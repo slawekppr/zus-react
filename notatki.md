@@ -105,5 +105,11 @@ npm i -D serve typescript
 
 # Backend w node - własny serwer express.js 
 
-npm i -D @types/node @types/express @types/express-session
+npm i -D @types/node @types/express @types/express-session typescript
 npm i express cors express-session
+
+git pull
+npm install
+tsc
+node dist/index.js
+
