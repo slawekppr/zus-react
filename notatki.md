@@ -77,3 +77,6 @@ npm install jquery@latest
 
 npm i  // Package.json + update
 npm ci // package-lock.json = exact!
+
+# Modules, module Resolution
+moduleResolution: 'node...'

@@ -1,4 +1,7 @@
-import { sub,div,mult } from "./lib.js";
+import { sub, div, mult } from "./lib.js";
+import jQuery from 'jquery'
+
+jQuery.addClass()
 
 const add = (x: number, y: number) => {
   return x + y;
