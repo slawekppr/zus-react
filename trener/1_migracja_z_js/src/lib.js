@@ -1,0 +1,2 @@
+
+var opowiesci = 'skrypty'
