@@ -69,5 +69,11 @@ Package  Current  Wanted  Latest  Location  Depended by
 jquery   MISSING   3.1.1   3.7.1  -         1_migracja_z_js
 react    MISSING  18.3.1  18.3.1  -         1_migracja_z_js
 
+npm i
 npm install jquery@^3
 npm install jquery@latest
+
+# Package.json / package-lock.json
+
+npm i  // Package.json + update
+npm ci // package-lock.json = exact!
