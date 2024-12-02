@@ -12,10 +12,13 @@ import fs from "fs";
 import type { User } from "./users";
 
 app.get("/users", (req, res) => {
-  const usersData = fs.readFileSync("../data/users.json", { encoding: "utf8" });
-  const users: User  = JSON.parse(usersData)
+  const usersData = fs.readFileSync("./data/users.json", { encoding: "utf8" });
+  const users: User[] = JSON.parse(usersData);
 
-  res.json(users);
+  // localhost?name=   name.includes(...)
+  const nameParam = req.query['name']
+
+  res.json(users.filter(u => u.name.includes(nameParam)));
 });
 
 const HOST = process.env["HOST"] || "localhost";
