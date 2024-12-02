@@ -24,3 +24,17 @@ F1 -> Clone -> PASTE ^ -> Clone From URL -> Select Location
 
 # DOMContentLoaded, onload, defer
 https://developer.mozilla.org/en-US/docs/Web/API/Document/DOMContentLoaded_event
+
+# TypeScript - TSC 
+npm install --global typescript
+
+npm i -g typescript@latest
+
+tsc -v
+
+# NPM global problems - prefix PATH
+npm config get prefix
+<!-- C:\Program Files\nodejs -->
+
+echo $PATH 
+settings -> System -> Zmienne środowiskowe -> PATH 
