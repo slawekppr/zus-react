@@ -3,11 +3,23 @@
 /**
  * Best substraction ever!
  * @param {number} x First number
- * @param {string} y Second number
+ * @param {number} y Second number
  * @returns {number} result
  */
 export function sub(x, y) {
   return x - y;
+}
+
+/**
+ * @param {number} x
+ * @param {number} y
+ */
+export function mult(x, y) {
+  return x * y;
+}
+
+export function div(x, y) {
+  return x / y;
 }
 
 sub(1, 1);
@@ -17,3 +29,19 @@ sub(1, "2");
 
 // @ts-expect-error
 sub(1, "2");
+
+
+/**
+ * show person info
+ * @param {Person} person 
+ * @returns 
+ */
+export function showPersonInfo(person){
+  return person.name
+}
+
+/**
+ * @typedef Person
+ * @property {string} id
+ * @property {string} name
+ */
