@@ -41,7 +41,11 @@ export function showPersonInfo(person){
 }
 
 /**
- * @typedef Person
- * @property {string} id
- * @property {string} name
+ * @typedef {import("./lib.d.ts").Person} Person 
  */
+
+// /**
+//  * @typedef Person
+//  * @property {string} id
+//  * @property {string} name
+//  */
