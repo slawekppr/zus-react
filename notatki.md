@@ -29,6 +29,7 @@ https://developer.mozilla.org/en-US/docs/Web/API/Document/DOMContentLoaded_event
 npm install --global typescript
 
 npm i -g typescript@latest
+npx tsc -v 
 
 tsc -v
 
