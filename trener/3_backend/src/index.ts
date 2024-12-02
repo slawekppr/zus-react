@@ -16,9 +16,27 @@ app.get("/users", (req, res) => {
   const users: User[] = JSON.parse(usersData);
 
   // localhost?name=   name.includes(...)
-  const nameParam = req.query['name']
+  const nameParam = req.query["name"];
 
-  res.json(users.filter(u => u.name.includes(nameParam)));
+  //   const name = nameParam as string;
+  //   const name = String(nameParam);
+
+  if (typeof nameParam === "string") {
+    // nameParam // string
+    res.json(users.filter((u) => u.name.includes(nameParam)));
+  } else {
+    nameParam; //  QueryString.ParsedQs | string[] | QueryString.ParsedQs[] | undefined
+    res.json(users);
+  }
+  
+  res.json({ message: "Bad param" });
+
+  //   if (typeof nameParam !== "object") {
+  //     nameParam ?? "";
+  //     if (nameParam !== undefined) {
+  //       nameParam;
+  //     }
+  //   }
 });
 
 const HOST = process.env["HOST"] || "localhost";
