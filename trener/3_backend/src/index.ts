@@ -1,30 +1,30 @@
 import express from "express";
-
-// console.log(process.argv);
-// window.document.body.append('test')
+import fs from "fs";
+import type { User } from "./users";
 
 const app = express();
 
-app.get("/", (req, res) => {
-  res.send("<h1>Hello / NodeJS Express</h1>");
+app.use((req, res, next) => {
+    // TODO: Authorize
+    req.user = {name:'Admin'}
+    next()
 });
-import fs from "fs";
-import type { User } from "./users";
+
+app.get("/", (req, res) => {
+  res.send(`<h1>Hello ${req.user.name} | Guest!</h1>`);
+});
 
 app.get("/users", (req, res) => {
   const usersData = fs.readFileSync("./data/users.json", { encoding: "utf8" });
   const users: User[] = JSON.parse(usersData);
 
   const nameParam = req.query["name"];
-  //   const name = nameParam as string;
-  //   const name = String(nameParam);
 
   if (typeof nameParam === "string") {
     res.json(users.filter((u) => u.name.includes(nameParam)));
   } else if (typeof nameParam === "undefined") {
     res.json(users);
   } else {
-    nameParam;
     res.json({ message: "Bad param" });
   }
 });
