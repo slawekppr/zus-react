@@ -56,3 +56,6 @@ tsc --init
 tsc main.ts --init --target es2015 --lib es2023
 
 tsc --init -target es2015 --lib es2023 --outdir ./dist
+
+# Declaration from JS
+tsc ./src/lib.js --allowJS true --declaration --emitDeclarationOnly true
