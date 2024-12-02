@@ -9,7 +9,10 @@ app.get("/", (req, res) => {
   res.send("<h1>Hello / NodeJS Express</h1>");
 });
 
-const HOST = "localhost";
+// const HOST = process.env["HOST"] ? process.env["HOST"] : "localhost";
+// const HOST = process.env["HOST"] || "localhost";
+
+const HOST = process.env["HOST"] ?? "localhost";
 const PORT = 8080;
 
 app.listen(PORT, HOST, () => {
