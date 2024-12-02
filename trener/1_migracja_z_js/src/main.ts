@@ -1,7 +1,9 @@
-import { sub, div, mult } from "./lib.js";
-import jQuery from 'jquery'
+/// <reference path="./types.d.ts" />
 
-jQuery.addClass()
+import { sub, div, mult } from "./lib.js";
+import jQuery from "jquery";
+
+// jQuery.placki;
 
 const add = (x: number, y: number) => {
   return x + y;

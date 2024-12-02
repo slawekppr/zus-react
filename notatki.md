@@ -80,3 +80,6 @@ npm ci // package-lock.json = exact!
 
 # Modules, module Resolution
 moduleResolution: 'node...'
+
+# Triple-Slash reference
+/// <reference path="./types.d.ts" />
