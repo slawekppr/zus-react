@@ -32,6 +32,7 @@ npm i -g typescript@latest
 npx tsc -v 
 
 tsc -v
+tsc --help
 
 # NPM global problems - prefix PATH
 npm config get prefix
@@ -39,3 +40,6 @@ npm config get prefix
 
 echo $PATH 
 settings -> System -> Zmienne środowiskowe -> PATH 
+
+# TSC
+tsc plik.ts 
