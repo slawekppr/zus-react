@@ -1,6 +1,12 @@
-// window.onload 
+// window.onload
 
-console.log('Hello JS');
-document.getElementById('title').textContent = 'Hello JS'
+function add(x, y) {
+  return x + y;
+}
 
-console.log('opowieści '+ opowiesci);
+// add(1,2)
+// add('2','2')
+
+// console.log('Hello JS');
+// document.getElementById('title').textContent = 'Hello JS'
+// console.log('opowieści '+ opowiesci);

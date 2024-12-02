@@ -1,2 +1,2 @@
 
-var opowiesci = 'skrypty'
+let opowiesci = 'skrypty'
