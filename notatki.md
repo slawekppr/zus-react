@@ -22,3 +22,5 @@ git clone https://bitbucket.org/ev45ive/sages-zus-typescript.git
 File -> New Window 
 F1 -> Clone -> PASTE ^ -> Clone From URL -> Select Location
 
+# DOMContentLoaded, onload, defer
+https://developer.mozilla.org/en-US/docs/Web/API/Document/DOMContentLoaded_event
