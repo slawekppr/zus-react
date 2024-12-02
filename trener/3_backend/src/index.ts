@@ -5,23 +5,24 @@ import type { User } from "./users";
 const app = express();
 
 app.use((req, res, next) => {
-  // TODO: Authorize
+  // if( Authorized.. )
   req.user = { name: "Admin" };
+  //   req.user = undefined;
   next();
 });
 
 app.get("/", (req, res) => {
-  res.send(`<h1>Hello ${req.user.name} | Guest!</h1>`);
+  res.send(`<h1>Hello ${req.user?.name || "Guest"} </h1>`);
 });
 
 declare global {
-    namespace Express {
-        // These open interfaces may be extended in an application-specific manner via declaration merging.
-        // See for example method-override.d.ts (https://github.com/DefinitelyTyped/DefinitelyTyped/blob/master/types/method-override/index.d.ts)
-        interface Request {
-            
-        }
+  namespace Express {
+    // These open interfaces may be extended in an application-specific manner via declaration merging.
+    // See for example method-override.d.ts (https://github.com/DefinitelyTyped/DefinitelyTyped/blob/master/types/method-override/index.d.ts)
+    interface Request {
+      user?: { name: string };
     }
+  }
 }
 
 // app.get("", (req, res) => {});
@@ -47,5 +48,3 @@ const PORT = Number(process.env["PORT"]) || 8080;
 app.listen(PORT, HOST, () => {
   console.log(`Listening on http://${HOST}:${PORT}`);
 });
-
-
