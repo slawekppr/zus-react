@@ -8,13 +8,13 @@ const app = express();
 app.get("/", (req, res) => {
   res.send("<h1>Hello / NodeJS Express</h1>");
 });
+import fs from "fs";
 
 app.get("/users", (req, res) => {
-  res.json([
-    {
-      name: "Alice",
-    },
-  ]);
+  const usersData = fs.readFileSync("../data/users.json", { encoding: "utf8" });
+  const users = JSON.parse(usersData)
+
+  res.json(users);
 });
 
 const HOST = process.env["HOST"] || "localhost";

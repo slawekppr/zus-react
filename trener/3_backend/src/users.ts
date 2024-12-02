@@ -53,7 +53,9 @@ const users: User[] = [
     },
   },
 ];
-users[0].address.street; // Type is inferred from data
+
+// Type is inferred from data
+users[0].address?.street;  // Street or undefined
 
 type UserDetails = { banana: true };
 
