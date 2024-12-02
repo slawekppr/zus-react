@@ -1,13 +1,7 @@
+import { sub } from "./lib.js";
+
 const add = (x: number, y: number) => {
   return x + y;
-}
-
+};
+sub(1, 2);
 add(1, 2);
-
-[].toReversed()
-
-// add("1", "2");
-
-// console.log('Hello JS');
-// document.getElementById('title').textContent = 'Hello JS'
-// console.log('opowieści '+ opowiesci);
