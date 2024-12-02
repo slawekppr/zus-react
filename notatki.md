@@ -103,3 +103,7 @@ npm i jquery @types/jquery bootstrap
 // devDependencies:
 npm i -D serve typescript
 
+# Backend w node - własny serwer express.js 
+
+npm i -D @types/node @types/express @types/express-session
+npm i express cors express-session
