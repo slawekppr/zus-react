@@ -7,6 +7,7 @@
 export function sub(x: number, y: number): number;
 
 /**
+ * Mnozenie
  * @param {number} x
  * @param {number} y
  */
@@ -23,5 +24,8 @@ export function showPersonInfo(person: Person): string;
 
 export type Person = {
     id: string;
+    /**
+     * Imie osoby
+     */
     name: string;
 };
