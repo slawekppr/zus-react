@@ -9,10 +9,11 @@ app.get("/", (req, res) => {
   res.send("<h1>Hello / NodeJS Express</h1>");
 });
 import fs from "fs";
+import type { User } from "./users";
 
 app.get("/users", (req, res) => {
   const usersData = fs.readFileSync("../data/users.json", { encoding: "utf8" });
-  const users = JSON.parse(usersData)
+  const users: User  = JSON.parse(usersData)
 
   res.json(users);
 });
