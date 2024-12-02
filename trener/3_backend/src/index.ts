@@ -13,7 +13,7 @@ app.get("/", (req, res) => {
 // const HOST = process.env["HOST"] || "localhost";
 
 const HOST = process.env["HOST"] ?? "localhost";
-const PORT = 8080;
+const PORT = process.env["PORT"] as unknown as number ?? 8080;
 
 app.listen(PORT, HOST, () => {
   console.log(`Listening on http://${HOST}:${PORT}`);
