@@ -83,3 +83,23 @@ moduleResolution: 'node...'
 
 # Triple-Slash reference
 /// <reference path="./types.d.ts" />
+
+# CSS Dinner
+https://flukeout.github.io/ 
+
+# TS for WEB
+
+// package.json:
+npm init -y
+echo node_modules >> .gitignore
+
+// tsconfig.json:
+tsc --init --target es2023 --outdir ./dist
+echo dist >> .gitignore
+
+// dependencies:
+npm i jquery @types/jquery bootstrap
+
+// devDependencies:
+npm i -D serve typescript
+
