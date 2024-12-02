@@ -18,3 +18,7 @@ git version 2.40.1.windows.1
 11`
 
 git clone https://bitbucket.org/ev45ive/sages-zus-typescript.git
+
+File -> New Window 
+F1 -> Clone -> PASTE ^ -> Clone From URL -> Select Location
+
