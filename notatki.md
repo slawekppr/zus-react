@@ -41,5 +41,16 @@ npm config get prefix
 echo $PATH 
 settings -> System -> Zmienne środowiskowe -> PATH 
 
+# Package.json
+npm init -y
+
 # TSC
 tsc plik.ts 
+
+--watch
+--target 
+--lib 
+
+# Tsc init / tsconfig.json
+tsc --init 
+tsc main.ts --init --target es2015 --lib es2023
