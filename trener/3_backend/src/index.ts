@@ -15,13 +15,15 @@ app.get("/", (req, res) => {
   res.send(`<h1>Hello ${req.user?.name || "Guest"} </h1>`);
 });
 
-
-
 // app.get("", (req, res) => {});
 
+import users from "../data/users.json"; // --resolveJsonModule
+
 app.get("/users", (req, res) => {
-  const usersData = fs.readFileSync("./data/users.json", { encoding: "utf8" });
-  const users: User[] = JSON.parse(usersData);
+  //   const usersData = fs.readFileSync("./data/users.json", { encoding: "utf8" });
+  //   const users: User[] = JSON.parse(usersData);
+
+  //   users[0].address.geo.lat
 
   const nameParam = req.query["name"];
 
