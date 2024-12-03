@@ -39,10 +39,31 @@ type Props = {
   children?: React.ReactNode;
 };
 
-const PersonProfile = ({ user, children }: Props) => {
-                            //  root.tutajjestem ?? 
-  const [color, setColor] = useState(user.color);
+class PeronP extends React.Component{
+  state = {
+    color:'red'
+  }
 
+  changeColorClick(){
+    this.setState({
+      ...this.state,
+      color:'blue'
+    })
+  }
+  render(): React.ReactNode {
+    return React.createElement('div',null, this.state.color)
+  }
+}
+
+
+const PersonProfile = ({ user, children }: Props) => {
+  //  root.tutajjestem.hooks[0] ??
+  const [color, setColor] = useState(user.color);
+  
+  if (color == "red") useState(); // root.tutajjestem.hooks[1]
+  
+  useState(); // root.tutajjestem.hooks[2]
+  
   return React.createElement(
     "div",
     {
