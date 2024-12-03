@@ -39,16 +39,12 @@ const users: User[] = [
     color: "green",
   },
 ];
-// const user = users[2];
 
-// Extract type + Type Lookup
-// type User = (typeof users)[ number ];
+type Props = {
+  user: User;
+};
 
-const PersonProfile = (props: { user: User; x?: 1 }) => {
-  // const user = props.user;
-  // const { user, x: jakisAlias } = props; // Destructuring
-  const { user } = props; // Destructuring
-
+const PersonProfile = ({ user }: Props) =>
   React.createElement(
     "div",
     {
@@ -60,13 +56,13 @@ const PersonProfile = (props: { user: User; x?: 1 }) => {
       ? React.createElement("p", null, `${user.name} has a ${user.pet.name}`)
       : React.createElement("p", { style: {} }, `${user.name} has no pet`)
   );
-};
 
 const UsersList = React.createElement(
   "ul",
   null,
   users.map((user, index) =>
-    React.createElement("li", { key: user.id }, `${user.name}`)
+    // React.createElement("li", { key: user.id }, PersonProfile({ user: user }))
+    React.createElement("li", { key: user.id }, PersonProfile({ user })) // Structuring
   )
 );
 
