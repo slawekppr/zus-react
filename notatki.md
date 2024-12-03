@@ -113,3 +113,5 @@ npm install
 tsc
 node dist/index.js
 
+# 12 FACTOR - cloud native 
+https://12factor.net/
