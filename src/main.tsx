@@ -42,9 +42,10 @@ const users: User[] = [
 
 type Props = {
   user: User;
+  children?: React.ReactNode;
 };
 
-const PersonProfile = ({ user }: Props) =>
+const PersonProfile = ({ user, children }: Props) =>
   React.createElement(
     "div",
     {
@@ -54,7 +55,8 @@ const PersonProfile = ({ user }: Props) =>
     },
     user.pet // Conditional Rendering
       ? React.createElement("p", null, `${user.name} has a ${user.pet.name}`)
-      : React.createElement("p", { style: {} }, `${user.name} has no pet`)
+      : React.createElement("p", { style: {} }, `${user.name} has no pet`),
+    children
   );
 
 const UsersList = ({ users }: { users: User[] }) =>
@@ -63,7 +65,14 @@ const UsersList = ({ users }: { users: User[] }) =>
     null,
     users.map(
       (user) =>
-        React.createElement("li", { key: user.id }, PersonProfile({ user })) // Structuring
+        React.createElement(
+          "li",
+          { key: user.id },
+          PersonProfile({
+            user,
+            children: React.createElement("button", {}, "Select"),
+          })
+        ) // Structuring
     )
   );
 
