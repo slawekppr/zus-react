@@ -60,6 +60,10 @@ const users: User[] = [
 // users[0] instanceof ????
 // users[0] instanceof Object
 
+
+typeof users[0] === 'object' // REAL - Apples
+type User2 = typeof users[0]  // Not Real - Contract for apples
+
 // // Type is inferred from data
 // users[0].address?.street;  // Street or undefined
 
