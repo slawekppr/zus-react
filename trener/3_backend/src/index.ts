@@ -1,5 +1,6 @@
 import express from "express";
 import fs from "fs";
+
 import type { User } from "./users";
 
 const app = express();
