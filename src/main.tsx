@@ -39,31 +39,40 @@ type Props = {
   children?: React.ReactNode;
 };
 
-class PeronP extends React.Component{
-  state = {
-    color:'red'
-  }
-
-  changeColorClick(){
-    this.setState({
-      ...this.state,
-      color:'blue'
-    })
-  }
-  render(): React.ReactNode {
-    return React.createElement('div',null, this.state.color)
-  }
-}
-
-
 const PersonProfile = ({ user, children }: Props) => {
-  //  root.tutajjestem.hooks[0] ??
   const [color, setColor] = useState(user.color);
+
+  window.setColor = setColor
   
-  if (color == "red") useState(); // root.tutajjestem.hooks[1]
-  
-  useState(); // root.tutajjestem.hooks[2]
-  
+  return (
+    <div
+      className="user-card"
+      id={`user_${user.id}`}
+      style={{ color: color, border: "1px solid" }}
+    >
+      {user.pet ? (
+        <p>
+          {user.name} has a {user.pet.name}
+        </p>
+      ) : (
+        <p>{user.name} has no pet</p>
+      )}
+      <button
+        onClick={() => {
+          setColor(color == "red" ? user.color : "red"); // impure state + dirty
+        }}
+      >
+        Select
+      </button>
+    </div>
+  );
+};
+
+debugger
+
+const PersonProfile2 = ({ user, children }: Props) => {
+  const [color, setColor] = useState(user.color);
+
   return React.createElement(
     "div",
     {
