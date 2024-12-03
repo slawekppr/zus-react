@@ -116,6 +116,9 @@ node dist/index.js
 # 12 FACTOR - cloud native 
 https://12factor.net/
 
+# Create React App + Webpack
+https://create-react-app.dev/
+
 # Vite
 https://vite.dev/guide/
 
@@ -135,3 +138,4 @@ Done. Now run:
   cd vite-project
   npm install
   npm run dev
+
