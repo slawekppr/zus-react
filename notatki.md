@@ -115,3 +115,23 @@ node dist/index.js
 
 # 12 FACTOR - cloud native 
 https://12factor.net/
+
+# Vite
+https://vite.dev/guide/
+
+npm create vite@latest
+
+> npx
+> create-vite
+
+√ Project name: ... vite-project
+√ Select a framework: » React
+√ Select a variant: » TypeScript
+
+Scaffolding project in C:\Projects\sages-zus-typescript\vite-project...
+
+Done. Now run:
+
+  cd vite-project
+  npm install
+  npm run dev
