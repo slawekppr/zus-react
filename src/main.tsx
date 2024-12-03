@@ -57,16 +57,17 @@ const PersonProfile = ({ user }: Props) =>
       : React.createElement("p", { style: {} }, `${user.name} has no pet`)
   );
 
-const UsersList = React.createElement(
-  "ul",
-  null,
-  users.map((user, index) =>
-    // React.createElement("li", { key: user.id }, PersonProfile({ user: user }))
-    React.createElement("li", { key: user.id }, PersonProfile({ user })) // Structuring
-  )
-);
+const UsersList = ({ users }: { users: User[] }) =>
+  React.createElement(
+    "ul",
+    null,
+    users.map(
+      (user) =>
+        React.createElement("li", { key: user.id }, PersonProfile({ user })) // Structuring
+    )
+  );
 
-root.render(UsersList);
+root.render(UsersList({ users }));
 
 // ReactDOM.render(vdiv, root);
 // createRoot(document.getElementById('root')!).render(
