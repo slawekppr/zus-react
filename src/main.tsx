@@ -32,7 +32,7 @@ const users = [
 ];
 const user = users[2];
 
-const vdiv = React.createElement(
+const PersonProfile = (user: ???? ) => React.createElement(
   "div",
   {
     id: `user_${user.id}`,
@@ -42,7 +42,7 @@ const vdiv = React.createElement(
   user.pet // Conditional Rendering
     ? React.createElement("p", null, `${user.name} has a ${user.pet.name}`)
     : React.createElement("p", { style: {} }, `${user.name} has no pet`)
-);
+)
 
 const UsersList = React.createElement(
   "ul",
