@@ -44,18 +44,23 @@ const users: User[] = [
 // Extract type + Type Lookup
 // type User = (typeof users)[ number ];
 
-export const PersonProfile = (props: { user: User }) =>
+const PersonProfile = (props: { user: User; x?: 1 }) => {
+  // const user = props.user;
+  // const { user, x: jakisAlias } = props; // Destructuring
+  const { user } = props; // Destructuring
+
   React.createElement(
     "div",
     {
-      id: `user_${props.user.id}`,
+      id: `user_${user.id}`,
       className: "user-card",
-      style: { color: props.user.color, border: "1px solid" },
+      style: { color: user.color, border: "1px solid" },
     },
-    props.user.pet // Conditional Rendering
-      ? React.createElement("p", null, `${props.user.name} has a ${props.user.pet.name}`)
-      : React.createElement("p", { style: {} }, `${props.user.name} has no pet`)
+    user.pet // Conditional Rendering
+      ? React.createElement("p", null, `${user.name} has a ${user.pet.name}`)
+      : React.createElement("p", { style: {} }, `${user.name} has no pet`)
   );
+};
 
 const UsersList = React.createElement(
   "ul",
