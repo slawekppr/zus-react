@@ -47,7 +47,9 @@ const vdiv = React.createElement(
 const UsersList = React.createElement(
   "ul",
   null,
-  React.createElement("li", null, "User 123")
+  users.map((user, index) =>
+    React.createElement("li", { key: user.id }, `${user.name}`)
+  )
 );
 
 root.render(UsersList);
