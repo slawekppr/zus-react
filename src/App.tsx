@@ -2,6 +2,8 @@ import { useState } from 'react'
 import reactLogo from './assets/react.svg'
 import viteLogo from '/vite.svg'
 import './App.css'
+import { UsersList } from './UsersList'
+import { users } from './users'
 
 function App() {
   const [count, setCount] = useState(0)
@@ -26,6 +28,7 @@ function App() {
         Ala ma kota a <b>kot</b> ma <u>HMR - Hot Module Replacement !!!</u>
         </p>
       </div>
+      <UsersList users={users} />
       <p className="read-the-docs">
         Click on the Vite and React logos to learn more
       </p>
