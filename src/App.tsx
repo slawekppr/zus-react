@@ -23,7 +23,7 @@ function App() {
           count is {count}
         </button>
         <p>
-         Ala ma kota a kot ma HMR - Hot Module Replacement
+        Ala ma kota a <b>kot</b> ma <u>HMR - Hot Module Replacement !!!</u>
         </p>
       </div>
       <p className="read-the-docs">
