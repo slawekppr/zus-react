@@ -42,8 +42,6 @@ type Props = {
 const PersonProfile = ({ user, children }: Props) => {
   const [color, setColor] = useState(user.color);
 
-  window.setColor = setColor
-  
   return (
     <div
       className="user-card"
@@ -65,34 +63,6 @@ const PersonProfile = ({ user, children }: Props) => {
         Select
       </button>
     </div>
-  );
-};
-
-debugger
-
-const PersonProfile2 = ({ user, children }: Props) => {
-  const [color, setColor] = useState(user.color);
-
-  return React.createElement(
-    "div",
-    {
-      id: `user_${user.id}`,
-      className: "user-card",
-      style: { color: color, border: "1px solid" },
-    },
-    user.pet // Conditional Rendering
-      ? React.createElement("p", null, `${user.name} has a ${user.pet.name}`)
-      : React.createElement("p", { style: {} }, `${user.name} has no pet`),
-    children,
-    React.createElement(
-      "button",
-      {
-        onClick() {
-          setColor(color == "red" ? user.color : "red"); // impure state + dirty
-        },
-      },
-      "Select"
-    )
   );
 };
 
