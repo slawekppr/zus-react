@@ -16,3 +16,31 @@ window.ReactDOM = ReactDOM;
 // )
 
 // export {} // module
+
+
+// div = document.createElement('div')
+// p = document.createElement('p')
+// div.append(p)
+// p.innerText = 'Alice has a cat'
+// root.append(div)
+
+// user = '<h1>Alice Hxr PWd <script> <img> '
+// root.innerHTML = `
+//  <div><p>${user} has a <b>cat<b></p></div>
+// `
+
+// user = 'Alice '
+// root.innerHTML = `
+//  <div>
+//  <p>${user} has a <b>cats<b></p>
+//  <input>
+//  </div>
+
+// vdiv = React.createElement('div',{
+//   id:'placki 123',
+//   className:'user-card',
+//   style: { color:'red' }
+// },
+// React.createElement('p',null,'Ala ma kota'),
+// React.createElement('input')
+// )
