@@ -9,6 +9,24 @@ window.React = React;
 window.ReactDOM = ReactDOM;
 (window as any).ReactDOM = ReactDOM;
 
+
+const root = createRoot(document.getElementById('root')!)
+
+const vdiv = React.createElement(
+  "div",
+  {
+    id: "placki 123",
+    className: "user-card",
+    style: { color: "blue", border: "1px solid" },
+  },
+  // React.createElement('input',{key:'tutaj jestem'}),
+  React.createElement("p", null, "Bob ma kota"),
+  React.createElement("input", { key: "tutaj jestem" })
+);
+
+root.render(vdiv)
+
+// ReactDOM.render(vdiv, root);
 // createRoot(document.getElementById('root')!).render(
 //   <StrictMode>
 //     <App />
@@ -16,7 +34,6 @@ window.ReactDOM = ReactDOM;
 // )
 
 // export {} // module
-
 
 // div = document.createElement('div')
 // p = document.createElement('p')
