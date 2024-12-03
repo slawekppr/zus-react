@@ -24,8 +24,6 @@ app.get("/users", (req, res) => {
   //   const usersData = fs.readFileSync("./data/users.json", { encoding: "utf8" });
   //   const users: User[] = JSON.parse(usersData);
 
-  //   users[0].address.geo.lat
-
   const nameParam = req.query["name"];
 
   if (typeof nameParam === "string") {

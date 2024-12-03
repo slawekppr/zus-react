@@ -28,6 +28,7 @@ type Address = {
   geo: Geo;
 };
 
+
 const users: User[] = [
   {
     id: 1,
@@ -54,9 +55,14 @@ const users: User[] = [
   },
 ];
 
-// Type is inferred from data
-users[0].address?.street;  // Street or undefined
+// 'User' only refers to a type, but is being used as a value here.
+// users[0] instanceof User
+// users[0] instanceof ????
+// users[0] instanceof Object
 
-type UserDetails = { banana: true };
+// // Type is inferred from data
+// users[0].address?.street;  // Street or undefined
 
-type SuperUser = User & UserDetails & { super: true }; // Extending type alias
+// type UserDetails = { banana: true };
+
+// type SuperUser = User & UserDetails & { super: true }; // Extending type alias
