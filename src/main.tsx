@@ -11,12 +11,26 @@ window.ReactDOM = ReactDOM;
 
 const root = createRoot(document.getElementById("root")!);
 
-const user = {
-  id: "123",
-  name: "Alice",
-  color: "red",
-  pet: { name: "cat" },
-};
+const users = [
+  {
+    id: "123",
+    name: "Alice",
+    color: "red",
+    pet: { name: "cat" },
+  },
+  {
+    id: "234",
+    name: "Bob",
+    color: "blue",
+    pet: { name: "dog" },
+  },
+  {
+    id: "345",
+    name: "Catherine",
+    color: "green",
+  },
+];
+const user = users[2];
 
 const vdiv = React.createElement(
   "div",
@@ -25,7 +39,9 @@ const vdiv = React.createElement(
     className: "user-card",
     style: { color: user.color, border: "1px solid" },
   },
-  React.createElement("p", null, `${user.name} has a ${user.pet.name}`),
+  user.pet // Conditional Rendering
+    ? React.createElement("p", null, `${user.name} has a ${user.pet.name}`)
+    : React.createElement("p", { style: {} }, `${user.name} has no pet`)
 );
 
 root.render(vdiv);
