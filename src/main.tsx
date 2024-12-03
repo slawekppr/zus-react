@@ -44,7 +44,13 @@ const vdiv = React.createElement(
     : React.createElement("p", { style: {} }, `${user.name} has no pet`)
 );
 
-root.render(vdiv);
+const UsersList = React.createElement(
+  "ul",
+  null,
+  React.createElement("li", null, "User 123")
+);
+
+root.render(UsersList);
 
 // ReactDOM.render(vdiv, root);
 // createRoot(document.getElementById('root')!).render(
