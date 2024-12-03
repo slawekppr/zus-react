@@ -11,7 +11,16 @@ window.ReactDOM = ReactDOM;
 
 const root = createRoot(document.getElementById("root")!);
 
-const users = [
+type User = {
+  id: string;
+  name: string;
+  color: string;
+  pet?: {
+    name: string;
+  };
+};
+
+const users: User[] = [
   {
     id: "123",
     name: "Alice",
@@ -30,22 +39,22 @@ const users = [
     color: "green",
   },
 ];
-const user = users[2];
+// const user = users[2];
 
-// Extract type + Type Lookup 
-type User = (typeof users)[ number ];
+// Extract type + Type Lookup
+// type User = (typeof users)[ number ];
 
-export const PersonProfile = () =>
+export const PersonProfile = (props: { user: User }) =>
   React.createElement(
     "div",
     {
-      id: `user_${user.id}`,
+      id: `user_${props.user.id}`,
       className: "user-card",
-      style: { color: user.color, border: "1px solid" },
+      style: { color: props.user.color, border: "1px solid" },
     },
-    user.pet // Conditional Rendering
-      ? React.createElement("p", null, `${user.name} has a ${user.pet.name}`)
-      : React.createElement("p", { style: {} }, `${user.name} has no pet`)
+    props.user.pet // Conditional Rendering
+      ? React.createElement("p", null, `${props.user.name} has a ${props.user.pet.name}`)
+      : React.createElement("p", { style: {} }, `${props.user.name} has no pet`)
   );
 
 const UsersList = React.createElement(
