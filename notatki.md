@@ -139,3 +139,12 @@ Done. Now run:
   npm install
   npm run dev
 
+# Vite dev
+npm i
+npm run dev
+
+  VITE v6.0.2  ready in 196 ms
+
+  ➜  Local:   http://localhost:5173/
+  ➜  Network: use --host to expose
+  ➜  press h + enter to show help
