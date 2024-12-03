@@ -2,37 +2,7 @@ import React, { StrictMode, useState } from "react";
 import { createRoot } from "react-dom/client";
 import "./index.css";
 import App from "./App.tsx";
-
-const root = createRoot(document.getElementById("root")!);
-
-type User = {
-  id: string;
-  name: string;
-  color: string;
-  pet?: {
-    name: string;
-  };
-};
-
-const users: User[] = [
-  {
-    id: "123",
-    name: "Alice",
-    color: "red",
-    pet: { name: "cat" },
-  },
-  {
-    id: "234",
-    name: "Bob",
-    color: "blue",
-    pet: { name: "dog" },
-  },
-  {
-    id: "345",
-    name: "Catherine",
-    color: "green",
-  },
-];
+import type { User } from "./User.tsx";
 
 type Props = {
   user: User;
@@ -66,22 +36,20 @@ const PersonProfile = ({ user, children }: Props) => {
   );
 };
 
-const UsersList = ({ users }: { users: User[] }) =>
-  React.createElement(
-    "ul",
-    null,
-    users.map((user) =>
-      React.createElement(
-        "li",
-        { key: user.id },
-        // root.tutajjestem = tu
-        React.createElement(PersonProfile, { user })
-      )
-    )
-  );
+const UsersList = ({ users }: { users: User[] }) => (
+  <ul>
+    {users.map((user) => (
+      <li key={user.id}>
+        <PersonProfile user={user} />
+      </li>
+    ))}
+  </ul>
+);
+// React.createElement("li", { key: user.id },
+//   React.createElement(PersonProfile, { user })
+// )
 
-// Pure
-UsersList({ users }); //  PersonProfile not rendered yet
-
+import { users } from "./users.tsx";
+const root = createRoot(document.getElementById("root")!);
 // Impure
 root.render(UsersList({ users })); // 3x render PersonProfile
