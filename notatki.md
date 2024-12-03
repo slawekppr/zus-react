@@ -148,3 +148,7 @@ npm run dev
   ➜  Local:   http://localhost:5173/
   ➜  Network: use --host to expose
   ➜  press h + enter to show help
+
+L337c0d3
+  S I t E
+  5 1 7 3
