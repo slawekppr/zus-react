@@ -9,22 +9,26 @@ window.React = React;
 window.ReactDOM = ReactDOM;
 (window as any).ReactDOM = ReactDOM;
 
+const root = createRoot(document.getElementById("root")!);
 
-const root = createRoot(document.getElementById('root')!)
+const user = {
+  id: "123",
+  name: "Alice",
+  color: "red",
+  pet: { name: "cat" },
+};
 
 const vdiv = React.createElement(
   "div",
   {
-    id: "placki 123",
+    id: `user_${user.id}`,
     className: "user-card",
-    style: { color: "blue", border: "1px solid" },
+    style: { color: user.color, border: "1px solid" },
   },
-  // React.createElement('input',{key:'tutaj jestem'}),
-  React.createElement("p", null, "Bob ma kota"),
-  React.createElement("input", { key: "tutaj jestem" })
+  React.createElement("p", null, `${user.name} has a ${user.pet.name}`),
 );
 
-root.render(vdiv)
+root.render(vdiv);
 
 // ReactDOM.render(vdiv, root);
 // createRoot(document.getElementById('root')!).render(
@@ -60,4 +64,6 @@ root.render(vdiv)
 // },
 // React.createElement('p',null,'Ala ma kota'),
 // React.createElement('input')
+// React.createElement("input", { key: "tutaj jestem" })
+
 // )
