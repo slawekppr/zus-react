@@ -152,3 +152,9 @@ npm run dev
 L337c0d3
   S I t E
   5 1 7 3
+
+## Functional effects - haskell / effect.ts
+
+https://learnyouahaskell.com/chapters
+
+https://effect.website/
