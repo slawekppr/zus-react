@@ -48,3 +48,22 @@ seed = random(seed)
 seed = random(seed)
 10608
 ```
+
+# Pure with Effects ( task vs data)
+
+```js
+// Pure 
+function getWeather(city, date) {
+    // Prepare db request... 
+
+    return (db) => { // Task
+        return db.find({city,date})
+    }
+}
+
+// Impure 
+function getWeather(city, date) {
+    // Prepare db request... 
+    return db.find({city,date}) // Result
+}
+```
