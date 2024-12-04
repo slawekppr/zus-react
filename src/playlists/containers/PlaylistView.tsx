@@ -22,8 +22,13 @@ const PlaylistView = () => {
     // const found = playlists.find((p) => p.id === id) as Playlist;
     // const found = playlists.find((p) => p.id === id)!;
     // const found = {} as Playlist;
+    const found = playlists.find((p) => p.id === id);
 
-    setSelected(found);
+    if (found) {
+      setSelected(found); // Playlist
+    } else {
+      found; // undefined
+    }
   };
 
   const showDetails = () => {
