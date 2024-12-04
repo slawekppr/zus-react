@@ -1,4 +1,4 @@
-import type { Playlist } from "./Playlist";
+import type { Playlist } from "../model/Playlist";
 
 export const mockPlaylists: Playlist[] = [
   {

@@ -1,6 +1,6 @@
 import React, { useState } from "react";
-import { mockPlaylists } from "./mockPlaylists";
-import type { Playlist } from "./Playlist";
+import { mockPlaylists } from "../../common/fixtures/mockPlaylists";
+import type { Playlist } from "../../common/model/Playlist";
 
 type Props = {
   playlists: Playlist[];

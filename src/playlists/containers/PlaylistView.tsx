@@ -3,7 +3,7 @@ import PlaylistList from "../components/PlaylistList";
 import PlaylistDetails from "../components/PlaylistDetails";
 import PlaylistEditor from "../components/PlaylistEditor";
 import { Button } from "primereact/button";
-import { mockPlaylists } from "../components/mockPlaylists";
+import { mockPlaylists } from "../../common/fixtures/mockPlaylists";
 
 type Modes = "details" | "editor";
 
