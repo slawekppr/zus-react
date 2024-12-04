@@ -9,23 +9,12 @@ const mockPlaylist = {
 };
 
 const PlaylistEditor = (props: Props) => {
-  
-  // const state = useState()
-  // const value = state[0]
-  // const setValue = state[1]
-  // const [value, setValue] = state
-  
-  const [read,  writeAndRenderFn  ] = useState( initial )
-  const [value, setValue] = useState()
-
-
   const [playlist, setPlaylist] = useState(mockPlaylist)
 
   const nameHandler = (event: React.ChangeEvent<HTMLInputElement>): void => {
     
     playlist.name = event.target.value;
-
-    // event.target.checked;
+    setPlaylist(playlist) // ???
   };
 
   return (
