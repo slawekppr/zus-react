@@ -9,7 +9,10 @@ import type { Playlist } from "../../common/model/Playlist";
 type Modes = "details" | "editor";
 
 const PlaylistView = () => {
-  const [playlists, setPlaylists] = useState(mockPlaylists);
+  const [playlists, setPlaylists] = useState(
+    // mockPlaylists 
+    mockPlaylists as (Playlist | "podcast")[]
+  );
 
   const [mode, setMode] = useState<Modes>("details");
   const [selectedId, setSelectedId] = useState("123");
@@ -18,16 +21,16 @@ const PlaylistView = () => {
   const selectPlaylistById = (id: string) => {
     setSelectedId(id);
 
-    // const found = playlists.find((p) => p.id === id) as any;
-    // const found = playlists.find((p) => p.id === id) as Playlist;
-    // const found = playlists.find((p) => p.id === id)!;
-    // const found = {} as Playlist;
     const found = playlists.find((p) => p.id === id);
 
-    if (found) {
+    if (typeof found === "object") {
       setSelected(found); // Playlist
-    } else {
+    } else if (typeof found === "undefined") {
       found; // undefined
+    } else {
+      // const _never: never = found; // never
+      found satisfies never; // Exhaustiveness Check
+      throw new Error("Unexpected error");
     }
   };
 
