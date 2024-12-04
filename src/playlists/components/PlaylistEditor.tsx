@@ -10,16 +10,24 @@ const PlaylistEditor = (props: Props) => {
     description: "Best playlist",
   };
 
-  const handleNameChange = (event: ????) => {}
+  // const handleNameChange = (event:React.ChangeEvent<HTMLInputElement>) => {}
+  // const handleNameChange: React.ChangeEventHandler<HTMLInputElement> = (event) => {};
 
+  // const handleNameChange = (event: "lewy but") => {};
+  // const handleNameChange = (event: React.ChangeEvent<HTMLInputElement>) => {};
+
+  const nameHandler = (event: React.ChangeEvent<HTMLInputElement>): void => { };
 
   return (
     <div>
- 
       <div className="grid gap-5">
         <div className="grid gap-2">
           <label>Name</label>
-          <input type="text" value={playlist.name} onChange={handleNameChange} />
+          <input
+            type="text"
+            value={playlist.name}
+            onChange={nameHandler}
+          />
           <div className="text-end">{playlist.name.length} / 100</div>
         </div>
 
