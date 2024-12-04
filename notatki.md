@@ -186,3 +186,16 @@ https://tailwindcss.com/
 
 # Generate not install - shadcn
 https://ui.shadcn.com/docs/components/accordion
+
+# Prime React
+https://primereact.org/installation/
+https://primereact.org/tailwind/
+
+# Tailwind
+https://tailwindcss.com/docs/guides/vite
+
+npm install -D tailwindcss postcss autoprefixer
+npx tailwindcss init -p
+
+primary color,
+"tailwindCSS.emmetCompletions": true
