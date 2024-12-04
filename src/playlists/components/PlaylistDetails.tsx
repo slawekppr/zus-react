@@ -12,7 +12,7 @@ const PlaylistDetails = (props: Props) => {
     description: "Best playlist",
   };
 
-/* TODO:
+  /* TODO:
   - Use mock data in HTML
   - add data to id,title,data- props
   - Public Yes / No 
@@ -21,25 +21,24 @@ const PlaylistDetails = (props: Props) => {
 
   return (
     <div>
-      {/* .grid.gap-5>.grid.gap-2*3>strong{Name}+div{Playlist $$$}^.flex.justify-between>Button{Edit} */}
-      
+      {true} {false} {null} {undefined} 
+
       <div className="grid gap-5" id="..." title=".." data-playlist-id="...">
-        
         <div className="grid gap-2">
           <strong>Name</strong>
-          <div>Playlist 001</div>
+          <div>{playlist.name}</div>
         </div>
 
         <div className="grid gap-2">
           <strong>Public</strong>
-          <div>Yes</div>
+          <div>{playlist.public}</div>
         </div>
-        
+
         <div className="grid gap-2">
           <strong>Description</strong>
-          <div>awesome playlist</div>
+          <div>{playlist.description}</div>
         </div>
-        
+
         <div className="flex justify-between">
           <Button>Edit</Button>
         </div>
