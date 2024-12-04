@@ -5,6 +5,7 @@ import viteLogo from "/vite.svg";
 import "primereact/resources/themes/lara-light-cyan/theme.css";
 
 import { Button } from "primereact/button";
+import PlaylistView from "./playlists/containers/PlaylistView";
 
 function App() {
   const [count, setCount] = useState(0);
@@ -15,8 +16,7 @@ function App() {
     <div className="container my-5">
       <h1 className="text-5xl bg-primary-500 text-white p-5">Witaj w ZUS</h1>
     
-
-      <Button>Start</Button>
+      <PlaylistView/>
     
     </div>
     

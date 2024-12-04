@@ -224,5 +224,12 @@ touch src/playlists/components/PlaylistDetails.tsx
 touch src/playlists/components/PlaylistEditor.tsx
 
 # Snippets
+
+Extensions - ES7 React snippets - dsznajder
 ts react arrow function component export:
 tsrafce
+
+# Emmet 
+https://flukeout.github.io/ 
+https://docs.emmet.io/cheat-sheet/
+
