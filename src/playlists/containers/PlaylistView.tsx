@@ -17,7 +17,13 @@ const PlaylistView = () => {
 
   const selectPlaylistById = (id: string) => {
     setSelectedId(id);
-    setSelected(playlists.find((p) => p.id === id)!);
+
+    // const found = playlists.find((p) => p.id === id) as any;
+    // const found = playlists.find((p) => p.id === id) as Playlist;
+    // const found = playlists.find((p) => p.id === id)!;
+    // const found = {} as Playlist;
+
+    setSelected(found);
   };
 
   const showDetails = () => {
@@ -29,18 +35,10 @@ const PlaylistView = () => {
   };
 
   const savePlaylist = (draft: Playlist) => {
-    // const index = playlists.findIndex((p) => p.id === draft.id);
-    // playlists[index] = draft;
-    // setPlaylists([...playlists]);
-
-    // Immutable:
     setPlaylists(playlists.map((p) => (p.id === draft.id ? draft : p)));
-
-    // setSelected(draft); // setState / render!
-    // setMode("details");
+    setSelected(draft);
+    setMode("details");
   };
-
-  console.log("render view");
 
   return (
     <div>
