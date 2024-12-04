@@ -4,11 +4,10 @@ import PlaylistDetails from "../components/PlaylistDetails";
 import PlaylistEditor from "../components/PlaylistEditor";
 import { Button } from "primereact/button";
 
-type Props = {};
 type Modes = "details" | "editor";
 
-const PlaylistView = (props: Props) => {
-  const [mode, setMode] = useState<Modes>('details');
+const PlaylistView = () => {
+  const [mode, setMode] = useState<Modes>("details");
 
   const showDetails = () => {
     setMode("details");
@@ -26,7 +25,8 @@ const PlaylistView = (props: Props) => {
         </div>
 
         <div className="grid gap-5">
-          {mode == "details" ? <PlaylistDetails /> : <PlaylistEditor />}
+          {mode == "details" && <PlaylistDetails />}
+          {mode == "editor" && <PlaylistEditor />}
 
           <div className="flex justify-between">
             <Button severity="warning" onClick={showDetails}>
