@@ -10,20 +10,16 @@ const PlaylistEditor = (props: Props) => {
     description: "Best playlist",
   };
 
+  const handleNameChange = (event: ????) => {}
+
+
   return (
     <div>
-
-      {/* 
-        Warning: You provided a `value` prop to a form field without an `onChange` handler. 
-        This will render a read-only field. 
-        If the field should be mutable use `defaultValue`. 
-        Otherwise, set either `onChange` or `readOnly`. 
-      */}
-      
+ 
       <div className="grid gap-5">
         <div className="grid gap-2">
           <label>Name</label>
-          <input type="text" value={playlist.name} />
+          <input type="text" value={playlist.name} onChange={handleNameChange} />
           <div className="text-end">{playlist.name.length} / 100</div>
         </div>
 
