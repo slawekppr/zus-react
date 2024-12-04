@@ -1,17 +1,15 @@
 // tsrafce
 import { Button } from "primereact/button";
 import React from "react";
+import type { Playlist } from "../../common/model/Playlist";
 
-type Props = {};
+type Props = {
+  playlist: Playlist;
+  onEdit: () => void;
+};
 
-const PlaylistDetails = (props: Props) => {
-  const playlist = {
-    id: "123",
-    name: "playlist 123",
-    public: false,
-    description: "Best playlist",
-  };
-
+const PlaylistDetails = ({ onEdit, playlist }: Props) => {
+  
   return (
     <div>
       <div
@@ -43,7 +41,7 @@ const PlaylistDetails = (props: Props) => {
         </div>
 
         <div className="flex justify-between">
-          <Button>Edit</Button>
+          <Button onClick={onEdit}>Edit</Button>
         </div>
       </div>
     </div>

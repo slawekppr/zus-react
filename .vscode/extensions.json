@@ -5,6 +5,7 @@
         "quicktype.quicktype",
         "esbenp.prettier-vscode",
         "yoavbls.pretty-ts-errors",
-        "bradlc.vscode-tailwindcss"
+        "bradlc.vscode-tailwindcss",
+        "planbcoding.vscode-react-refactor"
     ]
 }

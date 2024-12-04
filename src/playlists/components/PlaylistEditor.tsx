@@ -1,17 +1,23 @@
 import { Button } from "primereact/button";
 import React, { useState } from "react";
+import type { Playlist } from "../../common/model/Playlist";
 
-type Props = {};
-const mockPlaylist = {
-  id: "123",
-  name: "playlist 123",
-  public: false,
-  description: "Best playlist",
+type Props = {
+  playlist: Playlist;
+  onCancel: () => void;
+  onSave: (draft: Playlist) => void;
 };
 
-const PlaylistEditor = (props: Props) => {
+const PlaylistEditor = ({
+  onCancel,
+  onSave,
+  playlist: mockPlaylist,
+}: Props) => {
   const [playlist, setPlaylist] = useState(mockPlaylist);
 
+  const submit = () => {
+    onSave(playlist);
+  };
   const changeHandler = (
     event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
   ): void => {
@@ -67,8 +73,10 @@ const PlaylistEditor = (props: Props) => {
         </div>
 
         <div className="flex justify-between">
-          <Button severity="warning">Cancel</Button>
-          <Button>Save</Button>
+          <Button severity="warning" onClick={onCancel}>
+            Cancel
+          </Button>
+          <Button onClick={submit}>Save</Button>
         </div>
       </div>
     </div>
