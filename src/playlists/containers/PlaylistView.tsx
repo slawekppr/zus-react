@@ -3,11 +3,19 @@ import PlaylistList from "../components/PlaylistList";
 import PlaylistDetails from "../components/PlaylistDetails";
 import PlaylistEditor from "../components/PlaylistEditor";
 import { Button } from "primereact/button";
+import { mockPlaylists } from "../components/mockPlaylists";
 
 type Modes = "details" | "editor";
 
 const PlaylistView = () => {
   const [mode, setMode] = useState<Modes>("details");
+  
+  const playlists = mockPlaylists;
+  const [selectedId, setSelectedId] = useState("123");
+
+  const selectById = (id: string) => {
+    setSelectedId(id);
+  };
 
   const showDetails = () => {
     setMode("details");
