@@ -7,7 +7,6 @@ body {
   font-family: "Lato Bold", "Helvetica Neue", Helvetica, Arial, sans-serif;
 }
 
-
 @layer tailwind-base {
   @tailwind base;
 }
@@ -15,4 +14,10 @@ body {
 @layer tailwind-utilities {
   @tailwind components;
   @tailwind utilities;
+}
+
+input,
+select,
+textarea {
+  border: 1px solid black;
 }

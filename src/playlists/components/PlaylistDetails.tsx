@@ -14,7 +14,6 @@ const PlaylistDetails = (props: Props) => {
 
   return (
     <div>
-      {true} {false} {null} {undefined}
       <div
         className="grid gap-5"
         id={`playlist_${playlist.id}`}
@@ -36,7 +35,6 @@ const PlaylistDetails = (props: Props) => {
           >
             {playlist.public ? "Yes" : "No"}
           </div>
-          {/* {playlist.public ? <div/> : <div/> } */}
         </div>
 
         <div className="grid gap-2">
