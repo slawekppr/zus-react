@@ -30,6 +30,8 @@ const PlaylistEditor = (props: Props) => {
 
   return (
     <div>
+      <pre>{JSON.stringify(playlist, null, 2)}</pre>
+
       <div className="grid gap-5">
         <div className="grid gap-2">
           <label>Name</label>
