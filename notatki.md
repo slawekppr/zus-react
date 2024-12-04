@@ -158,3 +158,28 @@ L337c0d3
 https://learnyouahaskell.com/chapters
 
 https://effect.website/
+
+# UI Toolkits
+https://mui.com/
+
+https://www.wearedevelopers.com/magazine/best-free-react-ui-libraries
+
+https://www.chakra-ui.com/
+
+https://ant.design/components/button
+
+https://react-bootstrap.github.io/
+
+https://primereact.org/card/#advanced
+
+https://www.telerik.com/campaigns/kendo-ui-react/
+
+https://js.devexpress.com/React/Documentation/Guide/UI_Components/Accordion/Getting_Started_with_Accordion/
+
+
+# Headless
+https://headlessui.com/react/dialog
+
+https://getbootstrap.com/docs/3.4/css/#grid
+
+https://tailwindcss.com/
