@@ -3,24 +3,19 @@ import PlaylistList from "../components/PlaylistList";
 import PlaylistDetails from "../components/PlaylistDetails";
 import PlaylistEditor from "../components/PlaylistEditor";
 import { Button } from "primereact/button";
-// tsrafce
-
-enum MODES {
-  details = 'details',
-  editor = 'editor',
-}
 
 type Props = {};
+type Modes = "details" | "editor";
 
 const PlaylistView = (props: Props) => {
-  const [mode, setMode] = useState<MODES>(MODES.details);
+  const [mode, setMode] = useState<Modes>('details');
 
   const showDetails = () => {
-    setMode(MODES.details);
+    setMode("details");
   };
 
   const showEditor = () => {
-    setMode(MODES.editor);
+    setMode("editor");
   };
 
   return (
@@ -31,7 +26,7 @@ const PlaylistView = (props: Props) => {
         </div>
 
         <div className="grid gap-5">
-          {mode == MODES.editor ? <PlaylistDetails /> : <PlaylistEditor />}
+          {mode == "details" ? <PlaylistDetails /> : <PlaylistEditor />}
 
           <div className="flex justify-between">
             <Button severity="warning" onClick={showDetails}>
