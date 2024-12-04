@@ -11,8 +11,21 @@ const mockPlaylist = {
 const PlaylistEditor = (props: Props) => {
   const [playlist, setPlaylist] = useState(mockPlaylist);
 
-  const nameHandler = (event: React.ChangeEvent<HTMLInputElement>): void => {
-    setPlaylist({ ...playlist, name: event.target.value });
+  const changeHandler = (
+    event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+  ): void => {
+    const target = event.target;
+
+    let value: string | boolean = target.value;
+
+    if (target instanceof HTMLInputElement && target.type == "checkbox") {
+      value = target.checked;
+    }
+    // TODO: <select>, radio, ...
+    // event.target.tagName == "textarea";
+    // event.target.name == "description";
+
+    setPlaylist({ ...playlist, [event.target.name]: value });
   };
 
   return (
@@ -20,20 +33,34 @@ const PlaylistEditor = (props: Props) => {
       <div className="grid gap-5">
         <div className="grid gap-2">
           <label>Name</label>
-          <input type="text" value={playlist.name} onChange={nameHandler} />
+          <input
+            type="text"
+            value={playlist.name}
+            name="name"
+            onChange={changeHandler}
+          />
           <div className="text-end">{playlist.name.length} / 100</div>
         </div>
 
         <div className="grid gap-2">
           <label>
-            <input type="checkbox" defaultChecked={playlist.public} />
+            <input
+              type="checkbox"
+              checked={playlist.public}
+              name="public"
+              onChange={changeHandler}
+            />
             Public
           </label>
         </div>
 
         <div className="grid gap-2">
           <label>Description</label>
-          <textarea defaultValue={playlist.description}></textarea>
+          <textarea
+            value={playlist.description}
+            name="description"
+            onChange={changeHandler}
+          ></textarea>
         </div>
       </div>
     </div>
