@@ -8,14 +8,15 @@ import { mockPlaylists } from "../../common/fixtures/mockPlaylists";
 type Modes = "details" | "editor";
 
 const PlaylistView = () => {
-  const [mode, setMode] = useState<Modes>("details");
-
   const playlists = mockPlaylists;
+
+  const [mode, setMode] = useState<Modes>("details");
   const [selectedId, setSelectedId] = useState("123");
   const [selected, setSelected] = useState(playlists[0]);
 
   const selectPlaylistById = (id: string) => {
     setSelectedId(id);
+    setSelected(playlists.find((p) => p.id === id)!);
   };
 
   const showDetails = () => {
@@ -37,26 +38,15 @@ const PlaylistView = () => {
             selectedId={selectedId}
             onSelect={selectPlaylistById}
           />
-
-          <PlaylistList
-            playlists={playlists}
-            selectedId={selectedId}
-            onSelect={selectPlaylistById}
-          />
-
-          {/* <input type="text" value={selected.name} onKeyDown={e => {}} /> */}
         </div>
 
         <div className="grid gap-5">
-          {mode == "details" && <PlaylistDetails />}
-          {mode == "editor" && <PlaylistEditor />}
-
-          <div className="flex justify-between">
-            <Button severity="warning" onClick={showDetails}>
-              Detalils
-            </Button>
-            <Button onClick={() => showEditor()}>Edit</Button>
-          </div>
+          {mode == "details" && (
+            <PlaylistDetails playlist={selected} onEdit={showEditor} />
+          )}
+          {mode == "editor" && (
+            <PlaylistEditor playlist={selected} onCancel={showDetails} />
+          )}
         </div>
       </div>
     </div>

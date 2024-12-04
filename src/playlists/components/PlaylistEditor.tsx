@@ -1,3 +1,4 @@
+import { Button } from "primereact/button";
 import React, { useState } from "react";
 
 type Props = {};
@@ -63,6 +64,11 @@ const PlaylistEditor = (props: Props) => {
             name="description"
             onChange={changeHandler}
           ></textarea>
+        </div>
+
+        <div className="flex justify-between">
+          <Button severity="warning">Cancel</Button>
+          <Button>Save</Button>
         </div>
       </div>
     </div>
