@@ -1,12 +1,13 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
-import { UsersList } from './UsersList'
-import { users } from './users'
+import { useState } from "react";
+import reactLogo from "./assets/react.svg";
+import viteLogo from "/vite.svg";
+
+import "primereact/resources/themes/lara-light-cyan/theme.css";
+
+import { Button } from "primereact/button";
 
 function App() {
-  const [count, setCount] = useState(0)
+  const [count, setCount] = useState(0);
 
   return (
     <>
@@ -21,19 +22,18 @@ function App() {
       <h1>Vite + React</h1>
       <div className="card">
         <input type="text" />
-        <button onClick={() => setCount((count) => count + 1)}>
+        <Button onClick={() => setCount((count) => count + 1)}>
           count is {count}
-        </button>
+        </Button>
         <p>
-        Ala ma kota a <b>kot</b> ma <u>HMR - Hot Module Replacement !!!</u>
+          Ala ma kota a <b>kot</b> ma <u>HMR - Hot Module Replacement !!!</u>
         </p>
       </div>
-      <UsersList users={users} />
       <p className="read-the-docs">
         Click on the Vite and React logos to learn more
       </p>
     </>
-  )
+  );
 }
 
-export default App
+export default App;

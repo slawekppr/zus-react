@@ -5,8 +5,12 @@ import App from "./App.tsx";
 
 const root = createRoot(document.getElementById("root")!);
 
+import { PrimeReactProvider } from "primereact/api";
+
 root.render(
   <StrictMode>
-    <App />
+    <PrimeReactProvider>
+      <App />
+    </PrimeReactProvider>
   </StrictMode>
 );
