@@ -183,3 +183,6 @@ https://headlessui.com/react/dialog
 https://getbootstrap.com/docs/3.4/css/#grid
 
 https://tailwindcss.com/
+
+# Generate not install - shadcn
+https://ui.shadcn.com/docs/components/accordion
