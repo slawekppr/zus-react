@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 
 type Props = {};
 
@@ -24,25 +24,29 @@ const mockPlaylists = [
 ];
 const PlaylistList = (props: Props) => {
   const playlists = mockPlaylists;
-  const selectedId = "234";
-  const selectById = (id: string) => {
-    // ???
-  };
 
-  /* 
-    - Render dynamic list, 
-    - highlight selected, 
-    - click to change selection
-  */
+  const [selectedId, setSelectedId] = useState("123");
+
+  const selectById = (id: string) => {
+    setSelectedId(id);
+  };
 
   return (
     <div>
-      {/* Emmet Ctrl + Space -> Enter */}
-      {/* .divide-y.divide-slate-300.divide-solid>.px-4.px-2*3{$. Playlist $$$} */}
       <div className="divide-y divide-slate-300 divide-solid">
-        <div className="p-4">1. Playlist 001</div>
-        <div className="p-4 bg-pink-500 text-white">2. Playlist 002</div>
-        <div className="p-4">3. Playlist 003</div>
+        {playlists.map((playlist, i) => (
+          <div
+            className={`p-4 ${
+              selectedId === playlist.id
+                ? "bg-pink-500 text-white"
+                : "cursor-pointer hover:bg-pink-200"
+            }`}
+            onClick={() => selectById(playlist.id)}
+            key={playlist.id}
+          >
+            {i + 1}. {playlist.name}
+          </div>
+        ))}
       </div>
     </div>
   );
