@@ -199,3 +199,13 @@ npx tailwindcss init -p
 
 primary color,
 "tailwindCSS.emmetCompletions": true
+
+
+# -- Onion / Hexagonal / Clean - Arch --
+
+/   CORE , API, BIZ, Ingredients, Service \
+-------------------------------------------
+   FeatA | FeatB | FeatC | Recipe | Container
+---------------------------------------------
+\  Common,  Lib,  UI,  Cookware, Component  / 
+
