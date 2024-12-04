@@ -9,7 +9,7 @@ import type { Playlist } from "../../common/model/Playlist";
 type Modes = "details" | "editor";
 
 const PlaylistView = () => {
-  const playlists = mockPlaylists;
+  const [playlists, setPlaylists] = useState(mockPlaylists);
 
   const [mode, setMode] = useState<Modes>("details");
   const [selectedId, setSelectedId] = useState("123");
@@ -29,12 +29,15 @@ const PlaylistView = () => {
   };
 
   const savePlaylist = (draft: Playlist) => {
-    const index = playlists.findIndex((p) => p.id === draft.id);
+    // const index = playlists.findIndex((p) => p.id === draft.id);
+    // playlists[index] = draft;
+    // setPlaylists([...playlists]);
 
-    playlists[index] = draft; // Mutation, no render!
-    
-    setSelected(draft); // setState / render!
-    setMode("details");
+    // Immutable:
+    setPlaylists(playlists.map((p) => (p.id === draft.id ? draft : p)));
+
+    // setSelected(draft); // setState / render!
+    // setMode("details");
   };
 
   console.log("render view");
