@@ -1,20 +1,29 @@
-import React from "react";
+import React, { useState } from "react";
 
 type Props = {};
+const mockPlaylist = {
+  id: "123",
+  name: "playlist 123",
+  public: false,
+  description: "Best playlist",
+};
 
 const PlaylistEditor = (props: Props) => {
-  const playlist = {
-    id: "123",
-    name: "playlist 123",
-    public: false,
-    description: "Best playlist",
-  };
+  
+  // const state = useState()
+  // const value = state[0]
+  // const setValue = state[1]
+  // const [value, setValue] = state
+  
+  const [read,  writeAndRenderFn  ] = useState( initial )
+  const [value, setValue] = useState()
 
-  const nameHandler = (
-    event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
-  ): void => {
+
+  const [playlist, setPlaylist] = useState(mockPlaylist)
+
+  const nameHandler = (event: React.ChangeEvent<HTMLInputElement>): void => {
     
-    event.target.value;
+    playlist.name = event.target.value;
 
     // event.target.checked;
   };
@@ -37,10 +46,7 @@ const PlaylistEditor = (props: Props) => {
 
         <div className="grid gap-2">
           <label>Description</label>
-          <textarea
-            defaultValue={playlist.description}
-            onChange={nameHandler}
-          ></textarea>
+          <textarea defaultValue={playlist.description}></textarea>
         </div>
       </div>
     </div>
