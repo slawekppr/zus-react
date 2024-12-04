@@ -9,12 +9,12 @@ type Modes = "details" | "editor";
 
 const PlaylistView = () => {
   const [mode, setMode] = useState<Modes>("details");
-  
+
   const playlists = mockPlaylists;
   const [selectedId, setSelectedId] = useState("123");
-  const [selected, setSelected] = useState(playlists[0])
+  const [selected, setSelected] = useState(playlists[0]);
 
-  const selectById = (id: string) => {
+  const selectPlaylistById = (id: string) => {
     setSelectedId(id);
   };
 
@@ -26,14 +26,25 @@ const PlaylistView = () => {
     setMode("editor");
   };
 
+  console.log("render view");
+
   return (
     <div>
       <div className="grid grid-cols-2 gap-5">
         <div className="grid gap-5">
+          <PlaylistList
+            playlists={playlists}
+            selectedId={selectedId}
+            onSelect={selectPlaylistById}
+          />
 
-          <PlaylistList playlists={playlists} />
-          <input type="text" value={selected.name} />
-          
+          <PlaylistList
+            playlists={playlists}
+            selectedId={selectedId}
+            onSelect={selectPlaylistById}
+          />
+
+          {/* <input type="text" value={selected.name} onKeyDown={e => {}} /> */}
         </div>
 
         <div className="grid gap-5">
