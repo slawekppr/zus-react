@@ -11,9 +11,9 @@ type Props = {
 const PlaylistEditor = ({
   onCancel,
   onSave,
-  playlist: mockPlaylist,
+  playlist: initialPlaylistFromParent,
 }: Props) => {
-  const [playlist, setPlaylist] = useState(mockPlaylist);
+  const [playlist, setPlaylist] = useState(initialPlaylistFromParent);
 
   const submit = () => {
     onSave(playlist);
