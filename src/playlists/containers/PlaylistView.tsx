@@ -29,7 +29,12 @@ const PlaylistView = () => {
   };
 
   const savePlaylist = (draft: Playlist) => {
-    console.log("Saving", draft);
+    const index = playlists.findIndex((p) => p.id === draft.id);
+
+    playlists[index] = draft; // Mutation, no render!
+    
+    setSelected(draft); // setState / render!
+    setMode("details");
   };
 
   console.log("render view");
@@ -47,9 +52,7 @@ const PlaylistView = () => {
 
         <div className="grid gap-5">
           {mode == "details" && (
-            <PlaylistDetails 
-              playlist={selected} 
-              onEdit={showEditor} />
+            <PlaylistDetails playlist={selected} onEdit={showEditor} />
           )}
           {mode == "editor" && (
             <PlaylistEditor
