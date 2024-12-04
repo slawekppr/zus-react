@@ -5,7 +5,7 @@ import type { Playlist } from "../../common/model/Playlist";
 type Props = {
   playlists: Playlist[];
   onSelect: (id: string) => void;
-  selectedId: string;
+  selectedId?: string;
 };
 
 // Controlled (state)

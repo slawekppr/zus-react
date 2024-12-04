@@ -3,17 +3,29 @@ import React, { useState } from "react";
 import type { Playlist } from "../../common/model/Playlist";
 
 type Props = {
-  playlist: Playlist;
+  playlist?: Playlist;
   onCancel: () => void;
   onSave: (draft: Playlist) => void;
 };
+const EMPTY_PLAYLIST = {
+  id: "",
+  description: "",
+  name: "",
+  public: false,
+};
+
 
 const PlaylistEditor = ({
   onCancel,
   onSave,
-  playlist: initialPlaylistFromParent,
+  playlist: playlistFromParent = EMPTY_PLAYLIST,
 }: Props) => {
-  const [playlist, setPlaylist] = useState(initialPlaylistFromParent);
+
+  // playlistFromParent = playlistFromParent || EMPTY_PLAYLIST;
+  // playlistFromParent = playlistFromParent ?? EMPTY_PLAYLIST;
+  // playlistFromParent ??= EMPTY_PLAYLIST;
+
+  const [playlist, setPlaylist] = useState(playlistFromParent);
 
   const submit = () => {
     onSave(playlist);

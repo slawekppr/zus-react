@@ -4,11 +4,14 @@ import React from "react";
 import type { Playlist } from "../../common/model/Playlist";
 
 type Props = {
-  playlist: Playlist;
+  playlist?: Playlist;
   onEdit: () => void;
 };
 
 const PlaylistDetails = ({ onEdit, playlist }: Props) => {
+
+  if(!playlist) return <div 
+  className="text-blue-500 p-5 border border-solid">No playlist selected</div>
   
   return (
     <div>
