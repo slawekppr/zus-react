@@ -223,3 +223,6 @@ touch src/playlists/components/PlaylistList.tsx
 touch src/playlists/components/PlaylistDetails.tsx
 touch src/playlists/components/PlaylistEditor.tsx
 
+# Snippets
+ts react arrow function component export:
+tsrafce
