@@ -2,11 +2,9 @@ import React, { useState } from "react";
 import { mockPlaylists } from "./mockPlaylists";
 import type { Playlist } from "./Playlist";
 
-type Props = {};
+type Props = { playlists: Playlist[] };
 
-const PlaylistList = (props: Props) => {
-  const playlists: Playlist[] = [];
-
+const PlaylistList = ({ playlists }: Props) => {
   const [selectedId, setSelectedId] = useState("");
 
   const selectById = (id: string) => {

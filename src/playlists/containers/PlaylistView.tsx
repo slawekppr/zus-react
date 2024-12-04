@@ -12,6 +12,7 @@ const PlaylistView = () => {
   
   const playlists = mockPlaylists;
   const [selectedId, setSelectedId] = useState("123");
+  const [selected, setSelected] = useState(playlists[0])
 
   const selectById = (id: string) => {
     setSelectedId(id);
@@ -29,7 +30,10 @@ const PlaylistView = () => {
     <div>
       <div className="grid grid-cols-2 gap-5">
         <div className="grid gap-5">
-          <PlaylistList />
+
+          <PlaylistList playlists={playlists} />
+          <input type="text" value={selected.name} />
+          
         </div>
 
         <div className="grid gap-5">
