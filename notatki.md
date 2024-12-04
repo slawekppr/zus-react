@@ -200,7 +200,6 @@ npx tailwindcss init -p
 primary color,
 "tailwindCSS.emmetCompletions": true
 
-
 # -- Onion / Hexagonal / Clean - Arch --
 
 /   CORE , API, BIZ, Ingredients, Service \
@@ -208,4 +207,19 @@ primary color,
    FeatA | FeatB | FeatC | Recipe | Container
 ---------------------------------------------
 \  Common,  Lib,  UI,  Cookware, Component  / 
+
+
+
+# Playlists 'module'
+
+mkdir -p src/common/components/
+
+mkdir -p src/playlists/components/
+mkdir -p src/playlists/containers/
+
+touch src/playlists/containers/PlaylistView.tsx
+
+touch src/playlists/components/PlaylistList.tsx
+touch src/playlists/components/PlaylistDetails.tsx
+touch src/playlists/components/PlaylistEditor.tsx
 
