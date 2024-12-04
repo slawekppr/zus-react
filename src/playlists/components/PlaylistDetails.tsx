@@ -8,22 +8,20 @@ const PlaylistDetails = (props: Props) => {
   const playlist = {
     id: "123",
     name: "playlist 123",
-    public: true,
+    public: false,
     description: "Best playlist",
   };
 
-  /* TODO:
-  - Use mock data in HTML
-  - add data to id,title,data- props
-  - Public Yes / No 
-  - Public Red / Green
-*/
-
   return (
     <div>
-      {true} {false} {null} {undefined} 
-
-      <div className="grid gap-5" id="..." title=".." data-playlist-id="...">
+      {true} {false} {null} {undefined}
+      <div
+        className="grid gap-5"
+        id={`playlist_${playlist.id}`}
+        title={playlist.name}
+        // placki={123} // Error
+        data-playlist-id={playlist.id}
+      >
         <div className="grid gap-2">
           <strong>Name</strong>
           <div>{playlist.name}</div>
@@ -31,7 +29,14 @@ const PlaylistDetails = (props: Props) => {
 
         <div className="grid gap-2">
           <strong>Public</strong>
-          <div>{playlist.public}</div>
+          <div
+            style={{
+              color: playlist.public ? "red" : "green",
+            }}
+          >
+            {playlist.public ? "Yes" : "No"}
+          </div>
+          {/* {playlist.public ? <div/> : <div/> } */}
         </div>
 
         <div className="grid gap-2">
