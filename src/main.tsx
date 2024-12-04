@@ -5,6 +5,9 @@ import App from "./App.tsx";
 
 const root = createRoot(document.getElementById("root")!);
 
+import "primereact/resources/themes/lara-light-cyan/theme.css";
+
+
 import { PrimeReactProvider } from "primereact/api";
 
 root.render(
