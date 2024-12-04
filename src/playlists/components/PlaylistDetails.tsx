@@ -43,7 +43,7 @@ const PlaylistDetails = (props: Props) => {
         </div>
 
         <div className="flex justify-between">
-          <Button>Edit</Button>
+          {/* <Button>Edit</Button> */}
         </div>
       </div>
     </div>

@@ -2,11 +2,17 @@ import React from "react";
 import PlaylistList from "../components/PlaylistList";
 import PlaylistDetails from "../components/PlaylistDetails";
 import PlaylistEditor from "../components/PlaylistEditor";
+import { Button } from "primereact/button";
 // tsrafce
 
 type Props = {};
 
 const PlaylistView = (props: Props) => {
+  const mode = "details";
+
+  const showEditor = () => {};
+  const showDetails = () => {};
+
   return (
     <div>
       {/* Emmet + tailwind  */}
@@ -17,8 +23,12 @@ const PlaylistView = (props: Props) => {
         </div>
 
         <div className="grid gap-5">
-          <PlaylistDetails />
-          <PlaylistEditor />
+          {true  == true ? <PlaylistDetails /> : <PlaylistEditor />}
+
+          <div className="flex justify-between">
+            <Button severity="warning">Detalils</Button>
+            <Button>Edit</Button>
+          </div>
         </div>
       </div>
     </div>
