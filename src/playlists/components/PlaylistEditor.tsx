@@ -9,12 +9,13 @@ const mockPlaylist = {
 };
 
 const PlaylistEditor = (props: Props) => {
-  const [playlist, setPlaylist] = useState(mockPlaylist)
+  const [playlist, setPlaylist] = useState(mockPlaylist);
 
   const nameHandler = (event: React.ChangeEvent<HTMLInputElement>): void => {
     
     playlist.name = event.target.value;
-    setPlaylist(playlist) // ???
+    setPlaylist(playlist); // Same Reference  - No Update!
+    setPlaylist({ ...playlist }); // Same data, new refernce - Update!
   };
 
   return (

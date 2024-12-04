@@ -233,3 +233,5 @@ tsrafce
 https://flukeout.github.io/ 
 https://docs.emmet.io/cheat-sheet/
 
+# Devtools
+https://chromewebstore.google.com/detail/react-developer-tools/fmkadmapgofadopljbjfkapdkoienihi?hl=en
