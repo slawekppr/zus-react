@@ -63,10 +63,7 @@ const PlaylistView = () => {
             />
           )}
           {mode == "creator" && (
-            <PlaylistEditor
-              onCancel={showDetails}
-              onSave={createPlaylist}
-            />
+            <PlaylistEditor onCancel={showDetails} onSave={createPlaylist} />
           )}
         </div>
       </div>

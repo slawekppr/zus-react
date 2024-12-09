@@ -34,10 +34,14 @@ type Renderer = {
 
 declare function renderVector(v: Vector): void;
 declare function renderPoint(v: Point): void;
+declare function renderLine(v1: Point, v2:Point): void;
+declare function renderClear(): void;
 
 const renderer = {} as Renderer;
 renderer.renderPoint = renderPoint;
 renderer.renderVector = renderVector;
+renderer.renderVector = renderClear;
+// renderer.renderVector = renderLine;
 
 renderer.renderVector = renderPoint;
 // renderer.renderPoint = renderVector; // cant recieve vector if point is given

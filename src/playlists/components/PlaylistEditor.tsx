@@ -5,7 +5,7 @@ import type { Playlist } from "../../common/model/Playlist";
 type Props = {
   playlist?: Playlist;
   onCancel: () => void;
-  onSave: (draft: Playlist) => void;
+  onSave(draft: Playlist): void;
 };
 const EMPTY_PLAYLIST = {
   id: "",
@@ -19,7 +19,6 @@ const PlaylistEditor = ({
   onSave,
   playlist: playlistFromParent = EMPTY_PLAYLIST,
 }: Props) => {
-
   const [playlist, setPlaylist] = useState(playlistFromParent);
 
   const submit = () => {
