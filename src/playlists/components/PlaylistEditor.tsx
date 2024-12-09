@@ -14,13 +14,11 @@ const EMPTY_PLAYLIST = {
   public: false,
 };
 
-
 const PlaylistEditor = ({
   onCancel,
   onSave,
   playlist: playlistFromParent = EMPTY_PLAYLIST,
 }: Props) => {
-
   // playlistFromParent = playlistFromParent || EMPTY_PLAYLIST;
   // playlistFromParent = playlistFromParent ?? EMPTY_PLAYLIST;
   // playlistFromParent ??= EMPTY_PLAYLIST;
@@ -36,13 +34,12 @@ const PlaylistEditor = ({
     const target = event.target;
 
     let value: string | boolean = target.value;
+    target.type;
 
     if (target instanceof HTMLInputElement && target.type == "checkbox") {
+      // if ("checked" in target) {
       value = target.checked;
     }
-    // TODO: <select>, radio, ...
-    // event.target.tagName == "textarea";
-    // event.target.name == "description";
 
     setPlaylist({ ...playlist, [event.target.name]: value });
   };
