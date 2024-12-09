@@ -54,6 +54,7 @@ fromPoint({ x: 123, y: 123 });
 // fromPoint({ x: 123, y: 123, length: 123 }); // Freshness error - Typo!
 
 // # Tagged / Branded Types
+// https://dev.to/themuneebh/typescript-branded-types-in-depth-overview-and-use-cases-60e
 
 declare const UserId: unique symbol;
 
