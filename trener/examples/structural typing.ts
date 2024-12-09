@@ -53,12 +53,34 @@ fromPoint(v); // Vector OK
 fromPoint({ x: 123, y: 123 });
 // fromPoint({ x: 123, y: 123, length: 123 }); // Freshness error - Typo!
 
+// # Tagged / Branded Types
 
-let paramId = '123'
+declare const UserId: unique symbol;
 
-function findUserById(userId:string){}
-function findPostById(postId:string){}
+let userId = "123" as string & { [UserId]: "userId" };
+let paramId = "234" as string & { type: "postId" };
 
-findUserById(paramId)
-findPostById(paramId)
+function findUserById(userId: string & { [UserId]: "userId" }) {}
+function findPostById(postId: string & { type: "postId" }) {}
 
+findUserById(userId);
+// findPostById(userId); // Error
+
+paramId.type.toLocaleLowerCase(); // Runtime Error!
+// paramId[UserId].toLocaleLowerCase(); // Runtime Error!
+// paramId.[???? symbol not visible ???].toLocaleLowerCase(); // Runtime Error!
+
+type Brand<B> = { __type: B };
+type Branded<T, B> = T & Brand<B>;
+
+declare const Zloty: unique symbol;
+
+type PLN = Branded<number, typeof Zloty>;
+
+const wyplata = 123 as PLN;
+function wyplac(wyplata: PLN) {}
+
+const premia = wyplata + 123 as PLN
+
+wyplac(wyplata);
+wyplac(123 as PLN );
