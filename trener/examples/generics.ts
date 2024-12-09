@@ -14,6 +14,11 @@ const result = aBox.value; // any
 
 type TypedBox<T> = { value: T };
 const typedBox: TypedBox<string> = { value };
-typedBox.value
+typedBox.value;
 
+// Useless Generics 
+declare function parseJSON<T>(json: string): T;
+declare function serializeJSON<T>(obj: T): string;
 
+JSON.parse('...') as 'Cokolwiek'
+serializeJSON({x:1}) === '???'
