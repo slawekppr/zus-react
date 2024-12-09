@@ -52,3 +52,13 @@ fromPoint(p);
 fromPoint(v); // Vector OK
 fromPoint({ x: 123, y: 123 });
 // fromPoint({ x: 123, y: 123, length: 123 }); // Freshness error - Typo!
+
+
+let paramId = '123'
+
+function findUserById(userId:string){}
+function findPostById(postId:string){}
+
+findUserById(paramId)
+findPostById(paramId)
+
