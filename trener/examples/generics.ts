@@ -62,9 +62,32 @@ logAndReturnPerson2(person).age;
 // Generic Collections
 
 interface Collection<T> {
-  add(elem): void;
+  add(elem: T): void;
   get(): T;
+  // get(): T | undefined;
 }
-class Stack implements Collection {} // FILO
 
-class Queue implements Collection {} // FIFO
+// FILO
+class Stack<T> implements Collection<T> {
+  private items: T[] = [];
+  add(elem: T): void {
+    this.items.push(elem);
+  }
+  get(): T {
+    if (this.items.length === 0) throw new Error("Empty Stack");
+    return this.items.pop()!;
+  }
+}
+
+// FIFO
+class Queue<T> implements Collection<T> {
+  private items: Array<T> = [];
+  add(elem: T): void {
+    this.items.unshift(elem);
+  }
+  get(): T {
+    const item = this.items.pop();
+    if (!item) throw new Error("Empty Stack");
+    return item; // NonNullable<T>
+  }
+}
