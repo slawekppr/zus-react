@@ -33,8 +33,15 @@ const admin = { name: "admin" };
 const person = { name: "person", age: 23 };
 const bot = { name: "Chatb0t", model: "gpt99" };
 
+// POCO?
 function getUserInfo<T extends { name: string }>(person: T): T["name"] {
   return person.name;
 }
 getUserInfo(admin);
 // getUserInfo({ placki: 123 }); // Error
+
+// To samo co wyżej, ale krócej!
+function getUserInfo2(person: { name: string }): string {
+  return person.name;
+}
+getUserInfo2(bot);
