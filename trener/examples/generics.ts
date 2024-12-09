@@ -56,5 +56,15 @@ function logAndReturnPerson2<T extends { name: string }>(person: T) {
 }
 
 // logAndReturnPerson(bot).model // Error - not a bot anymore!
-logAndReturnPerson2(bot).model 
-logAndReturnPerson2(person).age 
+logAndReturnPerson2(bot).model;
+logAndReturnPerson2(person).age;
+
+// Generic Collections
+
+interface Collection<T> {
+  add(elem): void;
+  get(): T;
+}
+class Stack implements Collection {} // FILO
+
+class Queue implements Collection {} // FIFO
