@@ -91,3 +91,18 @@ class Queue<T> implements Collection<T> {
     return item; // NonNullable<T>
   }
 }
+
+// Inferring Generics
+
+// function getValue<T>(box: {value:T}) {return value;}
+
+// function getFirst<T extends Array<any>>(arr: T): T[number]  {
+// function getFirst<T>(arr: T[]): T {
+function getFirst<T>(arr: T[]) {
+  return arr[0];
+}
+
+// Generic "Collapsing" on contact with concrete type
+const ret1 = getFirst<string>(["ala", "ma"]);  // string
+const res2 = getFirst([123, 324, 345]);        // number
+const res3: boolean = getFirst([true]);        // boolean
