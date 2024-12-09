@@ -123,4 +123,9 @@ const res3: boolean = getFirst([true]); // boolean
 [1, 2, 3].flatMap((x) => [x, x * 2]);
 // [1, 2, 2, 4, 3, 6]
 
-[1,[2,[3,[4,[[[5,6,7]]]]]]].flat(Infinity)
+[1, [2, [3, [4, [[[5, 6, 7]]]]]]].flat(Infinity);
+
+// Working on multiple types
+function mergeObjects(obj1, obj2) {
+  return { ...obj1, ...obj2 };
+}
