@@ -19,9 +19,6 @@ const PlaylistEditor = ({
   onSave,
   playlist: playlistFromParent = EMPTY_PLAYLIST,
 }: Props) => {
-  // playlistFromParent = playlistFromParent || EMPTY_PLAYLIST;
-  // playlistFromParent = playlistFromParent ?? EMPTY_PLAYLIST;
-  // playlistFromParent ??= EMPTY_PLAYLIST;
 
   const [playlist, setPlaylist] = useState(playlistFromParent);
 
