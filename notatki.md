@@ -235,3 +235,6 @@ https://docs.emmet.io/cheat-sheet/
 
 # Devtools
 https://chromewebstore.google.com/detail/react-developer-tools/fmkadmapgofadopljbjfkapdkoienihi?hl=en
+
+# Ankieta - cz.1 - TypeScript
+https://sages.link/889487

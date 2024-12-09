@@ -4,3 +4,4 @@ export interface Playlist {
   public: boolean;
   description: string;
 }
+
