@@ -40,9 +40,14 @@ const tictactoe: TickTacToe = [
   ["X", "X", "O"],
 ];
 
-// Typing function params, array methods
-const cls = (classes) => classes.filter((x) => !!x).join(" ");
+const onlyStrings = (x: string | false): x is string => !!x;
 
-let selected = true;
+// Typing function params, array methods
+const cls = (...classes: (string | false)[]) =>
+  classes.filter(onlyStrings).join(" ");
+
+let selected = false;
 let active = true;
+// <div className= {cls("px-5", selected && "text-red", active && "bg-blue")} />
+
 cls("px-5", selected && "text-red", active && "bg-blue");
