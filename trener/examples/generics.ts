@@ -11,3 +11,9 @@ type AnyBox = {
 const value = "banana";
 const aBox: AnyBox = { value };
 const result = aBox.value; // any
+
+type TypedBox<T> = { value: T };
+const typedBox: TypedBox<string> = { value };
+typedBox.value
+
+
