@@ -16,3 +16,10 @@ function takePerson2([id, name]: Person) { id; name }
 function savePerson(db: string, ...person: Person) {}
 
 takePerson(123, "123"); // takePerson(id: number, name: string)
+
+
+const tictactoe = [
+    ['X','O',"O"],
+    ['O','X',"X"],
+    ['X','X',"O"],
+]
