@@ -3,6 +3,27 @@ export interface Playlist {
   name: string;
   public: boolean;
   description: string;
+  tracks?: Track[];
+}
+
+export interface Track {
+  id: string;
+  name: string;
+  duration_ms: number;
+  // track_no: number;
+}
+
+export interface Episode {
+  id: string;
+  name: string;
+  duration_ms: number;
+  episode_no: number;
+}
+
+function showInfo(res: Playlist | Track | Episode) {
+  return `playlist name - 12 tracks`;
+  return `track name - 1:20s`;
+  return `episode name - 10 episode`;
 }
 
 function normalizeId(id: number | string /* Union */) {
