@@ -26,9 +26,14 @@ if (isVerified(user)) {
   if (isAdmin(user)) {
     // AdminUser
     thisCanBeDoneByADminOnly(user);
+    
+    // Admin works too!
+    onlyVerified(user) 
   }
 }
-
+function onlyVerifiedUsers(user:VerifiedUser)
 function thisCanBeDoneByADminOnly(user: AdminUser) {}
+
+function onlyVerified(user:VerifiedUser){}
 
 ```
