@@ -23,3 +23,20 @@ if ("length" in p && typeof p.length === "number") {
   /// p ???
   p.length;
 }
+
+// Contravariance - take what is given or less
+type Renderer = {
+  renderVector: (v: Vector) => void;
+  renderPoint: (v: Point) => void;
+};
+
+declare function renderVector(v: Vector): void;
+declare function renderPoint(v: Point): void;
+
+const renderer = {} as Renderer;
+renderer.renderPoint = renderPoint;
+renderer.renderVector = renderVector;
+
+renderer.renderVector = renderPoint;
+// renderer.renderPoint = renderVector; // cant recieve vector if point is given
+
