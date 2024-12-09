@@ -12,14 +12,30 @@ let person: Person = [123, "Pankracy"];
 
 // function takePerson(person: Person) {}
 function takePerson(...person: Person) {}
-function takePerson2([id, name]: Person) { id; name }
+function takePerson2([id, name]: Person) {
+  id;
+  name;
+}
 function savePerson(db: string, ...person: Person) {}
 
 takePerson(123, "123"); // takePerson(id: number, name: string)
 
+// type TickTacToe = string[][];
+// type TickTacToe = Array<Array<string>>;
 
-const tictactoe = [
-    ['X','O',"O"],
-    ['O','X',"X"],
-    ['X','X',"O"],
-]
+type ValidMoves = "X" | "O";
+// type TickTacToe = Array<Array<ValidMoves>>;
+// type Row = [Field, Field, Field];
+
+type Field = ValidMoves | ''
+type TickTacToe = [
+    [Field, Field, Field], 
+    [Field, Field, Field], 
+    [Field, Field, Field]
+];
+
+const tictactoe: TickTacToe = [
+  ["X", "O", "O"],
+  ["O", "X", "X"],
+  ["X", "X", "O"],
+];
