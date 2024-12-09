@@ -28,6 +28,8 @@ if ("length" in p && typeof p.length === "number") {
 type Renderer = {
   renderVector: (v: Vector) => void;
   renderPoint: (v: Point) => void;
+//   renderVector(v: Vector): void; // Bivariance
+//   renderPoint(v: Point): void;
 };
 
 declare function renderVector(v: Vector): void;
