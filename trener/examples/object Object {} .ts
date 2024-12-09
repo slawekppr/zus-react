@@ -1,0 +1,4 @@
+
+function IonlyWorkWithObject(objectOnly: ???){
+    objectOnly // ??
+}
