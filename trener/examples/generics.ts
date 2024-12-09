@@ -103,6 +103,24 @@ function getFirst<T>(arr: T[]) {
 }
 
 // Generic "Collapsing" on contact with concrete type
-const ret1 = getFirst<string>(["ala", "ma"]);  // string
-const res2 = getFirst([123, 324, 345]);        // number
-const res3: boolean = getFirst([true]);        // boolean
+const ret1 = getFirst<string>(["ala", "ma"]); // string
+const res2 = getFirst([123, 324, 345]); // number
+const res3: boolean = getFirst([true]); // boolean
+
+// FlatMap - Monadic Interfaces
+[1, 2, 3].map((x) => x * 2);
+// [2,4,6]
+
+[1, 2, 3].concat(4, 5, 6);
+// [1, 2, 3, 4, 5, 6]
+
+[1, 2, 3].concat(4, 5, [6, 7]);
+// [1, 2, 3, 4, 5, 6, 7]
+
+[1, 2, 3].map((x) => [x, x * 2]);
+// [Array(2), Array(2), Array(2)]
+
+[1, 2, 3].flatMap((x) => [x, x * 2]);
+// [1, 2, 2, 4, 3, 6]
+
+[1,[2,[3,[4,[[[5,6,7]]]]]]].flat(Infinity)
