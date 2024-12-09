@@ -24,4 +24,17 @@ JSON.parse("...") as "Cokolwiek";
 serializeJSON({ x: 1 }) === "???";
 
 // Useful generics
-function identity<T>(x: T): T { return x; }
+function identity<T>(x: T): T {
+  return x;
+}
+
+// Generic constraints
+const admin = { name: "admin" };
+const person = { name: "person", age: 23 };
+const bot = { name: "Chatb0t", model: "gpt99" };
+
+function getUserInfo<T extends { name: string }>(person: T): T["name"] {
+  return person.name;
+}
+getUserInfo(admin);
+// getUserInfo({ placki: 123 }); // Error
