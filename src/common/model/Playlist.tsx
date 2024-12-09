@@ -16,14 +16,18 @@ export interface Track {
 export interface Episode {
   id: string;
   name: string;
+  // public: boolean;
   duration_ms: number;
   episode_no: number;
 }
 
 function showInfo(res: Playlist | Track | Episode) {
-  return `playlist name - 12 tracks`;
-  return `track name - 1:20s`;
-  return `episode name - 10 episode`;
+  if ("public" in res)
+    return `${res.name} - ${res.tracks?.length || " no "} tracks`;
+
+  if ("episode_no" in res) return `${res.name} - ${res.episode_no} episode`;
+
+  if ("duration_ms" in res) return `${res.name} - ${res.duration_ms / 1000}s`;
 }
 
 function normalizeId(id: number | string /* Union */) {
