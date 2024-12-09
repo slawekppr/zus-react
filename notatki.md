@@ -238,3 +238,17 @@ https://chromewebstore.google.com/detail/react-developer-tools/fmkadmapgofadoplj
 
 # Ankieta - cz.1 - TypeScript
 https://sages.link/889487
+
+
+# React Tech Stack
+
+- Vite
+- React 19
+- React Router
+- TanStack React Query
+- ky (zamiast axios)
+- Zod
+- react hook form
+- Prime React
+- Tailwind
+
