@@ -27,11 +27,11 @@ type ValidMoves = "X" | "O";
 // type TickTacToe = Array<Array<ValidMoves>>;
 // type Row = [Field, Field, Field];
 
-type Field = ValidMoves | ''
+type Field = ValidMoves | "";
 type TickTacToe = [
-    [Field, Field, Field], 
-    [Field, Field, Field], 
-    [Field, Field, Field]
+  [Field, Field, Field],
+  [Field, Field, Field],
+  [Field, Field, Field]
 ];
 
 const tictactoe: TickTacToe = [
@@ -39,3 +39,10 @@ const tictactoe: TickTacToe = [
   ["O", "X", "X"],
   ["X", "X", "O"],
 ];
+
+// Typing function params, array methods
+const cls = (classes) => classes.filter((x) => !!x).join(" ");
+
+let selected = true;
+let active = true;
+cls("px-5", selected && "text-red", active && "bg-blue");
