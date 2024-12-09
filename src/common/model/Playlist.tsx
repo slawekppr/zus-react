@@ -1,4 +1,5 @@
 export interface Playlist {
+  type: "playlist"; // Discriminator  ( intersected -> disjoint union )
   id: string;
   name: string;
   public: boolean;
@@ -7,6 +8,7 @@ export interface Playlist {
 }
 
 export interface Track {
+  type: "track";
   id: string;
   name: string;
   duration_ms: number;
@@ -14,14 +16,37 @@ export interface Track {
 }
 
 export interface Episode {
+  // type: Modes3.Episode,
+  type: "episode";
   id: string;
   name: string;
   // public: boolean;
   duration_ms: number;
   episode_no: number;
 }
+type Modes = Playlist | Track | Episode;
+type Modes2 = "Playlist" | "Track" | "Episode";
+enum Modes3 {
+  Playlist,
+  Track,
+  Episode,
+}
 
-function showInfo(res: Playlist | Track | Episode) {
+function showInfo2(res: Playlist | Track | Episode) {
+  switch (res.type) {
+    case "playlist":
+      return `${res.name} - ${res.tracks?.length || " no "} tracks`;
+    case "episode":
+      return `${res.name} - ${res.episode_no} episode`;
+    case "track":
+      return `${res.name} - ${res.duration_ms / 1000}s`;
+    default:
+      res satisfies never;
+      throw new Error("Unexpected res type");
+  }
+}
+
+function showInfo(res: Modes) {
   if ("public" in res)
     return `${res.name} - ${res.tracks?.length || " no "} tracks`;
 
