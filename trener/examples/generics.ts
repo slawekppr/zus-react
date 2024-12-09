@@ -125,7 +125,18 @@ const res3: boolean = getFirst([true]); // boolean
 
 [1, [2, [3, [4, [[[5, 6, 7]]]]]]].flat(Infinity);
 
-// Working on multiple types
-function mergeObjects(obj1, obj2) {
+// Working on multiple  Generic types
+function mergeObjects<T1, T2>(obj1: T1, obj2: T2): T1 & T2 {
   return { ...obj1, ...obj2 };
 }
+
+mergeObjects({ name: "123" }, { name: "123324234" });
+mergeObjects({ name: "123" }, { age: 123 });
+let o = mergeObjects({ name: "123" }, { age: 123, name: 123 });
+
+o.age.toFixed();
+// o.name.test // never - ERROR
+
+type A = { name: string } & { name: number };
+// const a:A = {name: 123}
+// const b:A = {name: '123'}
