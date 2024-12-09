@@ -28,13 +28,13 @@ if ("length" in p && typeof p.length === "number") {
 type Renderer = {
   renderVector: (v: Vector) => void;
   renderPoint: (v: Point) => void;
-//   renderVector(v: Vector): void; // Bivariance
-//   renderPoint(v: Point): void;
+  //   renderVector(v: Vector): void; // Bivariance
+  //   renderPoint(v: Point): void;
 };
 
 declare function renderVector(v: Vector): void;
 declare function renderPoint(v: Point): void;
-declare function renderLine(v1: Point, v2:Point): void;
+declare function renderLine(v1: Point, v2: Point): void;
 declare function renderClear(): void;
 
 const renderer = {} as Renderer;
@@ -46,3 +46,9 @@ renderer.renderVector = renderClear;
 renderer.renderVector = renderPoint;
 // renderer.renderPoint = renderVector; // cant recieve vector if point is given
 
+function fromPoint(v: Point) {}
+
+fromPoint(p);
+fromPoint(v); // Vector OK
+fromPoint({ x: 123, y: 123 });
+// fromPoint({ x: 123, y: 123, length: 123 }); // Freshness error - Typo!
