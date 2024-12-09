@@ -45,3 +45,16 @@ function getUserInfo2(person: { name: string }): string {
   return person.name;
 }
 getUserInfo2(bot);
+
+function logAndReturnPerson(person: { name: string }) {
+  console.log(person.name);
+  return person;
+}
+function logAndReturnPerson2<T extends { name: string }>(person: T) {
+  console.log(person.name);
+  return person;
+}
+
+// logAndReturnPerson(bot).model // Error - not a bot anymore!
+logAndReturnPerson2(bot).model 
+logAndReturnPerson2(person).age 
