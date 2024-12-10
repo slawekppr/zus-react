@@ -60,3 +60,16 @@ type AsyncFunction<F extends (...p: any) => Promise<any>> = PromiseResult<
 type placki = PromiseResult<ReturnType<typeof fetchPlacki>>;
 type placki2 = AsyncFunction<typeof fetchPlacki>;
 type placki3 = Awaited<ReturnType<typeof fetchPlacki>>;
+
+// Recursive inferred Types
+const nesting = [1, [2, [3, [5, 6, [7]]]]];
+
+// type Flatten<T> = T extends Array<any> ? "banana" : "placki";
+// type Flatten<T> = T extends Array<infer U> ? U  : T;
+type Flatten<T> = T extends Array<infer U> ? Flatten<U> : T;
+
+type F1 = Flatten<123>; /// 123
+type F2 = Flatten<[123]>; // 123
+
+type F3 = Flatten<[[[123]]]>; /// 123
+type F4 = Flatten<[[[123],'banana']]>; /// 123 | 'banana'
