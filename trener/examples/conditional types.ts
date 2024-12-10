@@ -33,3 +33,13 @@ type ExactOmit<T, K extends keyof T> = Pick<T, Exclude<keyof T, K>>;
 
 type P1 = Omit<Vector, "length2">;
 type P2 = ExactOmit<Vector, "length">;
+
+
+// Exercise: Extract keys by type 
+type Example = { id: number; name: string; surname: string };
+
+type ExtractKeyNamesByType<T, K> = {
+
+};
+
+type OnlyStringKeys = ExtractKeyNamesByType<Example, string>
