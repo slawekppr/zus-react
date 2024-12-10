@@ -18,7 +18,10 @@ const PlaylistView = () => {
   const selectPlaylistById = (id: string) => {
     if (mode !== "details") return;
     setSelectedId(id);
+    setTimeout(() => {
+      
     setSelected(playlists.find((p) => p.id === id));
+    }, 2000);
   };
 
   const showDetails = () => {
@@ -32,10 +35,17 @@ const PlaylistView = () => {
   const createPlaylist = (draft: Playlist) => {
     draft.id = crypto.randomUUID();
 
-    setPlaylists([...playlists, draft]);
-    setPlaylists([...playlists, draft]);
-    setPlaylists([...playlists, draft]);
-    setPlaylists([...playlists, draft]);
+    debugger;
+    // Result:
+    setPlaylists([...playlists, draft]); // 3 + 1
+    setPlaylists([...playlists, draft]); // 3 + 1
+
+    // Task (chain)
+    setPlaylists((nextPlaylists) => [...nextPlaylists, draft]); // 4 + 1 
+    setPlaylists((nextPlaylists) => { // 5 + 1 
+      debugger;
+      return [...nextPlaylists, draft];
+    });
 
     setSelectedId(draft.id);
     setSelected(draft);

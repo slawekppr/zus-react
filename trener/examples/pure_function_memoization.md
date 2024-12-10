@@ -67,3 +67,19 @@ function getWeather(city, date) {
     return db.find({city,date}) // Result
 }
 ```
+
+# BIS
+```ts
+function getWeather(city) {
+    // Update Counter + return result ( UPDATE c = 2 )
+    return db.find({city}
+}
+
+function getWeather(city) {
+
+    // Prepare +  return Task ( UPDATE c += 1 )
+    return () => {
+       return db.find({city}
+    }
+}
+```
