@@ -34,12 +34,25 @@ type ExactOmit<T, K extends keyof T> = Pick<T, Exclude<keyof T, K>>;
 type P1 = Omit<Vector, "length2">;
 type P2 = ExactOmit<Vector, "length">;
 
-
-// Exercise: Extract keys by type 
+// Exercise: Extract keys by type
 type Example = { id: number; name: string; surname: string };
 
 type ExtractKeyNamesByType<T, K> = {
+  [key in keyof T]: T[key] extends K ? key : never;
+}  [keyof T]
 
-};
+// type OnlyStringKeys = {
+//     id: never;
+//     name: "name";
+//     surname: "surname";
+// }[keyof T]
 
-type OnlyStringKeys = ExtractKeyNamesByType<Example, string>
+type OnlyStringKeys = ExtractKeyNamesByType<Example, string> // "name" | "surname"
+
+type KeysToRemove = {
+    id: never;
+    name: string;
+    surname: string;
+}
+type Impossible =  KeysToRemove['id'] // never
+type OnlyPossible = KeysToRemove['id'/* never */ | 'name' | 'surname'] // string
