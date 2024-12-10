@@ -32,10 +32,11 @@ const PlaylistView = () => {
   const createPlaylist = (draft: Playlist) => {
     draft.id = crypto.randomUUID();
 
-    // playlists.push(draft); // Mutable
-    // setPlaylists([...playlists]); // fake imutable
-
     setPlaylists([...playlists, draft]);
+    setPlaylists([...playlists, draft]);
+    setPlaylists([...playlists, draft]);
+    setPlaylists([...playlists, draft]);
+
     setSelectedId(draft.id);
     setSelected(draft);
     setMode("details");
