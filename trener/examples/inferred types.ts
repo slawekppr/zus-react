@@ -21,5 +21,8 @@ window.navigator.geolocation.getCurrentPosition((res) => {
 type PosFn = (typeof window)["navigator"]["geolocation"]["getCurrentPosition"];
 
 type ExtractGeoPos = PosFn extends (x: infer T) => any ? T : false;
-
 const placki: ExtractGeoPos = {} as PositionCallback;
+
+type Parameter<F> = F extends (x: infer P) => any ? P : never;
+
+type PosFnParam = Parameter<PosFn>; // PositionCallback
