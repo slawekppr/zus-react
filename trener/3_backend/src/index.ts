@@ -16,6 +16,11 @@ app.get("/", (req, res) => {
   res.send(`<h1>Hello ${req.user?.name || "Guest"} </h1>`);
 });
 
+app.get('/playlist/:plackiID', (req,res) => {
+  req.params['plackiID']
+  // req.params['innyId'] // Error
+})
+
 // app.get("", (req, res) => {});
 
 import users from "../data/users.json"; // --resolveJsonModule

@@ -79,7 +79,8 @@ type Cases<T> = {
   0: "banana";
   1: "costam" & T;
   2: "koklejne";
-}[
-    T extends string ? 0 
-        : T extends number ? 2 : 1
-];
+}[T extends string ? 0 : T extends number ? 2 : 1];
+
+// Infered template strings 
+type Path<T> = T extends `/playlists/${infer P}/` ? P : never;
+type P = Path<'/playlists/123/'> // 123
