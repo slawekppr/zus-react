@@ -270,3 +270,10 @@ https://jfrog.com/artifactory/
 - [rex-tils](https://github.com/Hotell/rex-tils)
 - [tiny-types](https://github.com/jan-molak/tiny-types)
 - [ts-essentials](https://github.com/krzkaczor/ts-essentials)
+
+## FUnctional utils
+https://selfrefactor.github.io/rambda/#/?id=add
+
+https://ramdajs.com/
+https://randycoulman.com/blog/categories/thinking-in-ramda/
+https://effect.website/
