@@ -41,5 +41,22 @@ function fetchPlacki(type: string) {
     .then((d) => ({ placek: d, sos: d.sos }));
 }
 
-// type fetchPlackiReturn = ???
-// type fetchPlackiThenReturn = ???
+// type ReturnType<F> = F extends (p: any) => infer R ? R : never;
+
+type fetchPlackiReturn = ReturnType<typeof fetchPlacki>;
+
+type fetchPlackiThenReturn = Parameters<
+  NonNullable<Parameters<fetchPlackiReturn["then"]>[0]>
+>[0];
+
+type PromiseResult<PromiseT extends Promise<any>> = Parameters<
+  NonNullable<Parameters<PromiseT["then"]>[0]>
+>[0];
+
+type AsyncFunction<F extends (...p: any) => Promise<any>> = PromiseResult<
+  ReturnType<F>
+>;
+
+type placki = PromiseResult<ReturnType<typeof fetchPlacki>>;
+type placki2 = AsyncFunction<typeof fetchPlacki>;
+type placki3 = Awaited<ReturnType<typeof fetchPlacki>>;
