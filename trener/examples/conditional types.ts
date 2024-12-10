@@ -27,3 +27,9 @@ type Exclude<T, U> = T extends U ? never : T;
 type Extract<T, U> = T extends U ? T : never;
 
 type OnlyStrings = Extract<"banana" | "plack" | 123 | true, string>;
+
+type Omit<T, K> = Pick<T, Exclude<keyof T, K>>;
+type ExactOmit<T, K extends keyof T> = Pick<T, Exclude<keyof T, K>>;
+
+type P1 = Omit<Vector, "length2">;
+type P2 = ExactOmit<Vector, "length">;
