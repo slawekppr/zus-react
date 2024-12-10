@@ -252,3 +252,10 @@ https://sages.link/889487
 - Prime React
 - Tailwind
 
+# Proxy / Repository
+https://www.google.com/search?q=npm+local+repository
+
+https://medium.com/@ogbemudiatimothy/using-npm-install-behind-a-corporate-proxy-server-db150c128899
+
+https://jfrog.com/artifactory/
+
