@@ -72,4 +72,14 @@ type F1 = Flatten<123>; /// 123
 type F2 = Flatten<[123]>; // 123
 
 type F3 = Flatten<[[[123]]]>; /// 123
-type F4 = Flatten<[[[123],'banana']]>; /// 123 | 'banana'
+type F4 = Flatten<[[[123], "banana"]]>; /// 123 | 'banana'
+
+// A'la "Switch"
+type Cases<T> = {
+  0: "banana";
+  1: "costam" & T;
+  2: "koklejne";
+}[
+    T extends string ? 0 
+        : T extends number ? 2 : 1
+];
