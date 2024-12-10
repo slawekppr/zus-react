@@ -18,7 +18,7 @@ const UserRoles = {
   USER: "user",
   ADMIN: "admin",
   MODERATOR: "moderator",
-}; // as const;
+} as const;
 
 //'UserRoles' refers to a value, but is being used as a type here.
 // Did you mean 'typeof UserRoles'?
@@ -26,3 +26,9 @@ const UserRoles = {
 typeof "banana" === "string"; // JS
 
 type Roles4 = typeof UserRoles; // TS
+
+type Roles5 = Roles4["ADMIN"] | Roles4["MODERATOR"] | Roles4["USER"];
+
+type Roles6 = keyof Roles4;
+
+type Roles7 = keyof typeof UserRoles;
