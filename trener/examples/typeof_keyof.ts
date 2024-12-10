@@ -29,6 +29,13 @@ type Roles4 = typeof UserRoles; // TS
 
 type Roles5 = Roles4["ADMIN"] | Roles4["MODERATOR"] | Roles4["USER"];
 
+type Roles5_5 = Roles4['ADMIN' | 'MODERATOR' | 'USER']
+
 type Roles6 = keyof Roles4;
 
 type Roles7 = keyof typeof UserRoles;
+
+type Roles8 = Roles4[ (keyof typeof UserRoles) ]
+
+type Roles9 = typeof UserRoles[ (keyof typeof UserRoles) ]
+
