@@ -62,9 +62,15 @@ type Album2 = {
   image: Album["images"];
 };
 
+type teams = "red" | "blue";
+type scores = {
+  [team in teams]: { score: number };
+};
+
 type keys = "id" | "name" | "images";
 
 // Map Album keys to Album3
 type Album3 = {
-    // ... keys ...
-}
+  [k in keys]: Album[k];
+};
+
