@@ -26,8 +26,8 @@ cache["123"] = { name: "" };
 cache["234"] = { name: "" };
 // cache["does not exit!"].name.toUpperCase();
 
-
-type AllowedHeaders = "Accept" | "Authorization";
+// type AllowedHeaders = "Accept" | "Authorization" | string & {};
+type AllowedHeaders = "Accept" | "Authorization" | `X-${string}`;
 
 // Mapped Type
 type RequestConfig = {
@@ -41,4 +41,8 @@ const req: RequestConfig = {
     Authorization: "",
   },
 };
-req.headers["X-PRoxty"] = "banana";
+req.headers["Accept"] = "banana";
+req.headers["X-Proxy"] = "banana";
+// req.headers["Proxy"] = "banana"; // errror
+
+
