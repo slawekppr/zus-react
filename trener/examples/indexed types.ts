@@ -26,9 +26,14 @@ cache["123"] = { name: "" };
 cache["234"] = { name: "" };
 // cache["does not exit!"].name.toUpperCase();
 
+
+type AllowedHeaders = "Accept" | "Authorization";
+
 // Headers MAP
 type RequestConfig = {
-  headers: {};
+  headers: {
+    [headerName: string]: string;
+  };
 };
 const req: RequestConfig = {
   headers: {
@@ -36,5 +41,4 @@ const req: RequestConfig = {
     Authorization: "",
   },
 };
-
 req.headers["X-PRoxty"] = "banana";
