@@ -259,3 +259,14 @@ https://medium.com/@ogbemudiatimothy/using-npm-install-behind-a-corporate-proxy-
 
 https://jfrog.com/artifactory/
 
+# TypeScript Utility Types
+- 🌟 [ts-toolbelt](https://github.com/pirix-gh/ts-toolbelt) (
+- [utility-types](https://github.com/piotrwitek/utility-types)
+- [type-zoo](https://github.com/pelotom/type-zoo)
+- [Reddit](https://www.reddit.com/r/typescript/comments/c2nq7k/higher_type_safety_for_typescript_with_tstoolbelt/))
+- [typesafe-actions](https://github.com/piotrwitek/typesafe-actions)
+- [type-fest](https://github.com/sindresorhus/type-fest)
+- [tsdef](https://github.com/joonhocho/tsdef)
+- [rex-tils](https://github.com/Hotell/rex-tils)
+- [tiny-types](https://github.com/jan-molak/tiny-types)
+- [ts-essentials](https://github.com/krzkaczor/ts-essentials)
