@@ -5,10 +5,7 @@ import PlaylistEditor from "../components/PlaylistEditor";
 import { Button } from "primereact/button";
 import { mockPlaylists } from "../../common/fixtures/mockPlaylists";
 import type { Playlist } from "../../common/model/Playlist";
-
-// Curried Function:
-// const appendItem = (draft: Playlist, nextPlaylists: Playlist[]): Playlist[] => [
-const appendItem =  <T,>(x: T) => (xs: T[]): T[] => [...xs, x];
+import { appendItem, updateItem } from "./utils";
 
 type Modes = "details" | "editor" | "creator";
 
@@ -38,19 +35,16 @@ const PlaylistView = () => {
   const createPlaylist = (draft: Playlist) => {
     draft.id = crypto.randomUUID();
 
-    // setPlaylists(nextPlaylsits => appendItem(draft,nextPlaylsits));
-    // setPlaylists((nextPlaylsits) => appendItem(draft)  (nextPlaylsits));
     setPlaylists(appendItem(draft));
-
+    
     setSelectedId(draft.id);
     setSelected(draft);
     setMode("details");
   };
 
   const savePlaylist = (draft: Playlist) => {
-    setPlaylists((playlists) =>
-      playlists.map((p) => (p.id === draft.id ? draft : p))
-    );
+    setPlaylists(updateItem(draft));
+
     setSelectedId(draft.id);
     setSelected(draft);
     setMode("details");
