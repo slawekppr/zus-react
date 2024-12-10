@@ -1,4 +1,3 @@
-
 // type AllowedHeaders = "Accept" | "Authorization" | string & {};
 type AllowedHeaders = "Accept" | "Authorization" | `X-${string}`;
 
@@ -31,3 +30,41 @@ type EventTypes = {
 type componentEventProps = {
   [e in reactEvents]: React.EventHandler<EventTypes[e]>;
 };
+
+type Album = {
+  album_type: string;
+  total_tracks: number;
+  available_markets: string[];
+  external_urls: {
+    spotify: string;
+  };
+  href: string;
+  id: string;
+  images: {
+    url: string;
+    height: number;
+    width: number;
+  }[];
+  name: string;
+  release_date: string;
+  release_date_precision: string;
+  restrictions: {};
+  type: string;
+};
+
+// Lookup
+type AlbumId = Album["id"];
+type AlbumImage = Album["images"][number];
+
+type Album2 = {
+  id: Album["id"];
+  name: Album["name"];
+  image: Album["images"];
+};
+
+type keys = "id" | "name" | "images";
+
+// Map Album keys to Album3
+type Album3 = {
+    // ... keys ...
+}
