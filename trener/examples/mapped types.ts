@@ -74,3 +74,10 @@ type Album3 = {
   [k in keys]: Album[k];
 };
 
+// Map All keys of Album 
+type PartialAlbum = {
+    // [ac in keyof Album]: 'banana'
+    // [aKey in keyof Album]: Album[aKey] | undefined
+    readonly [aKey in keyof Album]: Album[aKey]
+    // [aKey in keyof Album]?: Album[aKey]
+}
