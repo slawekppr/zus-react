@@ -29,10 +29,10 @@ cache["234"] = { name: "" };
 
 type AllowedHeaders = "Accept" | "Authorization";
 
-// Headers MAP
+// Mapped Type
 type RequestConfig = {
   headers: {
-    [headerName: string]: string;
+    [headerName in AllowedHeaders]: string;
   };
 };
 const req: RequestConfig = {
