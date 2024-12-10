@@ -49,14 +49,21 @@ const role: Roles9 = "admin";
 class Placek {
   sos = "bananowy";
 }
+class SuperPlacek extends Placek{}
 
 const jedenPlacek = new Placek(); // Placek
 
 type InstanceType = typeof jedenPlacek; // Placek
 type ConstructorType = typeof Placek; // Placek
+type ConstructorType2 = { new (): Placek }; // Placek
 
 function podajSniadanie(co: InstanceType) {}
-podajSniadanie(jedenPlacek)
+podajSniadanie(jedenPlacek);
 
-function zrobSniadanie( coZrobic: ConstructorType) {}
-zrobSniadanie( Placek )
+function zrobSniadanie(coZrobic: ConstructorType) {}
+zrobSniadanie(Placek);
+zrobSniadanie(SuperPlacek);
+
+function zrobSniadanie2(coZrobic: { new (): Placek }) {}
+zrobSniadanie2(Placek);
+zrobSniadanie2(SuperPlacek);
