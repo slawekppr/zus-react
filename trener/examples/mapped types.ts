@@ -1,4 +1,4 @@
-export {}
+export {};
 
 // type AllowedHeaders = "Accept" | "Authorization" | string & {};
 type AllowedHeaders = "Accept" | "Authorization" | `X-${string}`;
@@ -91,7 +91,7 @@ type PartialAlbum1 = {
 type Partial<T> = {
   [key in keyof T]?: T[key];
 };
-type PartialAlbum = Partial<Album>
+type PartialAlbum = Partial<Album>;
 
 // Exercise: Make Generic Pick Type
 type Keys = "id" | "name" | "images";
@@ -100,3 +100,12 @@ type Keys = "id" | "name" | "images";
 type PickAlbumKeys = {
   [k in Keys]: Album[k];
 };
+
+type Pick<T, K extends keyof T> = {
+  // [key in keyof T]?: K
+  // [key in keyof T]?: T[K]
+  [key in K]: T[key];
+};
+
+// type SimpleALbum = Pick<Album, "id" | "name" | "placki i bananay">;
+type SimpleALbum = Pick<Album, "id" | "name" | "images">;
