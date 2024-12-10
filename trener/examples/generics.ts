@@ -1,3 +1,5 @@
+export {}
+
 const empty = [];
 const anyBox: any[] = [];
 const maybeString: string[] = [];
