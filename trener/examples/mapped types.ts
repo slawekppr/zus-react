@@ -88,9 +88,9 @@ type PartialAlbum1 = {
 //   [key in keyof Album]?: Album[key];
 // };
 
-type Partial<T> = {
-  [key in keyof T]?: T[key];
-};
+// type Partial<T> = {
+//   [key in keyof T]?: T[key];
+// };
 type PartialAlbum = Partial<Album>;
 
 // Exercise: Make Generic Pick Type
