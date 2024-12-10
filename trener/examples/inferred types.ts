@@ -15,7 +15,7 @@ function getValue<T>(param: Wrapper<Wrapper<T>>) {
 // not exported GeolocationPosition
 
 window.navigator.geolocation.getCurrentPosition((res) => {
-  res.coords;
+  const mojeCors: MyCoords = res.coords;
 });
 
 type PosFn = (typeof window)["navigator"]["geolocation"]["getCurrentPosition"];
@@ -23,6 +23,12 @@ type PosFn = (typeof window)["navigator"]["geolocation"]["getCurrentPosition"];
 type ExtractGeoPos = PosFn extends (x: infer T) => any ? T : false;
 const placki: ExtractGeoPos = {} as PositionCallback;
 
-type Parameter<F> = F extends (x: infer P) => any ? P : never;
+type Parameter<F> = F extends (p: infer P) => any ? P : never;
+// type Parameters<F> = F extends (...params: infer P) => any ? P : never;
 
 type PosFnParam = Parameter<PosFn>; // PositionCallback
+type PosFnParams = Parameters<PosFn>; // [ PositionCallback, ...
+type FirstParam = PosFnParams[0]; // PositionCallback
+
+type ParamsOfCallbackParamFn = Parameters<FirstParam>[0];
+type MyCoords = ParamsOfCallbackParamFn["coords"];
