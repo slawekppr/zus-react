@@ -6,6 +6,10 @@ import { Button } from "primereact/button";
 import { mockPlaylists } from "../../common/fixtures/mockPlaylists";
 import type { Playlist } from "../../common/model/Playlist";
 
+// Curried Function:
+// const appendItem = (draft: Playlist, nextPlaylists: Playlist[]): Playlist[] => [
+const appendItem =  <T,>(x: T) => (xs: T[]): T[] => [...xs, x];
+
 type Modes = "details" | "editor" | "creator";
 
 const PlaylistView = () => {
@@ -30,13 +34,6 @@ const PlaylistView = () => {
   const showEditor = () => {
     setMode("editor");
   };
-
-  // Curried Function:
-  // const appendItem = (draft: Playlist, nextPlaylists: Playlist[]): Playlist[] => [
-  const appendItem =
-    (draft: Playlist) =>
-    (nextPlaylists: Playlist[]): Playlist[] =>
-      [...nextPlaylists, draft];
 
   const createPlaylist = (draft: Playlist) => {
     draft.id = crypto.randomUUID();
