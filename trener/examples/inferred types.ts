@@ -32,3 +32,14 @@ type FirstParam = PosFnParams[0]; // PositionCallback
 
 type ParamsOfCallbackParamFn = Parameters<FirstParam>[0];
 type MyCoords = ParamsOfCallbackParamFn["coords"];
+
+// Exercise: Extracting return values ( of return values )
+function fetchPlacki(type: string) {
+  return window
+    .fetch("http://fabrykaplackow.com/", {})
+    .then((r) => r.json())
+    .then((d) => ({ placek: d, sos: d.sos }));
+}
+
+// type fetchPlackiReturn = ???
+// type fetchPlackiThenReturn = ???
