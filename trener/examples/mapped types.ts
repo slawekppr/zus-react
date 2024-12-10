@@ -1,3 +1,5 @@
+export {}
+
 // type AllowedHeaders = "Accept" | "Authorization" | string & {};
 type AllowedHeaders = "Accept" | "Authorization" | `X-${string}`;
 
@@ -74,10 +76,19 @@ type Album3 = {
   [k in keys]: Album[k];
 };
 
-// Map All keys of Album 
-type PartialAlbum = {
-    // [ac in keyof Album]: 'banana'
-    // [aKey in keyof Album]: Album[aKey] | undefined
-    readonly [aKey in keyof Album]: Album[aKey]
-    // [aKey in keyof Album]?: Album[aKey]
-}
+// Map All keys of Album
+type PartialAlbum1 = {
+  // [ac in keyof Album]: 'banana'
+  // [aKey in keyof Album]: Album[aKey] | undefined
+  readonly [aKey in keyof Album]: Album[aKey];
+  // [aKey in keyof Album]?: Album[aKey]
+};
+
+// type PartialAlbum = {
+//   [key in keyof Album]?: Album[key];
+// };
+
+type Partial<T> = {
+  [key in keyof T]?: T[key];
+};
+type PartialAlbum = Partial<Album>
