@@ -9,14 +9,14 @@ import type { Playlist } from "../../common/model/Playlist";
 type Modes = "details" | "editor" | "creator";
 
 const PlaylistView = () => {
-  const [playlists, setPlaylists] = useState(mockPlaylists);
-
   const [mode, setMode] = useState<Modes>("details");
+
+  const [playlists, setPlaylists] = useState(mockPlaylists);
   const [selectedId, setSelectedId] = useState<string>();
-  // const [selected, setSelected] = useState<Playlist | undefined>(playlists[0]);
   const [selected, setSelected] = useState<Playlist>();
 
   const selectPlaylistById = (id: string) => {
+    if (mode !== "details") return;
     setSelectedId(id);
     setSelected(playlists.find((p) => p.id === id));
   };
@@ -29,14 +29,33 @@ const PlaylistView = () => {
     setMode("editor");
   };
 
-  const createPlaylist = (draft: Playlist) => {};
+  const createPlaylist = (draft: Playlist) => {
+    draft.id = crypto.randomUUID();
 
-  const savePlaylist = (draft: Playlist) => {
-    setPlaylists(playlists.map((p) => (p.id === draft.id ? draft : p)));
+    // playlists.push(draft); // Mutable
+    // setPlaylists([...playlists]); // fake imutable
+
+    setPlaylists([...playlists, draft]);
+    setSelectedId(draft.id);
     setSelected(draft);
     setMode("details");
   };
 
+  const savePlaylist = (draft: Playlist) => {
+    // playlists[0] = draft; // Mutable
+
+    // Immutable
+    setPlaylists(playlists.map((p) => (p.id === draft.id ? draft : p)));
+    setSelectedId(draft.id);
+    setSelected(draft);
+    setMode("details");
+  };
+
+  const showCreator = () => {
+    setSelected(undefined);
+    setSelectedId(undefined);
+    setMode("creator");
+  };
   return (
     <div>
       <div className="grid grid-cols-2 gap-5">
@@ -46,12 +65,10 @@ const PlaylistView = () => {
             selectedId={selectedId}
             onSelect={selectPlaylistById}
           />
+          <Button onClick={showCreator}>Create new</Button>
         </div>
 
         <div className="grid gap-5">
-          {/* {mode == "details" && selected && (
-            <PlaylistDetails playlist={selected} onEdit={showEditor} />
-          )} */}
           {mode == "details" && (
             <PlaylistDetails playlist={selected} onEdit={showEditor} />
           )}
