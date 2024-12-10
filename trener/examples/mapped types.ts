@@ -92,3 +92,11 @@ type Partial<T> = {
   [key in keyof T]?: T[key];
 };
 type PartialAlbum = Partial<Album>
+
+// Exercise: Make Generic Pick Type
+type Keys = "id" | "name" | "images";
+
+// Map Album keys to Album3
+type PickAlbumKeys = {
+  [k in Keys]: Album[k];
+};
