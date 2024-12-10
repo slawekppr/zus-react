@@ -20,6 +20,8 @@ type CacheItem = {
 type Cache = { [klucz: string]: CacheItem };
 type SafeCache = { [klucz: string]: CacheItem | undefined };
 
+type SafeCache2 = { [klucz in string]?: CacheItem };
+
 const cache: SafeCache = {
   "123": { name: "playlist 123" },
   "345": { name: "playlist 345" },
