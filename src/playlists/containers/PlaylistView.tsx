@@ -31,9 +31,19 @@ const PlaylistView = () => {
     setMode("editor");
   };
 
+  // Curried Function:
+  // const appendItem = (draft: Playlist, nextPlaylists: Playlist[]): Playlist[] => [
+  const appendItem =
+    (draft: Playlist) =>
+    (nextPlaylists: Playlist[]): Playlist[] =>
+      [...nextPlaylists, draft];
+
   const createPlaylist = (draft: Playlist) => {
     draft.id = crypto.randomUUID();
-    setPlaylists((nextPlaylists) => [...nextPlaylists, draft]);
+
+    // setPlaylists(nextPlaylsits => appendItem(draft,nextPlaylsits));
+    // setPlaylists((nextPlaylsits) => appendItem(draft)  (nextPlaylsits));
+    setPlaylists(appendItem(draft));
 
     setSelectedId(draft.id);
     setSelected(draft);
