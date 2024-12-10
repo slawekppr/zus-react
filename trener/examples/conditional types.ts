@@ -22,3 +22,8 @@ type ExcludeBanana<T> = T extends "banana" | "bananas" ? never : T;
 
 // Distributive over unions - 2 * ( 3 + 4 + 5 )
 type NoBananas = ExcludeBanana<"bananas" | "banana" | "apple" | "placki">;
+
+type Exclude<T, U> = T extends U ? never : T;
+type Extract<T, U> = T extends U ? T : never;
+
+type OnlyStrings = Extract<"banana" | "plack" | 123 | true, string>;
