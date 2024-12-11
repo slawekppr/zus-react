@@ -8,7 +8,8 @@ import { getToken } from "./Auth";
 // };
 
 export const fetchAlbumSearchResults = (query = "") => {
-  fetch(
+  
+  return fetch(
     "https://api.spotify.com/v1/search?" +
       new URLSearchParams({
         type: "album",
@@ -21,7 +22,8 @@ export const fetchAlbumSearchResults = (query = "") => {
     }
   )
     .then((r) => r.json())
-    .then(console.log);
+    .then((d) => d.albums.items)
+    // .then(console.log);
 
-  return Promise.resolve(mockAlbums);
+  // return Promise.resolve(mockAlbums);
 };
