@@ -7,8 +7,8 @@ const root = createRoot(document.getElementById("root")!);
 
 import "primereact/resources/themes/lara-light-cyan/theme.css";
 
-
 import { PrimeReactProvider } from "primereact/api";
+import "primeicons/primeicons.css";
 
 root.render(
   <StrictMode>
