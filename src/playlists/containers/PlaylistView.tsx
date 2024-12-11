@@ -66,6 +66,10 @@ const PlaylistView = () => {
     console.log("effect - after Render if deps[] changed ");
   }, [selectedId]);
 
+  useEffect(() => {
+    console.log("effect - after FIRST Render ONLY");
+  }, [/* "placki" */]);
+
   console.log("render");
 
   return (
