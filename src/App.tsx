@@ -10,11 +10,8 @@ import NavBar from "./common/components/NavBar";
 import MainLayout from "./common/components/MainLayout";
 
 function App() {
-  const [count, setCount] = useState(0);
-
-  useMemo(() => {
-    checkLogin();
-  }, []);
+  
+  useMemo(() => checkLogin(), []);
 
   return (
     <>

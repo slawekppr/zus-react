@@ -3,6 +3,7 @@ import SearchForm from "../components/SearchForm";
 import ResultsGrid from "../components/ResultsGrid";
 import { fetchAlbumSearchResults } from "../../common/services/MusicAPI";
 import { Album } from "../../common/model/Album";
+import UserWidget from "../../common/context/UserWidget";
 
 type Props = {};
 
@@ -26,6 +27,8 @@ const AlbumSearchView = (props: Props) => {
         <div>
           <ResultsGrid results={results} />
         </div>
+
+        <UserWidget/>
       </div>
     </div>
   );

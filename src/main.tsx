@@ -9,11 +9,14 @@ import "primereact/resources/themes/lara-light-cyan/theme.css";
 
 import { PrimeReactProvider } from "primereact/api";
 import "primeicons/primeicons.css";
+import UserContextProvider from "./common/context/UserContext.tsx";
 
 root.render(
   <StrictMode>
     <PrimeReactProvider>
-      <App />
+      <UserContextProvider>
+        <App />
+      </UserContextProvider>
     </PrimeReactProvider>
   </StrictMode>
 );
