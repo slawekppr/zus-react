@@ -1,4 +1,5 @@
 import { mockAlbums } from "../fixtures/mockAlbums";
+import { Album } from "../model/Album";
 import { getToken } from "./Auth";
 
 // export const fetchAlbumSearchResults = (query = "") => {
@@ -22,9 +23,19 @@ export const fetchAlbumSearchResults = (query = "", init?: RequestInit) => {
       },
     }
   )
-    .then((r) => r.ok ? r.json() : Promise.reject(new Error('Server Error')))
-    .then((d) => d.albums.items);
+    .then((r) => (r.ok ? r.json() : Promise.reject(new Error("Server Error"))))
+    .then((d) => d.albums.items as Album[]);
   // .then(console.log);
 
   // return Promise.resolve(mockAlbums);
+};
+
+export const fetchAlbumById = (id = "", init?: RequestInit) => {
+  return fetch("https://api.spotify.com/v1/albums/" + id, {
+    ...init,
+    headers: {
+      ...init?.headers,
+      Authorization: `Bearer ${getToken()}`,
+    },
+  });
 };

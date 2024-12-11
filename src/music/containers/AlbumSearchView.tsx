@@ -10,7 +10,7 @@ type Props = {};
 const AlbumSearchView = (props: Props) => {
   const [query, setQuery] = useState("");
 
-  const { isLoading, error, results } = useFetchAlbumSearch(query);
+  const { isLoading, error, data: results = [] } = useFetchAlbumSearch(query);
 
   return (
     <div>
