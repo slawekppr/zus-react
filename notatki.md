@@ -272,8 +272,8 @@ https://jfrog.com/artifactory/
 - [ts-essentials](https://github.com/krzkaczor/ts-essentials)
 
 ## FUnctional utils
-https://selfrefactor.github.io/rambda/#/?id=add
-
 https://ramdajs.com/
+https://remedajs.com/
+
 https://randycoulman.com/blog/categories/thinking-in-ramda/
 https://effect.website/
