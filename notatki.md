@@ -297,3 +297,6 @@ https://effect.website/
 
 // faker.js
 // casual.js
+
+# Spotify
+xafejil469@kindomd.com
