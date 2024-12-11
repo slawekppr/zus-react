@@ -21,8 +21,6 @@ export {};
     .forEach(show);
 }
 
-import * as R from "remeda";
-
 {
   // Exercise: Write 'isNot' function:
 
@@ -49,17 +47,20 @@ import * as R from "remeda";
   console.log(result);
 }
 
+import * as R from "ramda";
+import * as Re from "remeda";
 {
   const OUR_COUNTRY = "PL";
+
   type Person = {
     age: number;
-    birthCountry: string;
-    naturalizationDate: boolean;
+    birthCountry: string; // Always Citizen
+    naturalizationDate?: Date; // Become Citizen
   };
 
   const wasBornInCountry = (person: Person) =>
     person.birthCountry === OUR_COUNTRY;
-  
+
   const wasNaturalized = (person: Person) => Boolean(person.naturalizationDate);
   const isOver18 = (person: Person) => person.age >= 18;
 
@@ -68,4 +69,28 @@ import * as R from "remeda";
 
   const isEligibleToVote = (person: Person) =>
     isOver18(person) && isCitizen(person);
+}
+
+{
+  const OUR_COUNTRY = "PL";
+
+  type Person = {
+    age: number;
+    birthCountry: string; // Always Citizen
+    naturalizationDate?: Date; // Become Citizen
+  };
+
+  const wasBornInCountry = (person: Person) =>
+    person.birthCountry === OUR_COUNTRY;
+
+  const wasNaturalized = (person: Person) => Boolean(person.naturalizationDate);
+  const isOver18 = (person: Person) => person.age >= 18;
+
+  // const isCitizen = (person: Person) => wasBornInCountry(person) || wasNaturalized(person);
+  // const isCitizen = (person: Person) => R.either(wasBornInCountry,wasNaturalized) (person)
+  const isCitizen = R.either(wasBornInCountry, wasNaturalized);
+
+//   const isEligibleToVote = (person: Person) => isOver18(person) && isCitizen(person);
+//   const isEligibleToVote = (person: Person) => R.both(isOver18,isCitizen) (person)
+  const isEligibleToVote = R.both(isOver18,isCitizen) 
 }
