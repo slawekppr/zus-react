@@ -131,13 +131,33 @@ import * as Re from "remeda";
     title: string;
     year: number;
   };
+
   const publishedInYear = (book: Book, year: number) => book.year === year;
+  const publishedInYearF = R.flip(publishedInYear);
 
   const titlesForYear = (books: Book[], year: number) => {
-    const selected = R.filter((book) => publishedInYear(book, year), books);
+    // const selected = R.filter((book) => publishedInYear2(year) (book), books);
+    // const selected = R.filter(publishedInYear2(year), books);
 
-    return R.map((book) => book.title, selected);
+    const predicate = publishedInYearF(year);
+
+    return R.pipe(
+      R.filter(predicate),
+      //   R.map((book) => book.title)
+      R.map(R.prop("title"))
+    )(books);
+
+    // return R.map((book) => book.title, selected);
   };
+
+  const titlesForYear2 = (
+    year: number
+    // => (books: Book[]) => //
+  ) =>
+    R.pipe(
+      R.filter(publishedInYearF(year)), //
+      R.map(R.prop("title")) //
+    ); // (books);
 
   titlesForYear(
     [
