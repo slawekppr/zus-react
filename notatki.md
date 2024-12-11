@@ -300,3 +300,9 @@ https://effect.website/
 
 # Spotify
 xafejil469@kindomd.com
+
+# Use Hooks
+https://use-http.com/#/
+
+https://usehooks.com/usefetch
+
