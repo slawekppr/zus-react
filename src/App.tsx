@@ -17,14 +17,15 @@ function App() {
   return (
     <>
       {/* .container.my-5>h1.text-5xl.bg-primary-500.text-white.p-5{Witaj w ZUS} */}
-      <div className="container my-5 grid gap-5">
-        <div className="bg-primary-500">
-          <Button className="float-end m-5" onClick={login}>
+      <div className="bg-primary-500">
+        <div className="container  flex justify-between items-center">
+          <h1 className="text-5xl  text-white p-5">Witaj w ZUS</h1>
+          <Button className="" onClick={login}>
             Login
           </Button>
-          <h1 className="text-5xl  text-white p-5">Witaj w ZUS</h1>
         </div>
-
+      </div>
+      <div className="container my-5 grid gap-5">
         {/* <PlaylistView/> */}
         <AlbumSearchView />
       </div>
