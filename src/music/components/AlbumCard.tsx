@@ -1,22 +1,27 @@
 import { Button } from "primereact/button";
 import { Card } from "primereact/card";
 import React from "react";
+import { Album } from "../../common/model/Album";
 
-type Props = {};
+type Props = {
+  album: Album;
+};
 
-const AlbumCard = (props: Props) => {
+const AlbumCard = ({ album }: Props) => {
   return (
     <Card
-      subTitle="Simple Card"
-      header={
-        <img src="https://placecats.com/millie/300/300" alt="album name" />
-      }
+      subTitle={<>
+        <div className="line-clamp-1">{album.name}</div>
+      </>}
+      header={<img src={album.images[0].url} alt="album name" />}
       footer={
-        <Button size="small">Details</Button>
+        <>
+          <div className="grid items-end">
+            <Button size="small">Details</Button>
+          </div>
+        </>
       }
-    >
-      {/* <p className="m-0"></p> */}
-    </Card>
+    ></Card>
   );
 };
 
