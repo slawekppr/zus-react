@@ -54,23 +54,9 @@ const PlaylistView = () => {
     setMode("creator");
   };
 
-  // Error: Too many re-renders. React limits the number of renders to prevent an infinite loop.
-  // setSelected(playlists.find((p) => p.id === selectedId));
-
-  useEffect(() => {
-    console.log("effect - after reach Render");
-  });
-
   useEffect(() => {
     setSelected(playlists.find((p) => p.id === selectedId));
-    console.log("effect - after Render if deps[] changed ");
-  }, [selectedId]);
-
-  useEffect(() => {
-    console.log("effect - after FIRST Render ONLY");
-  }, [/* "placki" */]);
-
-  console.log("render");
+  }, [playlists, selectedId]);
 
   return (
     <div>
