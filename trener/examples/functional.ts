@@ -110,7 +110,7 @@ import * as Re from "remeda";
   const operate2 = (x: number, y: number) => square(addOne(multiply(x)(y)));
 
   const hasGoldStatus = R.gt(5);
-  
+
   const operate3 = (x: number, y: number) =>
     R.pipe(
       multiply(y),
@@ -124,4 +124,28 @@ import * as Re from "remeda";
   //   function pipe(...params:Function[]) { }
 
   operate(3, 4); // => ((3 * 4) + 1)^2 => (12 + 1)^2 => 13^2 => 169
+}
+
+{
+  type Book = {
+    title: string;
+    year: number;
+  };
+  const publishedInYear = (book: Book, year: number) => book.year === year;
+
+  const titlesForYear = (books: Book[], year: number) => {
+    const selected = R.filter((book) => publishedInYear(book, year), books);
+
+    return R.map((book) => book.title, selected);
+  };
+
+  titlesForYear(
+    [
+      { title: "Game of thrones", year: 2000 },
+      { title: "Banana", year: 2010 },
+      { title: "Placki", year: 2000 },
+      { title: "Wódz i buc", year: 2010 },
+    ],
+    2000
+  );
 }
