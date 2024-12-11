@@ -109,11 +109,19 @@ import * as Re from "remeda";
   };
   const operate2 = (x: number, y: number) => square(addOne(multiply(x)(y)));
 
-  const operate3 = (x: number, y: number) => R.pipe(
+  const hasGoldStatus = R.gt(5);
+  
+  const operate3 = (x: number, y: number) =>
+    R.pipe(
       multiply(y),
-      addOne,
+      R.cond([
+        // [(x) => x < 5, addOne],
+        [hasGoldStatus, addOne],
+        [R.T, (val: number) => val - 1],
+      ]),
       square
-  )
+    );
+  //   function pipe(...params:Function[]) { }
 
   operate(3, 4); // => ((3 * 4) + 1)^2 => (12 + 1)^2 => 13^2 => 169
 }
