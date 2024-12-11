@@ -16,6 +16,8 @@ export const login = () => {
 
 let access_token: string | null = "";
 
+export const getToken = () => access_token
+
 export const checkLogin = () => {
   access_token = new URLSearchParams(window.location.hash.slice(1)).get(
     "access_token"
