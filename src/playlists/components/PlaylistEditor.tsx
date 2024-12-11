@@ -1,6 +1,7 @@
 import { Button } from "primereact/button";
-import React, { useEffect, useId, useRef, useState } from "react";
+import React, { useId, useState } from "react";
 import type { Playlist } from "../../common/model/Playlist";
+import { useFocus } from "../../common/hooks/useFocus";
 
 type Props = {
   playlist?: Playlist;
@@ -13,15 +14,6 @@ const EMPTY_PLAYLIST = {
   name: "",
   public: false,
 };
-
-function useFocus() {
-  const ref = useRef<HTMLInputElement | null>(null);
-  useEffect(() => {
-    ref.current?.focus();
-  }, []);
-
-  return { ref: ref };
-}
 
 const PlaylistEditor = ({
   onCancel,

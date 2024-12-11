@@ -2,6 +2,7 @@
 import { Button } from "primereact/button";
 import { InputText } from "primereact/inputtext";
 import React, { useState } from "react";
+import { useFocus } from "../../common/hooks/useFocus";
 
 type Props = {
   onSearch: (query: string) => void;
@@ -9,6 +10,7 @@ type Props = {
 
 const SearchForm = ({ onSearch }: Props) => {
   const [query, setQuery] = useState("");
+  const { ref } = useFocus();
 
   function search() {
     onSearch(query);
@@ -18,6 +20,7 @@ const SearchForm = ({ onSearch }: Props) => {
     <div>
       <div className="p-inputgroup flex-1">
         <InputText
+          ref={ref}
           placeholder="search"
           value={query}
           onChange={(e) => setQuery(e.target.value)}
