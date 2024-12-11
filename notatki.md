@@ -292,3 +292,8 @@ https://remedajs.com/
 
 https://randycoulman.com/blog/categories/thinking-in-ramda/
 https://effect.website/
+
+# Generate  Mocks
+
+// faker.js
+// casual.js
