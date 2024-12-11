@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import PlaylistList from "../components/PlaylistList";
 import PlaylistDetails from "../components/PlaylistDetails";
 import PlaylistEditor from "../components/PlaylistEditor";
@@ -55,7 +55,14 @@ const PlaylistView = () => {
   };
 
   // Error: Too many re-renders. React limits the number of renders to prevent an infinite loop.
-  setSelected(playlists.find((p) => p.id === selectedId));
+  // setSelected(playlists.find((p) => p.id === selectedId));
+
+  useEffect(() => {
+    setSelected(playlists.find((p) => p.id === selectedId));
+    console.log("effect - after reach Render");
+  });
+
+  console.log("render");
 
   return (
     <div>
