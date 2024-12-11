@@ -90,7 +90,30 @@ import * as Re from "remeda";
   // const isCitizen = (person: Person) => R.either(wasBornInCountry,wasNaturalized) (person)
   const isCitizen = R.either(wasBornInCountry, wasNaturalized);
 
-//   const isEligibleToVote = (person: Person) => isOver18(person) && isCitizen(person);
-//   const isEligibleToVote = (person: Person) => R.both(isOver18,isCitizen) (person)
-  const isEligibleToVote = R.both(isOver18,isCitizen) 
+  //   const isEligibleToVote = (person: Person) => isOver18(person) && isCitizen(person);
+  //   const isEligibleToVote = (person: Person) => R.both(isOver18,isCitizen) (person)
+  const isEligibleToVote = R.both(isOver18, isCitizen);
+}
+
+{
+  const multiply = (a: number) => (b: number) => a * b;
+  const addOne = (x: number) => x + 1;
+  const square = (x: number) => x * x;
+
+  const operate = (x: number, y: number) => {
+    const product = multiply(x)(y);
+    const incremented = addOne(product);
+    const squared = square(incremented);
+
+    return squared;
+  };
+  const operate2 = (x: number, y: number) => square(addOne(multiply(x)(y)));
+
+  const operate3 = (x: number, y: number) => R.pipe(
+      multiply(y),
+      addOne,
+      square
+  )
+
+  operate(3, 4); // => ((3 * 4) + 1)^2 => (12 + 1)^2 => 13^2 => 169
 }
