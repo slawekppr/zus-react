@@ -1,5 +1,5 @@
 import { Button } from "primereact/button";
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useId, useState } from "react";
 import type { Playlist } from "../../common/model/Playlist";
 
 type Props = {
@@ -40,8 +40,10 @@ const PlaylistEditor = ({
     setPlaylist({ ...playlist, [event.target.name]: value });
   };
 
+  const id = useId(); // :r1:nameInputRef
+
   useEffect(() => {
-    document.getElementById("nameInputRef")!.focus();
+    document.getElementById(id + "nameInputRef")!.focus();
   }, []);
 
   return (
@@ -52,7 +54,7 @@ const PlaylistEditor = ({
         <div className="grid gap-2">
           <label>Name</label>
           <input
-            id="nameInputRef"
+            id={id + "nameInputRef"}
             type="text"
             value={playlist.name}
             name="name"
