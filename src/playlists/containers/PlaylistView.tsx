@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useMemo, useState } from "react";
 import PlaylistList from "../components/PlaylistList";
 import PlaylistDetails from "../components/PlaylistDetails";
 import PlaylistEditor from "../components/PlaylistEditor";
@@ -14,7 +14,6 @@ const PlaylistView = () => {
 
   const [playlists, setPlaylists] = useState(mockPlaylists);
   const [selectedId, setSelectedId] = useState<string>();
-  const [selected, setSelected] = useState<Playlist>();
 
   const selectPlaylistById = (id: string) => {
     if (mode !== "details") return;
@@ -49,14 +48,22 @@ const PlaylistView = () => {
   };
 
   const showCreator = () => {
-    setSelected(undefined);
-    // setSelectedId(undefined);
+    // setSelected(undefined);
+    setSelectedId(undefined);
     setMode("creator");
   };
 
-  useEffect(() => {
-    setSelected(playlists.find((p) => p.id === selectedId));
-  }, [playlists, selectedId]);
+  // 2 renders - async
+  // const [selected, setSelected] = useState<Playlist>();
+  // useEffect(() => {
+  //   setSelected(playlists.find((p) => p.id === selectedId));
+  // }, [playlists, selectedId]);
+
+  // 1 render - sync 
+  const selected = useMemo(
+    () => playlists.find((p) => p.id === selectedId),
+    [playlists, selectedId]
+  );
 
   return (
     <div>
