@@ -54,16 +54,22 @@ const PlaylistView = () => {
   };
 
   // 2 renders - async
-  // const [selected, setSelected] = useState<Playlist>();
-  // useEffect(() => {
-  //   setSelected(playlists.find((p) => p.id === selectedId));
-  // }, [playlists, selectedId]);
+  const [selected, setSelected] = useState<Playlist>();
+  useEffect(() => {
+    console.log("fetch playlist " + selectedId);
 
-  // 1 render - sync 
-  const selected = useMemo(
-    () => playlists.find((p) => p.id === selectedId),
-    [playlists, selectedId]
-  );
+    // Contructor:
+    const handler = setTimeout(() => {
+      setSelected(playlists.find((p) => p.id === selectedId));
+    }, 2000);
+
+    // Destructor:
+    return () => {
+      console.log("cancel");
+
+      clearTimeout(handler);
+    };
+  }, [playlists, selectedId]);
 
   return (
     <div>

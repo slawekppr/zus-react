@@ -44,7 +44,6 @@ const PlaylistEditor = ({
   const nameInputRef = useRef<HTMLInputElement | null>(null);
 
   useEffect(() => {
-    // document.getElementById(id + "nameInputRef")!.focus();
     nameInputRef.current?.focus();
   }, []);
 
