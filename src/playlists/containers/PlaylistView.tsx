@@ -58,9 +58,13 @@ const PlaylistView = () => {
   // setSelected(playlists.find((p) => p.id === selectedId));
 
   useEffect(() => {
-    setSelected(playlists.find((p) => p.id === selectedId));
     console.log("effect - after reach Render");
   });
+
+  useEffect(() => {
+    setSelected(playlists.find((p) => p.id === selectedId));
+    console.log("effect - after Render if deps[] changed ");
+  }, [selectedId]);
 
   console.log("render");
 
