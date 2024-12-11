@@ -1,0 +1,20 @@
+[
+    {
+        "id": "123",
+        "name": "Server playlist 123",
+        "public": false,
+        "description": "Awesome playlist"
+    },
+    {
+        "id": "234",
+        "name": "Server playlist 234",
+        "public": true,
+        "description": "Best playlist"
+    },
+    {
+        "id": "345",
+        "name": "Server playlist 345",
+        "public": false,
+        "description": "CoolF playlist"
+    }
+]

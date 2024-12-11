@@ -55,20 +55,18 @@ const PlaylistView = () => {
 
   // 2 renders - async
   const [selected, setSelected] = useState<Playlist>();
+
   useEffect(() => {
-    console.log("fetch playlist " + selectedId);
+    const huston = new AbortController();
 
-    // Contructor:
-    const handler = setTimeout(() => {
-      setSelected(playlists.find((p) => p.id === selectedId));
-    }, 2000);
+    fetch("http://localhost:5173/playlists.json", { signal: huston.signal })
+      .then((r) => r.json())
+      .then((playlists: Playlist[]) => {
+        setSelected(playlists.find((p) => p.id === selectedId));
+      });
 
-    // Destructor:
-    return () => {
-      console.log("cancel");
-
-      clearTimeout(handler);
-    };
+    return () => huston.abort();
+    
   }, [playlists, selectedId]);
 
   return (
