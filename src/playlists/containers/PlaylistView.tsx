@@ -66,7 +66,6 @@ const PlaylistView = () => {
       });
 
     return () => huston.abort();
-    
   }, [playlists, selectedId]);
 
   return (

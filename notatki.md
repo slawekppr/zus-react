@@ -223,6 +223,21 @@ touch src/playlists/components/PlaylistList.tsx
 touch src/playlists/components/PlaylistDetails.tsx
 touch src/playlists/components/PlaylistEditor.tsx
 
+# Music module 
+
+mkdir -p src/music/components/
+mkdir -p src/music/containers/
+
+touch src/music/containers/AlbumSearchView.tsx
+touch src/music/containers/AlbumDetailView.tsx
+
+touch src/music/components/SearchForm.tsx
+touch src/music/components/ResultsGrid.tsx
+touch src/music/components/AlbumCard.tsx
+
+touch src/common/model/Album.ts
+touch src/common/services/MusicAPI.ts
+
 # Snippets
 
 Extensions - ES7 React snippets - dsznajder
