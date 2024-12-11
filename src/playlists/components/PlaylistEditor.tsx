@@ -40,6 +40,9 @@ const PlaylistEditor = ({
     setPlaylist({ ...playlist, [event.target.name]: value });
   };
 
+  // Exercise: focus only after first render!
+  document.getElementById('nameInputRef')!.focus()
+
   return (
     <div>
       <pre>{JSON.stringify(playlist, null, 2)}</pre>
@@ -48,6 +51,7 @@ const PlaylistEditor = ({
         <div className="grid gap-2">
           <label>Name</label>
           <input
+          id="nameInputRef"
             type="text"
             value={playlist.name}
             name="name"
