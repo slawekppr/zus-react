@@ -19,9 +19,7 @@ const PlaylistView = () => {
   const selectPlaylistById = (id: string) => {
     if (mode !== "details") return;
     setSelectedId(id);
-    setTimeout(() => {
-      setSelected(playlists.find((p) => p.id === id));
-    }, 2000);
+    // setSelected(playlists.find((p) => p.id === id));
   };
 
   const showDetails = () => {
@@ -36,9 +34,9 @@ const PlaylistView = () => {
     draft.id = crypto.randomUUID();
 
     setPlaylists(appendItem(draft));
-    
+
     setSelectedId(draft.id);
-    setSelected(draft);
+    // setSelected(draft);
     setMode("details");
   };
 
@@ -46,15 +44,19 @@ const PlaylistView = () => {
     setPlaylists(updateItem(draft));
 
     setSelectedId(draft.id);
-    setSelected(draft);
+    // setSelected(draft);
     setMode("details");
   };
 
   const showCreator = () => {
     setSelected(undefined);
-    setSelectedId(undefined);
+    // setSelectedId(undefined);
     setMode("creator");
   };
+
+  // Error: Too many re-renders. React limits the number of renders to prevent an infinite loop.
+  setSelected(playlists.find((p) => p.id === selectedId));
+
   return (
     <div>
       <div className="grid grid-cols-2 gap-5">
