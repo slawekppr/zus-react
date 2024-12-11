@@ -14,6 +14,15 @@ const EMPTY_PLAYLIST = {
   public: false,
 };
 
+function useFocus() {
+  const ref = useRef<HTMLInputElement | null>(null);
+  useEffect(() => {
+    ref.current?.focus();
+  }, []);
+
+  return { ref: ref };
+}
+
 const PlaylistEditor = ({
   onCancel,
   onSave,
@@ -40,12 +49,7 @@ const PlaylistEditor = ({
     setPlaylist({ ...playlist, [event.target.name]: value });
   };
 
-  const id = useId(); // :r1:nameInputRef
-  const nameInputRef = useRef<HTMLInputElement | null>(null);
-
-  useEffect(() => {
-    nameInputRef.current?.focus();
-  }, []);
+  const { ref: nameInputRef } = useFocus();
 
   return (
     <div>
