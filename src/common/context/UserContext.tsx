@@ -24,6 +24,7 @@ const UserContextProvider = ({ children }: Props) => {
     user,
     login() {
       setUser({ display_name: "Placki!" } as User);
+      login()
     },
     logout() {
       setUser(null);

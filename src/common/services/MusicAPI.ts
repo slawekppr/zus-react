@@ -7,8 +7,7 @@ import { getToken } from "./Auth";
 //   return Promise.resolve(mockAlbums);
 // };
 
-export const fetchAlbumSearchResults = (query = "") => {
-  
+export const fetchAlbumSearchResults = (query = "", init?: RequestInit) => {
   return fetch(
     "https://api.spotify.com/v1/search?" +
       new URLSearchParams({
@@ -16,14 +15,16 @@ export const fetchAlbumSearchResults = (query = "") => {
         q: query,
       }),
     {
+      ...init,
       headers: {
+        ...init?.headers,
         Authorization: `Bearer ${getToken()}`,
       },
     }
   )
-    .then((r) => r.json())
-    .then((d) => d.albums.items)
-    // .then(console.log);
+    .then((r) => r.ok ? r.json() : Promise.reject(new Error('Server Error')))
+    .then((d) => d.albums.items);
+  // .then(console.log);
 
   // return Promise.resolve(mockAlbums);
 };
