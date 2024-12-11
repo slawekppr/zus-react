@@ -21,4 +21,5 @@ root.render(
 // Microfrontends:
 // import Naglowek from "http://placki.com.zis.pl/dist/naglowek.components.js";
 // const naglowek = createRoot("#naglowek");
-// naglowek.render(Naglowek);
+
+// naglowek.render(<Naglowek props={opcje} onLogin={...} /> );
