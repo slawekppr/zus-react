@@ -1,3 +1,4 @@
+export {}
 const tablica = [123, "Zbigniew", "Banan", true]; // (string | number | boolean)[]
 tablica[1] = false;
 tablica.push(123);

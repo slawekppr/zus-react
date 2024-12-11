@@ -1,4 +1,5 @@
 #!/usr/bin/env tsx
+export {};
 
 // npx tsx ./trener/examples/functional.ts
 
@@ -46,4 +47,25 @@ import * as R from "remeda";
   const result = list.filter(isOdd);
 
   console.log(result);
+}
+
+{
+  const OUR_COUNTRY = "PL";
+  type Person = {
+    age: number;
+    birthCountry: string;
+    naturalizationDate: boolean;
+  };
+
+  const wasBornInCountry = (person: Person) =>
+    person.birthCountry === OUR_COUNTRY;
+  
+  const wasNaturalized = (person: Person) => Boolean(person.naturalizationDate);
+  const isOver18 = (person: Person) => person.age >= 18;
+
+  const isCitizen = (person: Person) =>
+    wasBornInCountry(person) || wasNaturalized(person);
+
+  const isEligibleToVote = (person: Person) =>
+    isOver18(person) && isCitizen(person);
 }
