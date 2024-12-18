@@ -317,3 +317,6 @@ https://www.reactuse.com/element/useClickOutside
 - useRef <HTMLElement>(null)
 - render      <div ref={ ^ }
 - useEffect ( fn => destructor ) [deps]
+
+# Web Vitals lighthouse
+https://web.dev/articles/optimize-vitals-lighthouse
