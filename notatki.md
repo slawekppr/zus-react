@@ -308,6 +308,8 @@ https://use-http.com/#/
 
 https://usehooks.com/usefetch
 
+https://www.reactuse.com/element/useClickOutside
+
 # Basic React Hooks
 - useState (dane)
 - useMemo ( fn => value ) [deps]
