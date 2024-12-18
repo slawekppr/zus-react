@@ -8,15 +8,15 @@ import AlbumSearchView from "./music/containers/AlbumSearchView";
 import { checkLogin, login } from "./common/services/Auth";
 import NavBar from "./common/components/NavBar";
 import MainLayout from "./common/components/MainLayout";
+import { Outlet } from "react-router";
 
 function App() {
-  
   useMemo(() => checkLogin(), []);
 
   return (
     <>
       <MainLayout>
-        <AlbumSearchView />
+        <Outlet/>
       </MainLayout>
     </>
   );

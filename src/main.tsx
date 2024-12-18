@@ -10,12 +10,32 @@ import "primereact/resources/themes/lara-light-cyan/theme.css";
 import { PrimeReactProvider } from "primereact/api";
 import "primeicons/primeicons.css";
 import UserContextProvider from "./common/context/UserContext.tsx";
+import { RouterProvider, createBrowserRouter } from "react-router";
+import PlaylistView from "./playlists/containers/PlaylistView.tsx";
+import AlbumSearchView from "./music/containers/AlbumSearchView.tsx";
+
+const router = createBrowserRouter([
+  {
+    path: "/",
+    element: <App />,
+    children: [
+      {
+        path: "playlists",
+        element: <PlaylistView />,
+      },
+      {
+        path: "music/search",
+        element: <AlbumSearchView />,
+      },
+    ],
+  },
+]);
 
 root.render(
   <StrictMode>
     <PrimeReactProvider>
       <UserContextProvider>
-        <App />
+        <RouterProvider router={router} />
       </UserContextProvider>
     </PrimeReactProvider>
   </StrictMode>
