@@ -3,6 +3,7 @@ import { Button } from "primereact/button";
 import { InputText } from "primereact/inputtext";
 import React, { useEffect, useRef, useState } from "react";
 import { useFocus } from "../../common/hooks/useFocus";
+import { useDebounce } from "../../common/hooks/useDebounce";
 
 type Props = {
   onSearch: (query: string) => void;
@@ -12,15 +13,8 @@ const SearchForm = ({ onSearch }: Props) => {
   const [query, setQuery] = useState("");
 
   const { ref: inputElemRef } = useFocus();
-  
-  useEffect(() => {
-    const handler = setTimeout(() => {
-      onSearch(query);
-    }, 500);
-    
-    return () => clearTimeout(handler)
-  }, [query]);
 
+  useDebounce(() => onSearch(query), [query]);
 
   const submit = (e: React.FormEvent<HTMLFormElement>): void => {
     e.preventDefault();
