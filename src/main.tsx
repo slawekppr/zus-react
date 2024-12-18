@@ -20,63 +20,8 @@ import PlaylistView from "./playlists/containers/PlaylistView.tsx";
 import AlbumSearchView from "./music/containers/AlbumSearchView.tsx";
 import { checkLogin } from "./common/services/Auth.ts";
 import AlbumDetailView from "./music/containers/AlbumDetailView.tsx";
+import { router } from "./router.tsx";
 
-const PageNotFound = (
-  <div>
-    <h1 className="text-6xl text-center">404</h1>
-    <div>Nie polecam ;-)</div>
-  </div>
-);
-const router = createBrowserRouter([
-  {
-    path: "/",
-    element: <App />,
-    loader() {
-      checkLogin();
-      return true;
-    },
-    children: [
-      {
-        // path: "/",
-        index: true,
-        loader: () => redirect("/music/search"),
-      },
-      {
-        path: "playlists",
-        element: <PlaylistView />,
-      },
-      {
-        path: "music",
-        // element: <div>Music:<Outlet/></div>,
-        children: [
-          {
-            // path: "/",
-            index: true,
-            loader: () => redirect("/music/search"),
-          },
-          {
-            path: "search",
-            Component: AlbumSearchView,
-          },
-          {
-            path: "albums/:albumId",
-            element: <AlbumDetailView />,
-          },
-        ],
-      },
-      {
-        path: "/callback",
-        loader() {
-          return redirect("/music/search");
-        },
-      },
-      {
-        path: "*",
-        element: PageNotFound,
-      },
-    ],
-  },
-]);
 
 root.render(
   <StrictMode>
