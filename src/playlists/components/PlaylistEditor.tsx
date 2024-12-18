@@ -4,6 +4,7 @@ import type { Playlist } from "../../common/model/Playlist";
 import { useFocus } from "../../common/hooks/useFocus";
 import { useMutation } from "@tanstack/react-query";
 import { MusicAPI } from "../../common/services/MusicAPI";
+import { queryClient } from "../../main";
 
 type Props = {
   playlist?: Playlist;
@@ -31,6 +32,11 @@ const PlaylistEditor = ({
         json: data,
       }).json();
     },
+    onSuccess() {
+      // queryClient.invalidateQueries({ queryKey: ["playlists"] });
+      queryClient.invalidateQueries({ queryKey: ["playlists","my"] });
+      queryClient.invalidateQueries({ queryKey: ["playlists", playlist.id] });
+    },
   });
 
   const submit = () => {
@@ -41,7 +47,7 @@ const PlaylistEditor = ({
         public: playlist.public,
       })
       .then(() => {
-        // onSave(playlist);
+        onSave(playlist);
       });
   };
   const changeHandler = (
