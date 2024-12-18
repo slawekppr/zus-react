@@ -22,18 +22,13 @@ const PlaylistView = () => {
   const playlists = useQuery({
     queryKey: ["my/playlists"],
     queryFn: () => fetchMyPlaylists(),
-    initialData: mockPlaylists,
+    initialData: [],
   });
 
   const selected = useQuery({
     queryKey: ["playlists", selectedId],
     queryFn: () => fetchPlaylistById(selectedId),
     enabled: !!selectedId,
-    initialData: () =>
-      // Start with playlist from 'my/playlists' cached data
-      (queryClient.getQueryData(["my/playlists"]) as Playlist[])?.find(
-        (p) => p.id == selectedId
-      ),
   });
 
   const selectPlaylistById = (id: string) => {
@@ -79,11 +74,11 @@ const PlaylistView = () => {
         </div>
 
         <div className="grid gap-5">
-          {selected.isPending && <p>Loading playlist...</p>}
-          {selected.isFetching && <p>Updating playlist...</p>}
+          {selectedId && selected.isPending && <p>Loading playlist...</p>}
+          {selectedId && selected.isFetching && <p>Updating playlist...</p>}
           {/* {selected.isLoading && <p>Loading playlist first time...</p>} */}
 
-          {selected.data && (
+          {
             <>
               {mode == "details" && (
                 <PlaylistDetails playlist={selected.data} onEdit={showEditor} />
@@ -96,7 +91,7 @@ const PlaylistView = () => {
                 />
               )}
             </>
-          )}
+          }
           {mode == "creator" && (
             <PlaylistEditor onCancel={showDetails} onSave={createPlaylist} />
           )}
