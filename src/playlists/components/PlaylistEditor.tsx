@@ -2,12 +2,15 @@ import { Button } from "primereact/button";
 import React, { useId, useState } from "react";
 import type { Playlist } from "../../common/model/Playlist";
 import { useFocus } from "../../common/hooks/useFocus";
+import { useMutation } from "@tanstack/react-query";
+import { MusicAPI } from "../../common/services/MusicAPI";
 
 type Props = {
   playlist?: Playlist;
   onCancel: () => void;
   onSave(draft: Playlist): void;
 };
+
 const EMPTY_PLAYLIST = {
   id: "",
   description: "",
@@ -22,8 +25,24 @@ const PlaylistEditor = ({
 }: Props) => {
   const [playlist, setPlaylist] = useState(playlistFromParent);
 
+  const playlistUpdate = useMutation<Playlist, Error, Partial<Playlist>>({
+    mutationFn(data) {
+      return MusicAPI.put(`playlists/${playlist.id}`, {
+        json: data,
+      }).json();
+    },
+  });
+
   const submit = () => {
-    onSave(playlist);
+    playlistUpdate
+      .mutateAsync({
+        name: playlist.name,
+        description: playlist.description,
+        public: playlist.public,
+      })
+      .then(() => {
+        // onSave(playlist);
+      });
   };
   const changeHandler = (
     event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
@@ -45,8 +64,10 @@ const PlaylistEditor = ({
 
   return (
     <div>
-      <pre>{JSON.stringify(playlist, null, 2)}</pre>
-
+      {playlistUpdate.isPending && <p>Saving Playlist!</p>}
+      {playlistUpdate.error && (
+        <p className="text-red-500">{playlistUpdate.error.message}!</p>
+      )}
       <div className="grid gap-5">
         <div className="grid gap-2">
           <label>Name</label>

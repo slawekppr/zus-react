@@ -1,6 +1,7 @@
 const client_id = "793ec472d90147518aab693219128707";
 const redirect_uri = "http://localhost:5173/callback";
-const scope = "user-read-private user-read-email";
+// const scope = "user-read-private user-read-email";
+const scope = "playlist-read-private playlist-read-collaborative playlist-modify-private playlist-modify-public";
 const url = "https://accounts.spotify.com/authorize";
 
 export const login = () => {

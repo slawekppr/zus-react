@@ -32,7 +32,7 @@ const HandleSpotifyErrorResponse = (error: HTTPError) => {
   });
 };
 
-const MusicAPI = ky.create({
+export const MusicAPI = ky.create({
   prefixUrl: "https://api.spotify.com/v1/",
   hooks: {
     beforeRequest: [RequstAuthotizationHook],
