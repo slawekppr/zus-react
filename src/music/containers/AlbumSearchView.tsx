@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import SearchForm from "../components/SearchForm";
 import ResultsGrid from "../components/ResultsGrid";
 import UserWidget from "../../common/context/UserWidget";
@@ -6,21 +6,20 @@ import { ProgressSpinner } from "primereact/progressspinner";
 import { useFetchAlbumSearch } from "./useFetchAlbumSearch";
 import { useParams, useSearchParams } from "react-router";
 
-type Props = {};
-
-const AlbumSearchView = (props: Props) => {
-  const [query, setQuery] = useState("");
-
+const AlbumSearchView = () => {
   const [searchParams, setSearchParams] = useSearchParams({ q: "" });
+  const query = searchParams.get("q") || "";
 
-  const { isLoading, error, data: results = [] } = useFetchAlbumSearch(query);
+  const { isLoading, error, data: results = [] } = useFetchAlbumSearch(query!);
 
   return (
     <div>
-      {/* .grid.gap-5>div*2 */}
       <div className="grid gap-5">
         <div>
-          <SearchForm onSearch={setQuery} />
+          <SearchForm
+            onSearch={(query) => setSearchParams({ q: query })}
+            query={query}
+          />
         </div>
         <div>
           {isLoading && <ProgressSpinner className="mx-auto block my-5" />}

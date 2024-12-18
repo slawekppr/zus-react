@@ -6,19 +6,28 @@ import { useFocus } from "../../common/hooks/useFocus";
 import { useDebounce } from "../../common/hooks/useDebounce";
 import { useForm } from "../../common/hooks/useForm";
 
-
 type Props = {
   onSearch: (query: string) => void;
+  query: string;
 };
 
-
-const SearchForm = ({ onSearch }: Props) => {
-  const [query, setQuery] = useState("");
+const SearchForm = ({ onSearch, query: parentQuery }: Props) => {
+  const [query, setQuery] = useState(parentQuery);
   const { ref: inputElemRef } = useFocus();
+  const [submittedQuery, setSubmittedQuery] = useState(parentQuery);
 
-  const { onSubmit } = useForm(() => onSearch(query));
+  useEffect(() => setQuery(parentQuery), [parentQuery]);
 
-  useDebounce(() => onSearch(query), [query]);
+  const { onSubmit } = useForm(() => {
+    setSubmittedQuery(query);
+    onSearch(query);
+  });
+
+  useDebounce(() => {
+    if (parentQuery === query) return;
+    if (submittedQuery === query) return;
+    onSearch(query);
+  }, [query, parentQuery, submittedQuery]);
 
   return (
     <form onSubmit={onSubmit}>
