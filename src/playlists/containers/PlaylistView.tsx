@@ -6,19 +6,26 @@ import { Button } from "primereact/button";
 import { mockPlaylists } from "../../common/fixtures/mockPlaylists";
 import type { Playlist } from "../../common/model/Playlist";
 import { appendItem, updateItem } from "./utils";
+import { useQuery } from "@tanstack/react-query";
+import { fetchMyPlaylists } from "../../common/services/MusicAPI";
 
 type Modes = "details" | "editor" | "creator";
 
 const PlaylistView = () => {
   const [mode, setMode] = useState<Modes>("details");
 
-  const [playlists, setPlaylists] = useState(mockPlaylists);
+  const { data: playlists } = useQuery({
+    queryKey: ["my/playlists"],
+    queryFn: () => fetchMyPlaylists(),
+    initialData: mockPlaylists
+  });
+
   const [selectedId, setSelectedId] = useState<string>();
+  const [selected, setSelected] = useState<Playlist>();
 
   const selectPlaylistById = (id: string) => {
     if (mode !== "details") return;
     setSelectedId(id);
-    // setSelected(playlists.find((p) => p.id === id));
   };
 
   const showDetails = () => {
@@ -32,41 +39,19 @@ const PlaylistView = () => {
   const createPlaylist = (draft: Playlist) => {
     draft.id = crypto.randomUUID();
 
-    setPlaylists(appendItem(draft));
-
     setSelectedId(draft.id);
-    // setSelected(draft);
     setMode("details");
   };
 
   const savePlaylist = (draft: Playlist) => {
-    setPlaylists(updateItem(draft));
-
     setSelectedId(draft.id);
-    // setSelected(draft);
     setMode("details");
   };
 
   const showCreator = () => {
-    // setSelected(undefined);
     setSelectedId(undefined);
     setMode("creator");
   };
-
-  // 2 renders - async
-  const [selected, setSelected] = useState<Playlist>();
-
-  useEffect(() => {
-    const huston = new AbortController();
-
-    fetch("http://localhost:5173/playlists.json", { signal: huston.signal })
-      .then((r) => r.json())
-      .then((playlists: Playlist[]) => {
-        setSelected(playlists.find((p) => p.id === selectedId));
-      });
-
-    return () => huston.abort();
-  }, [playlists, selectedId]);
 
   return (
     <div>

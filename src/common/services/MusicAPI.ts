@@ -68,6 +68,8 @@ export const fetchPlaylistById = (id = "", init?: RequestInit) => {
   return MusicAPI.get<Playlist>("playlists/" + id, init).json();
 };
 
-export const fetchMyPlaylists = (id = "", init?: RequestInit) => {
-  return MusicAPI.get<PagingObject<Playlist>>("/me/playlists/", init).json();
+export const fetchMyPlaylists = (init?: RequestInit) => {
+  return MusicAPI.get<PagingObject<Playlist>>("me/playlists/", init)
+    .json()
+    .then((d) => d.items);
 };
