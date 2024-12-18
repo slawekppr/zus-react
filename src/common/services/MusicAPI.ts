@@ -1,4 +1,4 @@
-import ky from "ky";
+import ky, { KyRequest, NormalizedOptions } from "ky";
 import { mockAlbums } from "../fixtures/mockAlbums";
 import {
   Album,
@@ -9,10 +9,18 @@ import {
 import { getToken } from "./Auth";
 import { Playlist } from "../model/Playlist";
 
+const RequstAuthotizationHook = (
+  request: KyRequest,
+  options: NormalizedOptions
+) => {
+  request.headers.append("Authorization", `Bearer ${getToken()}`);
+  return request;
+};
+
 const MusicAPI = ky.create({
   prefixUrl: "https://api.spotify.com/v1/",
-  headers: {
-    Authorization: `Bearer ${getToken()}`,
+  hooks: {
+    beforeRequest: [RequstAuthotizationHook],
   },
 });
 const albumsAPI = MusicAPI.extend((parent) => ({
