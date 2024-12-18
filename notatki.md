@@ -326,6 +326,9 @@ https://reactrouter.com/start/library/routing
 
 # Axios, $.getJSON, $.ajax, ky
 npm i ky
+https://www.restapitutorial.com/advanced/responses/retries
 
 # NPM left-pad 
 https://en.wikipedia.org/wiki/Npm_left-pad_incident
+
+
