@@ -4,19 +4,27 @@ import { fetchAlbumById } from "../../common/services/MusicAPI";
 import { useQuery } from "@tanstack/react-query";
 import AlbumCard from "../components/AlbumCard";
 import { mockAlbums } from "../../common/fixtures/mockAlbums";
+import { ProgressSpinner } from "primereact/progressspinner";
 
 type Props = {};
 
 const AlbumDetailView = (props: Props) => {
   const { albumId } = useParams();
-  const album = mockAlbums[0];
-  fetchAlbumById;
-  useQuery;
+
+  const { data: album, error, refetch } = useQuery({
+    queryKey: ["albums/", albumId],
+    queryFn: ({ signal }) => fetchAlbumById(albumId, { signal }),
+    // enabled: false,
+    // initialData: mockAlbums[0]
+  });
+
+  if(error instanceof Error) return <div className="text-red-500 p-5">{error.message}</div>
+  if (!album) return <ProgressSpinner />;
 
   return (
     <div>
       <small className="text-gray-300">{albumId}</small>
-      <h1 className="text-4xl mb-5">Album tytul here!</h1>
+      <h1 className="text-4xl mb-5">{album.name}</h1>
 
       <div className="grid gap-5 grid-cols-2">
         <div>
@@ -26,15 +34,17 @@ const AlbumDetailView = (props: Props) => {
           <div className="grid gap-5">
             <div className="grid gap-2">
               <strong>Artist</strong>
-              <div>ktostam...</div>
+              <div>{album.artists[0].name}</div>
               <strong>Utwory</strong>
-              <div>42</div>
+              <div>{album.total_tracks}</div>
             </div>
           </div>
-          <div className="divide-y divide-solid divide-slate-200">
-            <div>1. Track 123</div>
-            <div>1. Track 123</div>
-            <div>1. Track 123</div>
+          <div className="divide-y divide-solid divide-slate-600">
+            {album.tracks.items.map((track, index) => (
+              <div className="px-2 py-3">
+                {index + 1}. {track.name}
+              </div>
+            ))}
           </div>
         </div>
       </div>

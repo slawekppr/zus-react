@@ -25,9 +25,28 @@ import PlaylistView from "./playlists/containers/PlaylistView.tsx";
 import AlbumSearchView from "./music/containers/AlbumSearchView.tsx";
 import AlbumDetailView from "./music/containers/AlbumDetailView.tsx";
 import { PageNotFound } from "./PageNotFound.tsx";
-import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+import {
+  QueryCache,
+  QueryClient,
+  QueryClientProvider,
+} from "@tanstack/react-query";
+import { HTTPError } from "ky";
 
-const queryClient = new QueryClient();
+const queryClient = new QueryClient({
+  defaultOptions: {
+    queries: {
+      retry(failureCount, error) {
+        return (
+          failureCount < 3 &&
+          error instanceof HTTPError &&
+          [408, 413, 429, 500, 502, 503, 504].includes(error.response.status)
+        );
+      },
+    },
+    mutations: {},
+  },
+  // queryCache: new QueryCache({}),
+});
 
 root.render(
   <StrictMode>

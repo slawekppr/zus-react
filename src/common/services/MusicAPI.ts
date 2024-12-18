@@ -44,7 +44,7 @@ const MusicAPI = ky.create({
   },
 });
 const albumsAPI = MusicAPI.extend((parent) => ({
-  prefixUrl: `${parent.prefixUrl}/albums`,
+  prefixUrl: `${parent.prefixUrl}albums`,
 }));
 
 export const fetchAlbumSearchResults = (query = "", init?: RequestInit) => {
@@ -60,13 +60,14 @@ export const fetchAlbumSearchResults = (query = "", init?: RequestInit) => {
 };
 
 export const fetchAlbumById = (id = "", init?: RequestInit) => {
-  return albumsAPI.get<AlbumResponse>(id, init);
+  // return albumsAPI.get<AlbumResponse>(id, init);
+  return MusicAPI.get<AlbumResponse>("albums/" + id, init).json();
 };
 
 export const fetchPlaylistById = (id = "", init?: RequestInit) => {
-  return MusicAPI.get<Playlist>("playlists/" + id, init);
+  return MusicAPI.get<Playlist>("playlists/" + id, init).json();
 };
 
 export const fetchMyPlaylists = (id = "", init?: RequestInit) => {
-  return MusicAPI.get<PagingObject<Playlist>>("/me/playlists/", init);
+  return MusicAPI.get<PagingObject<Playlist>>("/me/playlists/", init).json();
 };
