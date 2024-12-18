@@ -19,6 +19,7 @@ import {
 import PlaylistView from "./playlists/containers/PlaylistView.tsx";
 import AlbumSearchView from "./music/containers/AlbumSearchView.tsx";
 import { checkLogin } from "./common/services/Auth.ts";
+import AlbumDetailView from "./music/containers/AlbumDetailView.tsx";
 
 const PageNotFound = (
   <div>
@@ -56,6 +57,10 @@ const router = createBrowserRouter([
           {
             path: "search",
             Component: AlbumSearchView,
+          },
+          {
+            path: "albums/:albumId",
+            element: <AlbumDetailView />,
           },
         ],
       },
