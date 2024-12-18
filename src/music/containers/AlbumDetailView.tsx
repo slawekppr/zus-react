@@ -1,11 +1,11 @@
-import React from 'react'
+import React from "react";
+import { useParams } from "react-router";
 
-type Props = {}
+type Props = {};
 
 const AlbumDetailView = (props: Props) => {
-  return (
-    <div>AlbumDetailView</div>
-  )
-}
+  const {albumId} = useParams();
+  return <div>AlbumDetailView {albumId}</div>;
+};
 
-export default AlbumDetailView
+export default AlbumDetailView;
