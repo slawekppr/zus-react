@@ -324,3 +324,5 @@ https://web.dev/articles/optimize-vitals-lighthouse
 # React Router
 https://reactrouter.com/start/library/routing
 
+# Axios, $.getJSON, $.ajax, ky
+npm i ky

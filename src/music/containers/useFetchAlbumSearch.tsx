@@ -39,7 +39,7 @@ export function useFetchAlbumSearch(query: string) {
   return useFetch(query, fetchAlbumSearchResults);
 }
 
-// export function useFetchPLaylist(query: string) {
+// export function useFetchPlaylist(query: string) {
 //   return useFetch(query, fetchPlaylists);
 // }
 

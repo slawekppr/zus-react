@@ -1,3 +1,6 @@
+export interface AlbumSearchResponse {
+    albums:PagingObject<AlbumResponse>
+}
 export interface AlbumResponse {
     album_type:             string;
     total_tracks:           number;
