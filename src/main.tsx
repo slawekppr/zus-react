@@ -50,7 +50,17 @@ root.render(
                 <Route path="playlists" element={<PlaylistView />} />
                 <Route path="music">
                   <Route index element={<Navigate to="/music/search" />} />
-                  <Route path="search" element={<AlbumSearchView />} />
+                  <Route
+                    path="search"
+                    element={
+                      <div>
+                        <div className="grid grid-cols-2 gap-4">
+                          <AlbumSearchView />
+                          <AlbumSearchView />
+                        </div>
+                      </div>
+                    }
+                  />
                   <Route path="albums/:albumId" element={<AlbumDetailView />} />
                 </Route>
                 <Route

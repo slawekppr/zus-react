@@ -24,7 +24,7 @@ const AlbumSearchView = () => {
     enabled: !!query,
     initialData: [],
   });
- 
+
 
   return (
     <div>
