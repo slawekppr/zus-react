@@ -320,3 +320,7 @@ https://www.reactuse.com/element/useClickOutside
 
 # Web Vitals lighthouse
 https://web.dev/articles/optimize-vitals-lighthouse
+
+# React Router
+https://reactrouter.com/start/library/routing
+
