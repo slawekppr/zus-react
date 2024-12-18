@@ -6,7 +6,7 @@ import { Button } from "primereact/button";
 import { mockPlaylists } from "../../common/fixtures/mockPlaylists";
 import type { Playlist } from "../../common/model/Playlist";
 import { appendItem, updateItem } from "./utils";
-import { useQuery } from "@tanstack/react-query";
+import { useQueries, useQuery } from "@tanstack/react-query";
 import {
   fetchMyPlaylists,
   fetchPlaylistById,
@@ -73,8 +73,10 @@ const PlaylistView = () => {
         </div>
 
         <div className="grid gap-5">
-          {selected.isLoading && <p>Loading playlist...</p>}
-          
+          {selected.isPending && <p>Loading playlist...</p>}
+          {selected.isFetching && <p>Updating playlist...</p>}
+          {/* {selected.isLoading && <p>Loading playlist first time...</p>} */}
+
           {selected.data && (
             <>
               {mode == "details" && (
