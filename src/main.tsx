@@ -10,7 +10,12 @@ import "primereact/resources/themes/lara-light-cyan/theme.css";
 import { PrimeReactProvider } from "primereact/api";
 import "primeicons/primeicons.css";
 import UserContextProvider from "./common/context/UserContext.tsx";
-import { RouterProvider, createBrowserRouter, redirect } from "react-router";
+import {
+  Outlet,
+  RouterProvider,
+  createBrowserRouter,
+  redirect,
+} from "react-router";
 import PlaylistView from "./playlists/containers/PlaylistView.tsx";
 import AlbumSearchView from "./music/containers/AlbumSearchView.tsx";
 import { checkLogin } from "./common/services/Auth.ts";
@@ -25,6 +30,10 @@ const router = createBrowserRouter([
   {
     path: "/",
     element: <App />,
+    loader() {
+      checkLogin();
+      return true;
+    },
     children: [
       {
         // path: "/",
@@ -36,13 +45,23 @@ const router = createBrowserRouter([
         element: <PlaylistView />,
       },
       {
-        path: "music/search",
-        Component: AlbumSearchView,
+        path: "music",
+        // element: <div>Music:<Outlet/></div>,
+        children: [
+          {
+            // path: "/",
+            index: true,
+            loader: () => redirect("/music/search"),
+          },
+          {
+            path: "search",
+            Component: AlbumSearchView,
+          },
+        ],
       },
       {
         path: "/callback",
         loader() {
-          checkLogin();
           return redirect("/music/search");
         },
       },
