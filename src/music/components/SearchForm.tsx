@@ -1,7 +1,7 @@
 // tsrafce
 import { Button } from "primereact/button";
 import { InputText } from "primereact/inputtext";
-import React, { useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { useFocus } from "../../common/hooks/useFocus";
 
 type Props = {
@@ -9,18 +9,24 @@ type Props = {
 };
 
 const SearchForm = ({ onSearch }: Props) => {
-  const [query, setQuery] = useState(""); 
-
-  
+  const [query, setQuery] = useState("");
 
   function search() {
     onSearch(query);
   }
 
+  // const inputElemRef = useRef<'lewy but'>()
+  const inputElemRef = useRef<HTMLInputElement>(null);
+
+  useEffect(() => {
+    inputElemRef.current?.focus();
+  }, []);
+
   return (
     <div>
       <div className="p-inputgroup flex-1">
         <InputText
+          ref={inputElemRef}
           placeholder="search"
           value={query}
           onChange={(e) => setQuery(e.target.value)}
