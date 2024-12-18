@@ -8,21 +8,11 @@ type Props = {
   onSearch: (query: string) => void;
 };
 
-function useFocus<T = HTMLInputElement>() {
-  const ref = useRef<HTMLInputElement>(null);
-  const focus = () => ref.current?.focus();
-
-  useEffect(() => {
-    focus();
-  }, []);
-
-  return { ref, focus };
-}
 
 const SearchForm = ({ onSearch }: Props) => {
   const [query, setQuery] = useState("");
 
-  const { ref: inputElemRef, focus } = useFocus();
+  const { ref: inputElemRef } = useFocus();
 
   function search() {
     onSearch(query);
