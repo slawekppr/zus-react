@@ -331,4 +331,6 @@ https://www.restapitutorial.com/advanced/responses/retries
 # NPM left-pad 
 https://en.wikipedia.org/wiki/Npm_left-pad_incident
 
-
+# Semver
+https://semver.org/
+https://semver.npmjs.com/
