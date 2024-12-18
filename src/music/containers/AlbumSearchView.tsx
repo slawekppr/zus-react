@@ -4,11 +4,14 @@ import ResultsGrid from "../components/ResultsGrid";
 import UserWidget from "../../common/context/UserWidget";
 import { ProgressSpinner } from "primereact/progressspinner";
 import { useFetchAlbumSearch } from "./useFetchAlbumSearch";
+import { useParams, useSearchParams } from "react-router";
 
 type Props = {};
 
 const AlbumSearchView = (props: Props) => {
   const [query, setQuery] = useState("");
+
+  const [searchParams, setSearchParams] = useSearchParams({ q: "" });
 
   const { isLoading, error, data: results = [] } = useFetchAlbumSearch(query);
 

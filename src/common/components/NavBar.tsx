@@ -18,7 +18,7 @@ const NavBar = (props: Props) => {
             {/* <a href="/playlists">Playlist</a> */}
             {/* <NavLink to="/music" end>Search</NavLink> */}
             <NavLink to="/playlists">Playlist</NavLink>
-            <NavLink to="/music">Search</NavLink>
+            <NavLink to="/music">Music</NavLink>
           </div>
 
           <UserWidget />
