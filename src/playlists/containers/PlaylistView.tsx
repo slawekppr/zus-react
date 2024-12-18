@@ -7,21 +7,28 @@ import { mockPlaylists } from "../../common/fixtures/mockPlaylists";
 import type { Playlist } from "../../common/model/Playlist";
 import { appendItem, updateItem } from "./utils";
 import { useQuery } from "@tanstack/react-query";
-import { fetchMyPlaylists } from "../../common/services/MusicAPI";
+import {
+  fetchMyPlaylists,
+  fetchPlaylistById,
+} from "../../common/services/MusicAPI";
 
 type Modes = "details" | "editor" | "creator";
 
 const PlaylistView = () => {
   const [mode, setMode] = useState<Modes>("details");
+  const [selectedId, setSelectedId] = useState<string>();
 
-  const { data: playlists } = useQuery({
+  const playlists = useQuery({
     queryKey: ["my/playlists"],
     queryFn: () => fetchMyPlaylists(),
-    initialData: mockPlaylists
+    initialData: mockPlaylists,
   });
 
-  const [selectedId, setSelectedId] = useState<string>();
-  const [selected, setSelected] = useState<Playlist>();
+  const selected = useQuery({
+    queryKey: ["playlists", selectedId],
+    queryFn: () => fetchPlaylistById(selectedId),
+    enabled: !!selectedId,
+  });
 
   const selectPlaylistById = (id: string) => {
     if (mode !== "details") return;
@@ -58,7 +65,7 @@ const PlaylistView = () => {
       <div className="grid grid-cols-2 gap-5">
         <div className="grid gap-5">
           <PlaylistList
-            playlists={playlists}
+            playlists={playlists.data}
             selectedId={selectedId}
             onSelect={selectPlaylistById}
           />
@@ -66,15 +73,21 @@ const PlaylistView = () => {
         </div>
 
         <div className="grid gap-5">
-          {mode == "details" && (
-            <PlaylistDetails playlist={selected} onEdit={showEditor} />
-          )}
-          {mode == "editor" && (
-            <PlaylistEditor
-              playlist={selected}
-              onCancel={showDetails}
-              onSave={savePlaylist}
-            />
+          {selected.isLoading && <p>Loading playlist...</p>}
+          
+          {selected.data && (
+            <>
+              {mode == "details" && (
+                <PlaylistDetails playlist={selected.data} onEdit={showEditor} />
+              )}
+              {mode == "editor" && (
+                <PlaylistEditor
+                  playlist={selected.data}
+                  onCancel={showDetails}
+                  onSave={savePlaylist}
+                />
+              )}
+            </>
           )}
           {mode == "creator" && (
             <PlaylistEditor onCancel={showDetails} onSave={createPlaylist} />
