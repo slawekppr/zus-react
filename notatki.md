@@ -308,3 +308,10 @@ https://use-http.com/#/
 
 https://usehooks.com/usefetch
 
+# Basic React Hooks
+- useState (dane)
+- useMemo ( fn => value ) [deps]
+- useId()
+- useRef <HTMLElement>(null)
+- render      <div ref={ ^ }
+- useEffect ( fn => destructor ) [deps]
