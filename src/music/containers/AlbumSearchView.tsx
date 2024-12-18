@@ -5,12 +5,26 @@ import UserWidget from "../../common/context/UserWidget";
 import { ProgressSpinner } from "primereact/progressspinner";
 import { useFetchAlbumSearch } from "./useFetchAlbumSearch";
 import { useParams, useSearchParams } from "react-router";
+import { useQuery } from "@tanstack/react-query";
+import { fetchAlbumSearchResults } from "../../common/services/MusicAPI";
 
 const AlbumSearchView = () => {
   const [searchParams, setSearchParams] = useSearchParams({ q: "" });
   const query = searchParams.get("q") || "";
 
-  const { isLoading, error, data: results = [] } = useFetchAlbumSearch(query!);
+  // const { data: results = [], isLoading, error } = useFetchAlbumSearch(query!);
+
+  const {
+    data: results,
+    isLoading,
+    error,
+  } = useQuery({
+    queryKey: ["albums/search", query/* page, limit, sort */], 
+    queryFn: ({ signal }) => fetchAlbumSearchResults(query, { signal }),
+    enabled: !!query,
+    initialData: [],
+  });
+ 
 
   return (
     <div>
