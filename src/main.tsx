@@ -54,10 +54,7 @@ root.render(
                     path="search"
                     element={
                       <div>
-                        <div className="grid grid-cols-2 gap-4">
-                          <AlbumSearchView />
-                          <AlbumSearchView />
-                        </div>
+                        <AlbumSearchView />
                       </div>
                     }
                   />

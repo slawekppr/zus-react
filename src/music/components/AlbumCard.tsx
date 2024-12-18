@@ -2,22 +2,32 @@ import { Button } from "primereact/button";
 import { Card } from "primereact/card";
 import React from "react";
 import { Album } from "../../common/model/Album";
+import { useNavigate } from "react-router";
 
 type Props = {
   album: Album;
 };
 
 const AlbumCard = ({ album }: Props) => {
+  const go = useNavigate();
+  
   return (
     <Card
-      subTitle={<>
-        <div className="line-clamp-1">{album.name}</div>
-      </>}
+      subTitle={
+        <>
+          <div className="line-clamp-1">{album.name}</div>
+        </>
+      }
       header={<img src={album.images[0].url} alt="album name" />}
       footer={
         <>
           <div className="grid items-end">
-            <Button size="small">Details</Button>
+            <Button
+              size="small"
+              onClick={() => go("/music/albums/" + album.id)} /* TODO: <Link> */
+            >
+              Details
+            </Button>
           </div>
         </>
       }
