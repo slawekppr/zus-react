@@ -13,9 +13,10 @@ import UserContextProvider from "./common/context/UserContext.tsx";
 import { RouterProvider, createBrowserRouter, redirect } from "react-router";
 import PlaylistView from "./playlists/containers/PlaylistView.tsx";
 import AlbumSearchView from "./music/containers/AlbumSearchView.tsx";
+import { checkLogin } from "./common/services/Auth.ts";
 
 const PageNotFound = (
-  <div> 
+  <div>
     <h1 className="text-6xl text-center">404</h1>
     <div>Nie polecam ;-)</div>
   </div>
@@ -36,7 +37,14 @@ const router = createBrowserRouter([
       },
       {
         path: "music/search",
-        Component: AlbumSearchView
+        Component: AlbumSearchView,
+      },
+      {
+        path: "/callback",
+        loader() {
+          checkLogin();
+          return redirect("/music/search");
+        },
       },
       {
         path: "*",
