@@ -11,6 +11,7 @@ import {
   fetchMyPlaylists,
   fetchPlaylistById,
 } from "../../common/services/MusicAPI";
+import { queryClient } from "../../main";
 
 type Modes = "details" | "editor" | "creator";
 
@@ -28,6 +29,11 @@ const PlaylistView = () => {
     queryKey: ["playlists", selectedId],
     queryFn: () => fetchPlaylistById(selectedId),
     enabled: !!selectedId,
+    initialData: () =>
+      // Start with playlist from 'my/playlists' cached data
+      (queryClient.getQueryData(["my/playlists"]) as Playlist[])?.find(
+        (p) => p.id == selectedId
+      ),
   });
 
   const selectPlaylistById = (id: string) => {

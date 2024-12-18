@@ -32,7 +32,7 @@ import {
 } from "@tanstack/react-query";
 import { HTTPError } from "ky";
 
-const queryClient = new QueryClient({
+export const queryClient = new QueryClient({
   defaultOptions: {
     queries: {
       retry(failureCount, error) {
