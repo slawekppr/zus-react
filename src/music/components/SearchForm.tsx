@@ -4,25 +4,24 @@ import { InputText } from "primereact/inputtext";
 import React, { useEffect, useRef, useState } from "react";
 import { useFocus } from "../../common/hooks/useFocus";
 import { useDebounce } from "../../common/hooks/useDebounce";
+import { useForm } from "../../common/hooks/useForm";
+
 
 type Props = {
   onSearch: (query: string) => void;
 };
 
+
 const SearchForm = ({ onSearch }: Props) => {
   const [query, setQuery] = useState("");
-
   const { ref: inputElemRef } = useFocus();
+
+  const { onSubmit } = useForm(() => onSearch(query));
 
   useDebounce(() => onSearch(query), [query]);
 
-  const submit = (e: React.FormEvent<HTMLFormElement>): void => {
-    e.preventDefault();
-    onSearch(query);
-  };
-
   return (
-    <form onSubmit={submit}>
+    <form onSubmit={onSubmit}>
       <div className="p-inputgroup flex-1">
         <InputText
           ref={inputElemRef}
