@@ -1,4 +1,4 @@
-import ky, { KyRequest, NormalizedOptions } from "ky";
+import ky, { HTTPError, KyRequest, NormalizedOptions } from "ky";
 import { mockAlbums } from "../fixtures/mockAlbums";
 import {
   Album,
@@ -13,14 +13,30 @@ const RequstAuthotizationHook = (
   request: KyRequest,
   options: NormalizedOptions
 ) => {
+  // TODO: check token exprired, refresh token, update token...
   request.headers.append("Authorization", `Bearer ${getToken()}`);
   return request;
+};
+
+type SpotifyError = {
+  error: {
+    status: number;
+    message: string;
+  };
+};
+
+const HandleSpotifyErrorResponse = (error: HTTPError) => {
+  return error.response.json<SpotifyError>().then((data) => {
+    error.message = data.error.message;
+    return error;
+  });
 };
 
 const MusicAPI = ky.create({
   prefixUrl: "https://api.spotify.com/v1/",
   hooks: {
     beforeRequest: [RequstAuthotizationHook],
+    beforeError: [HandleSpotifyErrorResponse],
   },
 });
 const albumsAPI = MusicAPI.extend((parent) => ({
