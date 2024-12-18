@@ -29,4 +29,5 @@ export const checkLogin = () => {
   } else {
     access_token = sessionStorage.getItem("access_token");
   }
+  return !!access_token
 };
