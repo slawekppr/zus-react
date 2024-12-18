@@ -12,8 +12,16 @@ const SearchForm = ({ onSearch }: Props) => {
   const [query, setQuery] = useState("");
 
   const { ref: inputElemRef } = useFocus();
+  
+  useEffect(() => {
+    const handler = setTimeout(() => {
+      onSearch(query);
+    }, 500);
+    
+    return () => clearTimeout(handler)
+  }, [query]);
 
-  // function submit(event:'lewy but') {
+
   const submit = (e: React.FormEvent<HTMLFormElement>): void => {
     e.preventDefault();
     onSearch(query);
