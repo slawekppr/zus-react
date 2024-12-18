@@ -26,6 +26,7 @@ const SearchForm = ({ onSearch }: Props) => {
           placeholder="search"
           value={query}
           onChange={(e) => setQuery(e.target.value)}
+          onKeyDown={e => e.key === 'Enter' && search()}
         />
         <Button
           icon="pi pi-search"
