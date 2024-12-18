@@ -9,8 +9,9 @@ type Props = {
 };
 
 const SearchForm = ({ onSearch }: Props) => {
-  const [query, setQuery] = useState("");
-  const { ref } = useFocus();
+  const [query, setQuery] = useState(""); 
+
+  
 
   function search() {
     onSearch(query);
@@ -20,7 +21,6 @@ const SearchForm = ({ onSearch }: Props) => {
     <div>
       <div className="p-inputgroup flex-1">
         <InputText
-          ref={ref}
           placeholder="search"
           value={query}
           onChange={(e) => setQuery(e.target.value)}
