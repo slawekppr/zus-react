@@ -15,7 +15,8 @@ export const fetchAlbumSearchResults = (query = "", init?: RequestInit) => {
       Authorization: `Bearer ${getToken()}`,
     },
     ...init,
-  });
+  }).json() // Promise waiting for Response Promise and then Body JSON Promise
+
   return req.then((r) => r.json()).then((d) => d.albums.items as Album[]);
 };
 
