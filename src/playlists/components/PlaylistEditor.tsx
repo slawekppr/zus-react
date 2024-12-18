@@ -5,6 +5,7 @@ import { useFocus } from "../../common/hooks/useFocus";
 import { useMutation } from "@tanstack/react-query";
 import { MusicAPI } from "../../common/services/MusicAPI";
 import { queryClient } from "../../main";
+import { playlistUpdate } from "../mutations/playlists";
 
 type Props = {
   playlist?: Playlist;
@@ -26,29 +27,8 @@ const PlaylistEditor = ({
 }: Props) => {
   const [playlist, setPlaylist] = useState(playlistFromParent);
 
-  const playlistUpdate = useMutation<Playlist, Error, Partial<Playlist>>({
-    mutationFn(data) {
-      return MusicAPI.put(`playlists/${playlist.id}`, {
-        json: data,
-      }).json();
-    },
-    onSuccess() {
-      // queryClient.invalidateQueries({ queryKey: ["playlists"] });
-      queryClient.invalidateQueries({ queryKey: ["playlists","my"] });
-      queryClient.invalidateQueries({ queryKey: ["playlists", playlist.id] });
-    },
-  });
-
   const submit = () => {
-    playlistUpdate
-      .mutateAsync({
-        name: playlist.name,
-        description: playlist.description,
-        public: playlist.public,
-      })
-      .then(() => {
-        onSave(playlist);
-      });
+    playlistUpdate.mutateAsync(playlist).then(() => onSave(playlist));
   };
   const changeHandler = (
     event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
