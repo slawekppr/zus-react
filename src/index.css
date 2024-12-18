@@ -16,6 +16,10 @@ body {
   @tailwind utilities;
 }
 
+.active{
+  @apply bg-pink-300 font-bold;
+}
+
 input,
 select,
 textarea {
