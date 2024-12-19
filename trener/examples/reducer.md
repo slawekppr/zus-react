@@ -18,3 +18,21 @@
 // 10 5 15
 15
 ```
+
+# Pure random (seed)
+```ts
+Math.random() // impure
+
+// pure
+random = (seed) => seed * 3456789 % 098765;
+
+seed = 1234;
+random(seed)
+// 17276
+
+seed = random(seed)
+// 17276
+
+seed = random(seed)
+// 44334
+```
