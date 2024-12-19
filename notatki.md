@@ -344,3 +344,13 @@ https://semver.npmjs.com/
 // Eventual Consistency
 // Optimistic Updates
 // Compensating Transaction (Revert)
+
+# 3d
+https://r3f.docs.pmnd.rs/getting-started/introduction
+https://threejs.org/docs/index.html#manual/en/introduction/How-to-create-VR-content
+
+
+# Web
+https://whatwebcando.today/
+https://caniuse.com/webnfc
+https://web.dev/learn/pwa/progressive-web-apps
