@@ -1,21 +1,48 @@
 import { Chart } from "chart.js/auto";
-import React, { useEffect, useRef } from "react";
+import React, { PropsWithChildren, useEffect, useRef } from "react";
 
 type Props = {};
 
+namespace Bar {
+  export const Chart = (props: PropsWithChildren) => {
+    const chartRef = useRef<HTMLCanvasElement>(null);
+
+    useBarChart(chartRef);
+
+    return (
+      <div
+        className="chart-container"
+        style={{
+          position: "relative",
+          height: "40vh",
+          width: "80vw",
+        }}
+      >
+        <canvas ref={chartRef}></canvas>
+      </div>
+    );
+  };
+  export const Tooltip = (props: PropsWithChildren) => <div></div>;
+}
+namespace Data {
+  export const Set = (props: PropsWithChildren) => <div></div>;
+  export const Item = (props: PropsWithChildren) => <div></div>;
+}
+
 const AnalyticsView = (props: Props) => {
-  const chartRef = useRef<HTMLCanvasElement>(null);
-
-  useBarChart(chartRef);
-
   return (
     <div>
       AnalyticsView
-      <canvas ref={chartRef} width={300} height={300}></canvas>
+      <Bar.Chart>
+        <Bar.Tooltip />
+        <Data.Set label="# of Votes">
+          <Data.Item label="red" bg="red" border="red" value="30" />
+          <Data.Item label="green" bg="green" border="green" value="40" />
+        </Data.Set>
+      </Bar.Chart>
     </div>
   );
 };
-
 export default AnalyticsView;
 
 function useBarChart(chartRef: React.RefObject<HTMLCanvasElement>) {
@@ -41,6 +68,7 @@ function renderChart(canvas: HTMLCanvasElement) {
       ],
     },
     options: {
+      responsive: true,
       backgroundColor: ["red", "blue", "yellow", "green", "purple", "orange"],
       borderColor: ["red", "blue", "yellow", "green", "purple", "orange"],
       scales: {
