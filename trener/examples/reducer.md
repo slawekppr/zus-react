@@ -36,3 +36,19 @@ seed = random(seed)
 seed = random(seed)
 // 44334
 ```
+
+# Reduce state
+```ts
+lista = [1,2,3,4,5]
+    
+lista.reduce( (state, x) => {
+    return { 
+        ...state,
+        counter: state.counter + x 
+    }
+}, {
+    todos:[],
+    counter: 0   
+})
+// {todos: Array(0), counter: 15}
+```
