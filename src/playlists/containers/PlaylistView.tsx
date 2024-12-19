@@ -15,7 +15,44 @@ import { queryClient } from "../../main";
 
 type Modes = "details" | "editor" | "creator";
 
+type State = {
+  mode: Modes;
+  items: Playlist[];
+  selectedId?: Playlist["id"];
+  selected?: Playlist;
+};
 
+const initialState: State = {
+  mode: "details",
+  items: mockPlaylists,
+};
+
+const Select = (payload: Playlist["id"]) =>
+  ({ type: "Select", payload } as const);
+const ShowCreator = () => ({ type: "ShowCreator" } as const);
+const ShowEditor = () => ({ type: "ShowEditor" } as const);
+const Cancel = () => ({ type: "Cancel" } as const);
+const Save = (payload: Playlist) => ({ type: "Save", payload } as const);
+const CreatePlaylist = (payload: Playlist) =>
+  ({ type: "CreatePlaylist", payload } as const);
+
+type Action = ReturnType<
+  | typeof Select
+  | typeof ShowCreator
+  | typeof ShowEditor
+  | typeof Cancel
+  | typeof Save
+  | typeof CreatePlaylist
+>;
+
+const playlistsReducer = (state: State, action: Action): State => {
+  switch (action.type) {
+    case "Select":
+      return { ...state, selectedId: action.payload };
+    default:
+      return state;
+  }
+};
 
 const PlaylistView = () => {
   return (
