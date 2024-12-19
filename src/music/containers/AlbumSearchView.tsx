@@ -15,7 +15,7 @@ const AlbumSearchView = () => {
   // const { data: results = [], isLoading, error } = useFetchAlbumSearch(query!);
 
   const {
-    data: results,
+    data: results = [],
     isLoading,
     isFetching,
     isStale,
@@ -24,7 +24,7 @@ const AlbumSearchView = () => {
     queryKey: ["albums/search", query /* page, limit, sort */],
     queryFn: ({ signal }) => fetchAlbumSearchResults(query, { signal }),
     enabled: !!query,
-    initialData: [],
+    select: (res) => res.albums.items,
   });
 
   return (
@@ -44,7 +44,7 @@ const AlbumSearchView = () => {
               {error.message}
             </p>
           )}
-          
+
           {isFetching && <p>Updating data...</p>}
 
           <ResultsGrid results={results} />

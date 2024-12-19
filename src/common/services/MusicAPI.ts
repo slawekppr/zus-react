@@ -38,10 +38,11 @@ export const MusicAPI = ky.create({
     beforeRequest: [RequstAuthotizationHook],
     beforeError: [HandleSpotifyErrorResponse],
   },
-  retry: {
-    statusCodes: [408, 413, 429, 500, 502, 503, 504],
-    delay: (attemptCount) => 0.3 * 2 ** (attemptCount - 1) * 1000,
-  },
+  retry: 0,
+  // retry: {
+  //   statusCodes: [408, 413, 429, 500, 502, 503, 504],
+  //   delay: (attemptCount) => 0.3 * 2 ** (attemptCount - 1) * 1000,
+  // },
 });
 const albumsAPI = MusicAPI.extend((parent) => ({
   prefixUrl: `${parent.prefixUrl}albums`,
@@ -56,7 +57,7 @@ export const fetchAlbumSearchResults = (query = "", init?: RequestInit) => {
     ...init,
   })
     .json()
-    .then((d) => d.albums.items);
+    // .then((d) => d.albums.items);
 };
 
 export const fetchAlbumById = (id = "", init?: RequestInit) => {
