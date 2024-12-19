@@ -1,29 +1,26 @@
-import { Chart } from "chart.js/auto";
+import { Chart, ChartConfiguration } from "chart.js/auto";
 import React, {
   PropsWithChildren,
   ReactElement,
   useEffect,
+  useMemo,
   useRef,
+  useState,
 } from "react";
 
-type Props = {};
-
 namespace Bar {
-  export const Chart = (props: PropsWithChildren) => {
+  export const Context = React.createContext<any>(null);
+  export const useContext = () => React.useContext(Context);
+
+  export function Chart(props: PropsWithChildren) {
     const chartRef = useRef<HTMLCanvasElement>(null);
 
-    (props.children as Array<ReactElement>).forEach((child) => {
-      switch (child.type) {
-        case Bar.Tooltip:
-          console.log("Tooltip", child.props);
-          break;
-        case Data.Set:
-          console.log("Set", child.props);
-          break;
-      }
-    });
+    const config: ChartConfiguration<"bar", number[], string> = {
+      type: "bar",
+      data: { labels: [], datasets: [] },
+    };
 
-    useBarChart(chartRef);
+    useBarChart(chartRef, config);
 
     return (
       <div
@@ -35,47 +32,89 @@ namespace Bar {
         }}
       >
         <canvas ref={chartRef}></canvas>
+        <Context.Provider value={{ config }}>{props.children}</Context.Provider>
       </div>
     );
-  };
-  export const Tooltip = (props: PropsWithChildren) => <div></div>;
+  }
+  export function Tooltip(props: PropsWithChildren) {
+    const {} = Bar.useContext();
+    return <></>;
+  }
 }
 namespace Data {
-  export const Set = (
+  export const Context = React.createContext<any>(null);
+  export const useContext = () => React.useContext(Context);
+
+  export function Set(
     props: PropsWithChildren<{
       label: string;
     }>
-  ) => <div></div>;
-  export const Item = (
+  ) {
+    const { config } = Bar.useContext();
+    const dataset = (config.data.datasets[0] ??= {
+      label: props.label,
+      data: [],
+    });
+    return (
+      <Context.Provider value={{ dataset }}>{props.children}</Context.Provider>
+    );
+  }
+  export function Item(
     props: PropsWithChildren<{
       label: string;
       bg: string;
       border: string;
-      value: string;
+      value: number | string;
     }>
-  ) => <div></div>;
+  ) {
+    const { config } = Bar.useContext();
+    const { dataset } = Data.useContext();
+
+    useEffect(() => {
+      dataset.data.push(props.value);
+      config.data.labels.push(props.value);
+    }, []);
+
+    return <></>;
+  }
 }
 
-const AnalyticsView = (props: Props) => {
+const AnalyticsView = () => {
   return (
     <div>
       AnalyticsView
       <Bar.Chart>
         <Bar.Tooltip />
-        <Data.Set label="# of Votes">
-          <Data.Item label="red" bg="red" border="red" value="30" />
-          <Data.Item label="green" bg="green" border="green" value="40" />
-        </Data.Set>
+        <MySpecialDataset factor={20} />
+        <MySpecialDataset />
       </Bar.Chart>
     </div>
   );
 };
+
+const MySpecialDataset = ({ factor = 10 }: { factor?: number }) => (
+  <Data.Set label="# of Votes">
+    {["red", "green", "blue"].map((label, index) => (
+      <Data.Item
+        key={label}
+        label={label}
+        bg={label}
+        border={label}
+        value={(index + 1) * factor}
+      />
+    ))}
+  </Data.Set>
+);
+
 export default AnalyticsView;
 
-function useBarChart(chartRef: React.RefObject<HTMLCanvasElement>) {
+function useBarChart(
+  chartRef: React.RefObject<HTMLCanvasElement>,
+  config: ChartConfiguration<"bar", number[], string>
+) {
   useEffect(() => {
     if (!chartRef.current) throw new Error("missin canvas");
-    const chart = renderChart(chartRef.current);
+    const chart = new Chart(chartRef.current, config);
 
     return () => chart.destroy();
   }, []);
