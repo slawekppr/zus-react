@@ -345,6 +345,9 @@ https://semver.npmjs.com/
 // Optimistic Updates
 // Compensating Transaction (Revert)
 
+# Infinite scroll
+https://usehooks.com/usewindowscroll
+
 # 3d
 https://r3f.docs.pmnd.rs/getting-started/introduction
 https://threejs.org/docs/index.html#manual/en/introduction/How-to-create-VR-content
@@ -354,3 +357,7 @@ https://threejs.org/docs/index.html#manual/en/introduction/How-to-create-VR-cont
 https://whatwebcando.today/
 https://caniuse.com/webnfc
 https://web.dev/learn/pwa/progressive-web-apps
+
+# DevExpress - local context
+https://lr2gt6.csb.app/
+https://js.devexpress.com/React/Demos/WidgetsGallery/Demo/DataGrid/Overview/MaterialBlueLight/
