@@ -6,11 +6,12 @@ import { useNavigate } from "react-router";
 
 type Props = {
   album: Album;
+  showDetailsButton?: boolean;
 };
 
-const AlbumCard = ({ album }: Props) => {
+const AlbumCard = ({ album, showDetailsButton = false }: Props) => {
   const go = useNavigate();
-  
+
   return (
     <Card
       subTitle={
@@ -21,14 +22,18 @@ const AlbumCard = ({ album }: Props) => {
       header={<img src={album.images[0].url} alt="album name" />}
       footer={
         <>
-          <div className="grid items-end">
-            <Button
-              size="small"
-              onClick={() => go("/music/albums/" + album.id)} /* TODO: <Link> */
-            >
-              Details
-            </Button>
-          </div>
+          {showDetailsButton && (
+            <div className="grid items-end">
+              <Button
+                size="small"
+                onClick={() =>
+                  go("/music/albums/" + album.id)
+                } /* TODO: <Link> */
+              >
+                Details
+              </Button>
+            </div>
+          )}
         </>
       }
     ></Card>
