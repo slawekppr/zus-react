@@ -31,6 +31,7 @@ import {
   QueryClientProvider,
 } from "@tanstack/react-query";
 import { HTTPError } from "ky";
+import AnalyticsView from "./admin/AnalyticsView.tsx";
 
 export const queryClient = new QueryClient({
   defaultOptions: {
@@ -65,6 +66,7 @@ root.render(
                 }}
               >
                 <Route index element={<Navigate to="/music/search" />} />
+                <Route path="analytics" element={<AnalyticsView />} />
 
                 <Route path="playlists" element={<PlaylistView />} />
                 <Route path="music">
