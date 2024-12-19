@@ -32,6 +32,8 @@ import {
 } from "@tanstack/react-query";
 import { HTTPError } from "ky";
 import AnalyticsView from "./admin/AnalyticsView.tsx";
+import { Provider } from "react-redux";
+import { store } from "./store.ts";
 
 export const queryClient = new QueryClient({
   defaultOptions: {
@@ -52,45 +54,50 @@ export const queryClient = new QueryClient({
 root.render(
   <StrictMode>
     <QueryClientProvider client={queryClient}>
-      <UserContextProvider>
-        {/* <RouterProvider router={router}/> */}
-        <PrimeReactProvider>
-          <BrowserRouter>
-            <Routes>
-              <Route
-                path="/"
-                element={<App />}
-                loader={() => {
-                  checkLogin();
-                  return true;
-                }}
-              >
-                <Route index element={<Navigate to="/music/search" />} />
-                <Route path="analytics" element={<AnalyticsView />} />
-
-                <Route path="playlists" element={<PlaylistView />} />
-                <Route path="music">
-                  <Route index element={<Navigate to="/music/search" />} />
-                  <Route
-                    path="search"
-                    element={
-                      <div>
-                        <AlbumSearchView />
-                      </div>
-                    }
-                  />
-                  <Route path="albums/:albumId" element={<AlbumDetailView />} />
-                </Route>
+      <Provider store={store}>
+        <UserContextProvider>
+          {/* <RouterProvider router={router}/> */}
+          <PrimeReactProvider>
+            <BrowserRouter>
+              <Routes>
                 <Route
-                  path="callback"
-                  element={<Navigate to="/music/search" />}
-                />
-                <Route path="*" element={<PageNotFound />} />
-              </Route>
-            </Routes>
-          </BrowserRouter>
-        </PrimeReactProvider>
-      </UserContextProvider>
+                  path="/"
+                  element={<App />}
+                  loader={() => {
+                    checkLogin();
+                    return true;
+                  }}
+                >
+                  <Route index element={<Navigate to="/music/search" />} />
+                  <Route path="analytics" element={<AnalyticsView />} />
+
+                  <Route path="playlists" element={<PlaylistView />} />
+                  <Route path="music">
+                    <Route index element={<Navigate to="/music/search" />} />
+                    <Route
+                      path="search"
+                      element={
+                        <div>
+                          <AlbumSearchView />
+                        </div>
+                      }
+                    />
+                    <Route
+                      path="albums/:albumId"
+                      element={<AlbumDetailView />}
+                    />
+                  </Route>
+                  <Route
+                    path="callback"
+                    element={<Navigate to="/music/search" />}
+                  />
+                  <Route path="*" element={<PageNotFound />} />
+                </Route>
+              </Routes>
+            </BrowserRouter>
+          </PrimeReactProvider>
+        </UserContextProvider>
+      </Provider>
     </QueryClientProvider>
   </StrictMode>
 );

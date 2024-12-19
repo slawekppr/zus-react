@@ -74,6 +74,7 @@ export const playlistsReducer = (state: State, action: Action): State => {
     case "Load":
       if (action.payload.error) return { ...state, error: action.payload.error };
       return { ...state, items: action.payload.data };
+
     default:
       action satisfies never;
       return state;

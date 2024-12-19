@@ -374,3 +374,10 @@ https://www.chartjs.org/docs/latest/charts/bar.html
 
 # ContentEditable
 https://js.devexpress.com/React/Demos/WidgetsGallery/Demo/HtmlEditor/Overview/MaterialBlueLight/
+
+# Redux, Redux Toolkit
+https://redux-toolkit.js.org/tutorials/typescript
+npm install @reduxjs/toolkit react-redux
+
+# Immer
+https://immerjs.github.io/immer/
