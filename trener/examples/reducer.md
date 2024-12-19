@@ -97,3 +97,30 @@ state = reducer( state, inc(2) )
 state = reducer( state, addTodo('learn redux!') )
 
 ```
+
+# Slice reducer
+```ts
+
+counterReducerSlice = (state = 0,action) => {
+    switch(action.type){
+        case 'INC': return  state + action.payload
+        case 'DECREMENT': return  state - action.payload
+        case 'RESET': return  0
+        default: return state;
+    }
+}
+
+reducer = (state, action) => {
+    // switch(action.type){
+        // case 'ADDTODO': return { ...state,
+        //     todos: [...state.todos, action.payload] 
+        // }
+        return {
+            ...state,
+            counter: counterReducerSlice(state.counter, action),
+            todos: todosReducerSlice(state.todos, action),
+            playlists: playlistsReducerSlice(state.playlists, action),
+        }
+}
+
+```
