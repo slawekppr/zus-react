@@ -12,7 +12,6 @@ type Props = {
 const PlaylistList = React.memo(
   ({ playlists, onSelect, selectedId }: Props) => {
     
-    console.log("Reander List");
     return (
       <div>
         <div className="divide-y divide-slate-300 divide-solid">
