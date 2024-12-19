@@ -361,3 +361,13 @@ https://web.dev/learn/pwa/progressive-web-apps
 # DevExpress - local context
 https://lr2gt6.csb.app/
 https://js.devexpress.com/React/Demos/WidgetsGallery/Demo/DataGrid/Overview/MaterialBlueLight/
+
+# Charts
+https://observablehq.com/@d3/gallery?utm_source=d3js-org&utm_medium=hero&utm_campaign=try-observable
+
+https://js.devexpress.com/React/Demos/WidgetsGallery/Demo/Charts/AjaxRequest/MaterialBlueLight/
+
+https://js.devexpress.com/React/Demos/WidgetsGallery/Demo/Charts/AjaxRequest/MaterialBlueLight/
+
+https://www.chartjs.org/docs/latest/charts/bar.html
+
