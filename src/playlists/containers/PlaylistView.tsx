@@ -1,4 +1,4 @@
-import React, { useEffect, useMemo, useState } from "react";
+import React, { useCallback, useEffect, useMemo, useState } from "react";
 import PlaylistList from "../components/PlaylistList";
 import PlaylistDetails from "../components/PlaylistDetails";
 import PlaylistEditor from "../components/PlaylistEditor";
@@ -20,7 +20,7 @@ const PlaylistView = () => {
   const [selectedId, setSelectedId] = useState<string>();
 
   const playlists = useQuery({
-    queryKey: ["playlists","my"],
+    queryKey: ["playlists", "my"],
     queryFn: () => fetchMyPlaylists(),
     initialData: [],
   });
@@ -31,35 +31,27 @@ const PlaylistView = () => {
     enabled: !!selectedId,
   });
 
-  const selectPlaylistById = (id: string) => {
-    if (mode !== "details") return;
-    setSelectedId(id);
-  };
+  const showDetails = useCallback(() => setMode("details"), []);
+  const showEditor = useCallback(() => setMode("editor"), []);
 
-  const showDetails = () => {
-    setMode("details");
-  };
-
-  const showEditor = () => {
-    setMode("editor");
-  };
-
-  const createPlaylist = (draft: Playlist) => {
+  const createPlaylist = useCallback((draft: Playlist) => {
     draft.id = crypto.randomUUID();
-
     setSelectedId(draft.id);
     setMode("details");
-  };
+  }, []);
 
-  const savePlaylist = (draft: Playlist) => {
-    setSelectedId(draft.id);
-    setMode("details");
-  };
+  const savePlaylist = useCallback(
+    (draft: Playlist) => {
+      setSelectedId(draft.id);
+      showDetails();
+    },
+    [showDetails]
+  );
 
-  const showCreator = () => {
+  const showCreator = useCallback(() => {
     setSelectedId(undefined);
     setMode("creator");
-  };
+  }, []);
 
   return (
     <div>
@@ -68,7 +60,7 @@ const PlaylistView = () => {
           <PlaylistList
             playlists={playlists.data}
             selectedId={selectedId}
-            onSelect={selectPlaylistById}
+            onSelect={setSelectedId}
           />
           <Button onClick={showCreator}>Create new</Button>
         </div>
@@ -76,8 +68,6 @@ const PlaylistView = () => {
         <div className="grid gap-5">
           {selectedId && selected.isPending && <p>Loading playlist...</p>}
           {selectedId && selected.isFetching && <p>Updating playlist...</p>}
-          {/* {selected.isLoading && <p>Loading playlist first time...</p>} */}
-
           {
             <>
               {mode == "details" && (

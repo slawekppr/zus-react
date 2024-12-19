@@ -11,8 +11,8 @@ type Props = {
 // Controlled (state)
 const PlaylistList = React.memo(
   ({ playlists, onSelect, selectedId }: Props) => {
+    
     console.log("Reander List");
-
     return (
       <div>
         <div className="divide-y divide-slate-300 divide-solid">
@@ -32,10 +32,11 @@ const PlaylistList = React.memo(
         </div>
       </div>
     );
-  }, // propsAreEqual?:
-  (prevProps: Readonly<Props>, nextProps: Readonly<Props>) =>
-    prevProps.playlists === nextProps.playlists &&
-    prevProps.selectedId === nextProps.selectedId
+  }
+  // propsAreEqual?:
+  // (prevProps: Readonly<Props>, nextProps: Readonly<Props>) =>
+  //   prevProps.playlists === nextProps.playlists &&
+  //   prevProps.selectedId === nextProps.selectedId
 );
 
 export default PlaylistList;

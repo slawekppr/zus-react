@@ -9,7 +9,7 @@ type Props = {
   showDetailsButton?: boolean;
 };
 
-const AlbumCard = ({ album, showDetailsButton = false }: Props) => {
+const AlbumCard = React.memo(({ album, showDetailsButton = false }: Props) => {
   const go = useNavigate();
 
   return (
@@ -38,6 +38,6 @@ const AlbumCard = ({ album, showDetailsButton = false }: Props) => {
       }
     ></Card>
   );
-};
+});
 
 export default AlbumCard;
