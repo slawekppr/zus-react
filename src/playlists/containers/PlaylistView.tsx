@@ -15,70 +15,35 @@ import { queryClient } from "../../main";
 
 type Modes = "details" | "editor" | "creator";
 
+
+
 const PlaylistView = () => {
-  const [mode, setMode] = useState<Modes>("details");
-  const [selectedId, setSelectedId] = useState<string>();
-  const [playlists, setPlaylists] = useState(mockPlaylists);
-
-  const selected = useMemo(
-    () => playlists.find((p) => p.id === selectedId),
-    [selectedId, playlists]
-  );
-
-  const showDetails = useCallback(() => setMode("details"), []);
-  const showEditor = useCallback(() => setMode("editor"), []);
-
-  const createPlaylist = useCallback((draft: Playlist) => {
-    draft.id = crypto.randomUUID();
-    setPlaylists(appendItem(draft));
-    setSelectedId(draft.id);
-    setMode("details");
-  }, []);
-
-  const savePlaylist = useCallback(
-    (draft: Playlist) => {
-      setPlaylists(updateItem(draft));
-      setSelectedId(draft.id);
-      showDetails();
-    },
-    [showDetails]
-  );
-
-  const showCreator = useCallback(() => {
-    setSelectedId(undefined);
-    setMode("creator");
-  }, []);
-
   return (
     <div>
       <div className="grid grid-cols-2 gap-5">
         <div className="grid gap-5">
-          <PlaylistList
+          {/* <PlaylistList
             playlists={playlists}
             selectedId={selectedId}
             onSelect={setSelectedId}
-          />
-          <Button onClick={showCreator}>Create new</Button>
+          /> */}
+          {/* <Button onClick={showCreator}>Create new</Button> */}
         </div>
 
         <div className="grid gap-5">
-          {
-            <>
-              {mode == "details" && (
+          {/* {mode == "details" && (
                 <PlaylistDetails playlist={selected} onEdit={showEditor} />
-              )}
-              {mode == "editor" && (
+              )} */}
+          {/* {mode == "editor" && (
                 <PlaylistEditor
                   playlist={selected}
                   onCancel={showDetails}
                   onSave={savePlaylist}
                 />
-              )}
-            </>
-          }
-          {mode == "creator" && (
+              )} */}
+          {/* {mode == "creator" && (
             <PlaylistEditor onCancel={showDetails} onSave={createPlaylist} />
-          )}
+          )} */}
         </div>
       </div>
     </div>
