@@ -1,11 +1,27 @@
 import { Chart } from "chart.js/auto";
-import React, { PropsWithChildren, useEffect, useRef } from "react";
+import React, {
+  PropsWithChildren,
+  ReactElement,
+  useEffect,
+  useRef,
+} from "react";
 
 type Props = {};
 
 namespace Bar {
   export const Chart = (props: PropsWithChildren) => {
     const chartRef = useRef<HTMLCanvasElement>(null);
+
+    (props.children as Array<ReactElement>).forEach((child) => {
+      switch (child.type) {
+        case Bar.Tooltip:
+          console.log("Tooltip", child.props);
+          break;
+        case Data.Set:
+          console.log("Set", child.props);
+          break;
+      }
+    });
 
     useBarChart(chartRef);
 
@@ -25,8 +41,19 @@ namespace Bar {
   export const Tooltip = (props: PropsWithChildren) => <div></div>;
 }
 namespace Data {
-  export const Set = (props: PropsWithChildren) => <div></div>;
-  export const Item = (props: PropsWithChildren) => <div></div>;
+  export const Set = (
+    props: PropsWithChildren<{
+      label: string;
+    }>
+  ) => <div></div>;
+  export const Item = (
+    props: PropsWithChildren<{
+      label: string;
+      bg: string;
+      border: string;
+      value: string;
+    }>
+  ) => <div></div>;
 }
 
 const AnalyticsView = (props: Props) => {
