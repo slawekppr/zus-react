@@ -48,16 +48,20 @@ const albumsAPI = MusicAPI.extend((parent) => ({
   prefixUrl: `${parent.prefixUrl}albums`,
 }));
 
-export const fetchAlbumSearchResults = (query = "", init?: RequestInit) => {
+export const fetchAlbumSearchResults = (
+  query = "",
+  offset = 0,
+  init?: RequestInit
+) => {
   return MusicAPI.get<AlbumSearchResponse>("search", {
     searchParams: {
       type: "album",
       q: query,
+      offset,
     },
     ...init,
-  })
-    .json()
-    // .then((d) => d.albums.items);
+  }).json();
+  // .then((d) => d.albums.items);
 };
 
 export const fetchAlbumById = (id = "", init?: RequestInit) => {

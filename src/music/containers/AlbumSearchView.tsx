@@ -5,8 +5,9 @@ import UserWidget from "../../common/context/UserWidget";
 import { ProgressSpinner } from "primereact/progressspinner";
 import { useFetchAlbumSearch } from "./useFetchAlbumSearch";
 import { useParams, useSearchParams } from "react-router";
-import { useQuery } from "@tanstack/react-query";
+import { useInfiniteQuery, useQuery } from "@tanstack/react-query";
 import { fetchAlbumSearchResults } from "../../common/services/MusicAPI";
+import { Button } from "primereact/button";
 
 const AlbumSearchView = () => {
   const [searchParams, setSearchParams] = useSearchParams({ q: "" });
@@ -15,16 +16,22 @@ const AlbumSearchView = () => {
   // const { data: results = [], isLoading, error } = useFetchAlbumSearch(query!);
 
   const {
-    data: results = [],
+    data: data,
     isLoading,
     isFetching,
     isStale,
+    fetchNextPage,
+    fetchPreviousPage,
     error,
-  } = useQuery({
+  } = useInfiniteQuery({
     queryKey: ["albums/search", query /* page, limit, sort */],
-    queryFn: ({ signal }) => fetchAlbumSearchResults(query, { signal }),
+    queryFn: ({ signal, pageParam }) =>
+      fetchAlbumSearchResults(query, pageParam, { signal }),
     enabled: !!query,
-    select: (res) => res.albums.items,
+    initialPageParam: 0,
+    getNextPageParam: (lastPage, pages) => {
+      return lastPage.albums.offset + 20;
+    },
   });
 
   return (
@@ -47,7 +54,10 @@ const AlbumSearchView = () => {
 
           {isFetching && <p>Updating data...</p>}
 
-          <ResultsGrid results={results} />
+          {data?.pages.map((page) => {
+            return <ResultsGrid results={page.albums.items} />;
+          })}
+          <Button onClick={() => fetchNextPage()}>NExt page</Button>
         </div>
       </div>
     </div>
