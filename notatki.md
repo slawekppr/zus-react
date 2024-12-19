@@ -334,3 +334,13 @@ https://en.wikipedia.org/wiki/Npm_left-pad_incident
 # Semver
 https://semver.org/
 https://semver.npmjs.com/
+
+# CAP Theorem
+// - Consistency
+// - Availability
+// - Partition Tolerant
+
+// Event Sourcing
+// Eventual Consistency
+// Optimistic Updates
+// Compensating Transaction (Revert)

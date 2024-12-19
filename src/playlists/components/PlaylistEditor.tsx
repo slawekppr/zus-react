@@ -1,11 +1,12 @@
 import { Button } from "primereact/button";
-import React, { useId, useState } from "react";
+import React, { useState } from "react";
 import type { Playlist } from "../../common/model/Playlist";
 import { useFocus } from "../../common/hooks/useFocus";
-import { useMutation } from "@tanstack/react-query";
-import { MusicAPI } from "../../common/services/MusicAPI";
-import { queryClient } from "../../main";
-import { playlistUpdate } from "../mutations/playlists";
+import { usePlaylistUpdate } from "../mutations/playlists";
+import {
+  fetchMyPlaylists,
+  fetchPlaylistById,
+} from "../../common/services/MusicAPI";
 
 type Props = {
   playlist?: Playlist;
@@ -26,9 +27,17 @@ const PlaylistEditor = ({
   playlist: playlistFromParent = EMPTY_PLAYLIST,
 }: Props) => {
   const [playlist, setPlaylist] = useState(playlistFromParent);
+  const playlistUpdate = usePlaylistUpdate();
 
   const submit = () => {
-    playlistUpdate.mutateAsync(playlist).then(() => onSave(playlist));
+    const { id, description, name, public: pp } = playlist;
+    console.log("playlist", playlist.name);
+
+    playlistUpdate
+      .mutateAsync({ id, description, name, public: pp })
+      .then(() => {
+        fetchPlaylistById(playlist.id).then((data) => console.log(data.name));
+      });
   };
   const changeHandler = (
     event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
