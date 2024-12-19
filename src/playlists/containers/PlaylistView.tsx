@@ -29,24 +29,29 @@ import {
   CreatePlaylist,
   LoadPlaylists,
 } from "../../store/PlaylistsStore";
+import { useAppDispatch, useAppSelector } from "../../store";
+import { playlistsSlice } from "../../store/playlists";
+
+const actions = playlistsSlice.actions;
+const selectors = playlistsSlice.selectors;
 
 const PlaylistView = () => {
-  const [state, dispatch] = useReducer(playlistsReducer, initialState);
+  // const [state, dispatch] = useReducer(playlistsReducer, initialState);
+  const dispatch = useAppDispatch();
 
-  const { mode, items: playlists, selectedId } = state;
+  // const mode = useAppSelector((state) => state.playlists.mode);
+  const mode = useAppSelector(selectors.mode);
+  const playlists = useAppSelector(selectors.playlists);
+  const selectedId = useAppSelector(selectors.selectedId);
+  const selected = useAppSelector(selectors.selected);
 
   useEffect(() => {
     fetchMyPlaylists()
-      .then((data) => dispatch(LoadPlaylists({ data })))
-      .catch((error) => dispatch(LoadPlaylists({ error })));
+      .then((data) => dispatch(actions.LoadPlaylists({ data })))
+      .catch((error) => dispatch(actions.LoadPlaylists({ error })));
   }, []);
 
-  const selected = useMemo(
-    () => playlists.find((p) => p.id == selectedId),
-    [playlists, selectedId]
-  );
-
-  const onSelect = (payload: string) => dispatch(Select(payload));
+  const onSelect = (payload: string) => dispatch(actions.Select(payload));
 
   return (
     <div>
@@ -57,27 +62,29 @@ const PlaylistView = () => {
             selectedId={selectedId}
             onSelect={onSelect}
           />
-          <Button onClick={() => dispatch(ShowCreator())}>Create new</Button>
+          <Button onClick={() => dispatch(actions.ShowCreator())}>
+            Create new
+          </Button>
         </div>
 
         <div className="grid gap-5">
           {mode == "details" && (
             <PlaylistDetails
               playlist={selected}
-              onEdit={() => dispatch(ShowEditor())}
+              onEdit={() => dispatch(actions.ShowEditor())}
             />
           )}
           {mode == "editor" && (
             <PlaylistEditor
               playlist={selected}
-              onCancel={() => dispatch(Cancel())}
-              onSave={(draft) => dispatch(SavePlaylist(draft))}
+              onCancel={() => dispatch(actions.Cancel())}
+              onSave={(draft) => dispatch(actions.SavePlaylist(draft))}
             />
           )}
           {mode == "creator" && (
             <PlaylistEditor
-              onCancel={() => dispatch(Cancel())}
-              onSave={(draft) => dispatch(CreatePlaylist(draft))}
+              onCancel={() => dispatch(actions.Cancel())}
+              onSave={(draft) => dispatch(actions.CreatePlaylist(draft))}
             />
           )}
         </div>

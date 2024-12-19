@@ -55,4 +55,11 @@ export const playlistsSlice = createSlice({
       state.items.push(action.payload);
     },
   },
+  selectors: {
+    playlists: (state) => state.items,
+    selectedId: (state) => state.selectedId,
+    mode: (state) => state.mode,
+    error: (state) => state.error,
+    selected: (state) => state.items.find((p) => p.id == state.selectedId),
+  },
 });
