@@ -36,7 +36,9 @@ const PlaylistEditor = ({
     playlistUpdate
       .mutateAsync({ id, description, name, public: pp })
       .then(() => {
-        fetchPlaylistById(playlist.id).then((data) => console.log(data.name));
+        // fetchPlaylistById(playlist.id)
+        // .then((data) => console.log(data.name));
+        onSave(playlist)
       });
   };
   const changeHandler = (
