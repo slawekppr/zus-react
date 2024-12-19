@@ -7,6 +7,7 @@ import {
   fetchMyPlaylists,
   fetchPlaylistById,
 } from "../../common/services/MusicAPI";
+import RichEditor from "../../common/components/RichEditor";
 
 type Props = {
   playlist?: Playlist;
@@ -98,6 +99,7 @@ const PlaylistEditor = ({
             name="description"
             onChange={changeHandler}
           ></textarea>
+          <RichEditor/>
         </div>
 
         <div className="flex justify-between">

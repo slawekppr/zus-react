@@ -371,3 +371,6 @@ https://js.devexpress.com/React/Demos/WidgetsGallery/Demo/Charts/AjaxRequest/Mat
 
 https://www.chartjs.org/docs/latest/charts/bar.html
 
+
+# ContentEditable
+https://js.devexpress.com/React/Demos/WidgetsGallery/Demo/HtmlEditor/Overview/MaterialBlueLight/
