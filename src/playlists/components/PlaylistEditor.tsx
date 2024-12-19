@@ -28,19 +28,9 @@ const PlaylistEditor = ({
   playlist: playlistFromParent = EMPTY_PLAYLIST,
 }: Props) => {
   const [playlist, setPlaylist] = useState(playlistFromParent);
-  const playlistUpdate = usePlaylistUpdate();
 
   const submit = () => {
-    const { id, description, name, public: pp } = playlist;
-    console.log("playlist", playlist.name);
-
-    playlistUpdate
-      .mutateAsync({ id, description, name, public: pp })
-      .then(() => {
-        // fetchPlaylistById(playlist.id)
-        // .then((data) => console.log(data.name));
-        onSave(playlist)
-      });
+    onSave(playlist);
   };
   const changeHandler = (
     event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
@@ -62,10 +52,6 @@ const PlaylistEditor = ({
 
   return (
     <div>
-      {playlistUpdate.isPending && <p>Saving Playlist!</p>}
-      {playlistUpdate.error && (
-        <p className="text-red-500">{playlistUpdate.error.message}!</p>
-      )}
       <div className="grid gap-5">
         <div className="grid gap-2">
           <label>Name</label>
@@ -99,7 +85,6 @@ const PlaylistEditor = ({
             name="description"
             onChange={changeHandler}
           ></textarea>
-          <RichEditor/>
         </div>
 
         <div className="flex justify-between">

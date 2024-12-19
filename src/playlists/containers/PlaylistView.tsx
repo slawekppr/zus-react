@@ -18,30 +18,26 @@ type Modes = "details" | "editor" | "creator";
 const PlaylistView = () => {
   const [mode, setMode] = useState<Modes>("details");
   const [selectedId, setSelectedId] = useState<string>();
+  const [playlists, setPlaylists] = useState(mockPlaylists);
 
-  const playlists = useQuery({
-    queryKey: ["playlists", "my"],
-    queryFn: () => fetchMyPlaylists(),
-    initialData: [],
-  }); 
-
-  const selected = useQuery({
-    queryKey: ["playlists", selectedId],
-    queryFn: () => fetchPlaylistById(selectedId),
-    enabled: !!selectedId,
-  });
+  const selected = useMemo(
+    () => playlists.find((p) => p.id === selectedId),
+    [selectedId, playlists]
+  );
 
   const showDetails = useCallback(() => setMode("details"), []);
   const showEditor = useCallback(() => setMode("editor"), []);
 
   const createPlaylist = useCallback((draft: Playlist) => {
     draft.id = crypto.randomUUID();
+    setPlaylists(appendItem(draft));
     setSelectedId(draft.id);
     setMode("details");
   }, []);
 
   const savePlaylist = useCallback(
     (draft: Playlist) => {
+      setPlaylists(updateItem(draft));
       setSelectedId(draft.id);
       showDetails();
     },
@@ -58,7 +54,7 @@ const PlaylistView = () => {
       <div className="grid grid-cols-2 gap-5">
         <div className="grid gap-5">
           <PlaylistList
-            playlists={playlists.data}
+            playlists={playlists}
             selectedId={selectedId}
             onSelect={setSelectedId}
           />
@@ -66,16 +62,14 @@ const PlaylistView = () => {
         </div>
 
         <div className="grid gap-5">
-          {selectedId && selected.isPending && <p>Loading playlist...</p>}
-          {selectedId && selected.isFetching && <p>Updating playlist...</p>}
           {
             <>
               {mode == "details" && (
-                <PlaylistDetails playlist={selected.data} onEdit={showEditor} />
+                <PlaylistDetails playlist={selected} onEdit={showEditor} />
               )}
               {mode == "editor" && (
                 <PlaylistEditor
-                  playlist={selected.data}
+                  playlist={selected}
                   onCancel={showDetails}
                   onSave={savePlaylist}
                 />
