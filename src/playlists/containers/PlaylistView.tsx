@@ -27,12 +27,19 @@ import {
   Cancel,
   SavePlaylist,
   CreatePlaylist,
+  LoadPlaylists,
 } from "../../store/PlaylistsStore";
 
 const PlaylistView = () => {
   const [state, dispatch] = useReducer(playlistsReducer, initialState);
 
   const { mode, items: playlists, selectedId } = state;
+
+  useEffect(() => {
+    fetchMyPlaylists()
+      .then((data) => dispatch(LoadPlaylists({ data })))
+      .catch((error) => dispatch(LoadPlaylists({ error })));
+  }, []);
 
   const selected = useMemo(
     () => playlists.find((p) => p.id == selectedId),
