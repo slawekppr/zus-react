@@ -23,7 +23,7 @@ const PlaylistView = () => {
     queryKey: ["playlists", "my"],
     queryFn: () => fetchMyPlaylists(),
     initialData: [],
-  });
+  }); 
 
   const selected = useQuery({
     queryKey: ["playlists", selectedId],

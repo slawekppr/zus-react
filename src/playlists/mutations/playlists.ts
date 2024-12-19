@@ -1,4 +1,4 @@
-import { useMutation } from "@tanstack/react-query";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { Playlist } from "../../common/model/Playlist";
 import { MusicAPI } from "../../common/services/MusicAPI";
 import { queryClient } from "../../main";
@@ -6,7 +6,8 @@ import { updateItem } from "../containers/utils";
 
 export const usePlaylistUpdate = () => {
   const playlistsKey = ["playlists", "my"];
-
+  const queryClient = useQueryClient();
+  
   return useMutation<
     Playlist,
     Error,
