@@ -52,3 +52,48 @@ lista.reduce( (state, x) => {
 })
 // {todos: Array(0), counter: 15}
 ```
+
+```ts
+
+state = {
+    todos:[],
+    counter: 0   
+}
+counterReducer = (state, action) => {
+    return { 
+        ...state,
+        counter: state.counter + action
+    }
+}
+state = counterReducer( state, 1)
+// state = TodosReducer( state, 'kup mleko')
+```
+
+# Reducer
+```ts
+
+state = {
+    todos:[],
+    counter: 0   
+}
+
+reducer = (state, action) => {
+    switch(action.type){
+        case 'INC': return { ...state,
+            counter: state.counter + action.payload
+        } 
+        case 'ADDTODO': return { ...state,
+            todos: [...state.todos, action.payload] 
+        }
+        default: return state;
+    }
+}
+
+inc = (payload=1) => ({type:'INC', payload});
+addTodo = (payload='') => ({type:'ADDTODO', payload});
+
+// usage
+state = reducer( state, inc(2) )
+state = reducer( state, addTodo('learn redux!') )
+
+```
