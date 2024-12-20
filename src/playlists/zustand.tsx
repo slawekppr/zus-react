@@ -7,14 +7,21 @@ type Store = {
   inc: () => void;
 };
 
-const useCounterStore = create<Store>()((set) => ({
-  count: 1,
-  value: "2",
-  inc: () => set((state) => ({ count: state.count + 1 })),
-  dec() {
-    set((state) => ({ count: state.count - 1 }));
-  },
-}));
+const useCounterStore = create<Store>()(
+  immer((set) => ({
+    count: 1,
+    value: "2",
+    inc: () =>
+      set((state) => {
+        state.count++;
+      }),
+    dec() {
+      set((state) => {
+        state.count--;
+      });
+    },
+  }))
+);
 
 function Counter() {
   const { count, inc } = useCounterStore();
