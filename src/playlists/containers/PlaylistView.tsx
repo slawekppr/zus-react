@@ -38,7 +38,11 @@ const { actions, selectors } = playlistsSlice;
 
 const LoadPlaylistsThunkAction = () => (dispatch: AppDispatch) => {
   fetchMyPlaylists()
-    .then((data) => dispatch(actions.LoadPlaylists({ data: mockPlaylists })))
+    .then((data) => {
+      dispatch(actions.LoadPlaylists({ data: mockPlaylists }));
+      // dispatch(actions.Select(mockPlaylists[0]))
+      // dispatch(LoadAndSelectFirstPlaylist())
+    })
     .catch((error) =>
       dispatch(actions.LoadPlaylists({ error: error.message }))
     );
