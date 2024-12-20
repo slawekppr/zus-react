@@ -13,7 +13,7 @@ import type { Playlist } from "../../common/model/Playlist";
 import { appendItem, updateItem } from "./utils";
 import { useQueries, useQuery } from "@tanstack/react-query";
 import { fetchPlaylistById } from "../../common/services/MusicAPI";
-import { queryClient } from "../../main";
+import { PlaylistDetailsLoader, queryClient } from "../../main";
 import {
   playlistsReducer,
   initialState,
@@ -27,7 +27,7 @@ import {
 } from "../../store/PlaylistsStore";
 import { useAppDispatch, useAppSelector } from "../../store";
 import { playlistsSlice } from "../../store/playlists";
-import { Outlet } from "react-router";
+import { Outlet, Route, Routes } from "react-router";
 import { Store, ThunkDispatch } from "@reduxjs/toolkit";
 import { LoadPlaylistsThunkAction } from "./LoadPlaylistsThunkAction";
 import { musicAPI } from "../../api/musicAPIQueries";
@@ -41,7 +41,15 @@ const PlaylistView = () => {
         </div>
 
         <div className="grid gap-5">
-          <Outlet />
+          <Routes>
+            <Route path="create" element={<PlaylistEditor />} />
+            <Route
+              path=":playlistId"
+              loader={PlaylistDetailsLoader}
+              element={<PlaylistDetails />}
+            />
+            <Route path=":playlistId/edit" element={<PlaylistEditor />} />
+          </Routes>
         </div>
       </div>
     </div>

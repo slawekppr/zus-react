@@ -82,17 +82,10 @@ const routes = createRoutesFromElements(
     <Route index element={<Navigate to="/music/search" />} />
     <Route path="analytics" element={<AnalyticsView />} />
 
-    <Route path="playlists" element={<PlaylistView />}>
-      <Route path="create" element={<PlaylistEditor />} />
-
-      <Route
-        path=":playlistId"
-        loader={PlaylistDetailsLoader}
-        element={<PlaylistDetails />}
-      />
-
-      <Route path=":playlistId/edit" element={<PlaylistEditor />} />
-    </Route>
+    <Route
+      path="playlists/*"
+      lazy={() => import("./playlists/containers/PlaylistView.tsx")}
+    />
 
     <Route path="music">
       <Route index element={<Navigate to="/music/search" />} />
