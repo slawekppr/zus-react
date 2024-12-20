@@ -37,14 +37,9 @@ import { Store, ThunkDispatch } from "@reduxjs/toolkit";
 const { actions, selectors } = playlistsSlice;
 
 const LoadPlaylistsThunkAction = () => (dispatch: AppDispatch) => {
-  //  dispatch(fetchMyPlaylists() => {type: ... })
-
   fetchMyPlaylists()
     .then((data) => {
       dispatch(actions.LoadPlaylists({ data: mockPlaylists }));
-      // dispatch(actions.Select(mockPlaylists[0]))
-      // if(pplacki)
-      // dispatch(LoadAndSelectFirstPlaylist())
     })
     .catch((error) =>
       dispatch(actions.LoadPlaylists({ error: error.message }))

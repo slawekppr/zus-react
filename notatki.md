@@ -393,3 +393,6 @@ https://nativescript.org/
 
 # Redux devtools + time travel
 https://chromewebstore.google.com/detail/redux-devtools/lmhkpmbekcpmknklioeibfkpmmfibljd?hl=en
+
+# Redux Promise Action
+https://github.com/pburtchaell/redux-promise-middleware/blob/HEAD/docs/introduction.md
