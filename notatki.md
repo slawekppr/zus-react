@@ -441,3 +441,5 @@ https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Cache-Control
 # Hook Form
 https://react-hook-form.com/docs/usefieldarray
 
+https://dev.to/isnan__h/custom-schema-validation-in-typescript-with-zod-5cp5
+

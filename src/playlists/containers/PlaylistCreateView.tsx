@@ -47,6 +47,8 @@ const PlaylistCreateView = () => {
     resolver: zodResolver(playlistSchema),
   });
 
+  const isPublic = watch("public");
+
   return (
     <form
       onSubmit={handleSubmit(
@@ -66,12 +68,6 @@ const PlaylistCreateView = () => {
 
         <CustomInputCounter control={control} label="Name" name="name" />
 
-        <CustomInputCounter
-          control={control}
-          label="Description"
-          name="description"
-        />
-
         {/* <div className="grid grid-cols-2">
           <label>Name</label>
           <div>
@@ -81,13 +77,15 @@ const PlaylistCreateView = () => {
             )}
           </div>
         </div> */}
+
         <div className="grid grid-cols-2">
           <label>Public</label>
           <input type="checkbox" {...register("public")} />
         </div>
+
         <div className="grid grid-cols-2">
           <label>Description</label>
-          <textarea {...register("description")} />
+          <textarea {...register("description", { disabled: !!isPublic })} />
         </div>
 
         <div className="flex gap-5">
