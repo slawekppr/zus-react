@@ -58,7 +58,7 @@ export const queryClient = new QueryClient({
   // queryCache: new QueryCache({}),
 });
 
-const PlaylistDetailsLoader: LoaderFunction<Playlist> = ({
+export const PlaylistDetailsLoader: LoaderFunction<Playlist> = ({
   params,
   request,
   context,

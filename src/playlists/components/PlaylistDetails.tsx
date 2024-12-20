@@ -4,15 +4,17 @@ import React from "react";
 import type { Playlist } from "../../common/model/Playlist";
 import { useAppDispatch, useAppSelector } from "../../store";
 import { playlistsSlice } from "../../store/playlists";
-import { useNavigate, useParams } from "react-router";
+import { useLoaderData, useNavigate, useParams } from "react-router";
+import { PlaylistDetailsLoader } from "../../main";
 
 type Props = {};
 
 const PlaylistDetails = ({}: Props) => {
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
-  
 
+  const data = useLoaderData<Playlist>();
+  
   const { playlistId } = useParams();
   const playlist = useAppSelector((state) =>
     playlistsSlice.selectors.selectedById(state, playlistId)
