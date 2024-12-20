@@ -11,6 +11,10 @@ import RichEditor from "../../common/components/RichEditor";
 import { useAppDispatch, useAppSelector } from "../../store";
 import { playlistsSlice } from "../../store/playlists";
 import { useNavigate, useParams } from "react-router";
+import {
+  useGetPlaylistByIdQuery,
+  useSavePlaylistMutation,
+} from "../../api/musicAPIQueries";
 
 type Props = {};
 
@@ -26,15 +30,19 @@ const PlaylistEditor = ({}: Props) => {
 
   const navigate = useNavigate();
   const { playlistId } = useParams();
-  const playlistOriginal = useAppSelector((state) =>
-    playlistsSlice.selectors.selectedById(state, playlistId)
-  );
+
+  const { data: playlistOriginal } = useGetPlaylistByIdQuery(playlistId!);
 
   const [playlist, setPlaylist] = useState(playlistOriginal ?? EMPTY_PLAYLIST);
 
-  const submit = () => {
+  const [savePlaylist, { isLoading: isSaving }] = useSavePlaylistMutation({});
+
+  const submit = async () => {
     dispatch(playlistsSlice.actions.SavePlaylist(playlist));
-    navigate(`/playlists/${playlist.id}`)
+
+    await savePlaylist(playlist);
+
+    navigate(`/playlists/${playlist.id}`);
   };
   const changeHandler = (
     event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
@@ -56,6 +64,7 @@ const PlaylistEditor = ({}: Props) => {
 
   return (
     <div>
+      {isSaving && "Saving..."}
       <div className="grid gap-5">
         <div className="grid gap-2">
           <label>Name</label>
