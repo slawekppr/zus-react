@@ -19,7 +19,7 @@ const playlistSchema = z.object({
 });
 
 type Playlsit2 = z.infer<typeof playlistSchema>;
-const result = playlistSchema.parse(mockPlaylists[0]); // Playlist | Exception!
+// const result = playlistSchema.parse(mockPlaylists[0]); // Playlist | Exception!
 
 const PlaylistCreateView = () => {
   const playlist = mockPlaylists[0];

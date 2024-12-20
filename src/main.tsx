@@ -73,7 +73,7 @@ const routes = createRoutesFromElements(
       path="playlists/*"
       lazy={() => import("./playlists/containers/PlaylistView.tsx")}
     />
-    <Route path="form" element={<PlaylistCreateView/>} />
+    <Route path="form" element={<PlaylistCreateView />} />
     <Route path="music">
       <Route index element={<Navigate to="/music/search" />} />
       <Route
@@ -90,7 +90,10 @@ const routes = createRoutesFromElements(
   </Route>
 );
 
-const router = createBrowserRouter(routes);
+const router = createBrowserRouter(routes, {});
+// router.subscribe(() => {
+//   debugger
+// })
 
 root.render(
   <StrictMode>
