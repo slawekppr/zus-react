@@ -432,3 +432,9 @@ dist/assets/index-BgLvvF5a.js                    625.53 kB │ gzip: 203.45 kB
 - Adjust chunk size limit for this warning via build.chunkSizeWarningLimit.
 ✓ built in 2.38s
 
+# Rewrite URL 
+https://v17.angular.io/guide/deployment#server-configuration
+
+# Immutable Cache (files hash tree)
+https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Cache-Control
+
