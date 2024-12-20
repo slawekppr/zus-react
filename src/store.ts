@@ -1,13 +1,27 @@
-import { configureStore } from "@reduxjs/toolkit";
+import { configureStore, Middleware, MiddlewareAPI } from "@reduxjs/toolkit";
 import { counterSlice } from "./store/counter";
 import { playlistsSlice } from "./store/playlists";
 
+const logger: Middleware =
+  (api: MiddlewareAPI) =>
+  (next: (action: unknown) => unknown) =>
+  (action: unknown) => {
+    console.log("before ", action);
+    const state = next(action);
+    console.log("after", action);
+    return state;
+  };
+
+  
 export const store = configureStore({
   reducer: {
     [counterSlice.name]: counterSlice.reducer,
     [playlistsSlice.name]: playlistsSlice.reducer,
   },
   devTools: true,
+  middleware(getDefaultMiddleware) {
+    return getDefaultMiddleware().concat([logger, logger, logger]);
+  },
 });
 
 (window as any).store = store;
