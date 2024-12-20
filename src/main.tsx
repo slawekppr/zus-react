@@ -27,6 +27,7 @@ import { Playlist } from "./common/model/Playlist.tsx";
 import { mockPlaylists } from "./common/fixtures/mockPlaylists.tsx";
 import { playlistsSlice } from "./store/playlists.ts";
 import PlaylistCreateView from "./playlists/containers/PlaylistCreateView.tsx";
+import ZustandView from "./playlists/zustand.tsx";
 
 const root = createRoot(document.getElementById("root")!);
 
@@ -74,6 +75,7 @@ const routes = createRoutesFromElements(
       lazy={() => import("./playlists/containers/PlaylistView.tsx")}
     />
     <Route path="form" element={<PlaylistCreateView />} />
+    <Route path="zustand" element={<ZustandView />} />
     <Route path="music">
       <Route index element={<Navigate to="/music/search" />} />
       <Route
