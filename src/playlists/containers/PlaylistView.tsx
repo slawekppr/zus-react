@@ -33,12 +33,11 @@ import { LoadPlaylistsThunkAction } from "./LoadPlaylistsThunkAction";
 import { musicAPI } from "../../api/musicAPIQueries";
 
 const PlaylistView = () => {
-
   return (
     <div>
       <div className="grid grid-cols-2 gap-5">
         <div className="grid gap-5">
-          <PlaylistList />
+          <PlaylistList createNew />
         </div>
 
         <div className="grid gap-5">

@@ -7,11 +7,14 @@ import { Button } from "primereact/button";
 import { NavLink, useNavigate } from "react-router";
 import { useGetPlaylistsQuery } from "../../api/musicAPIQueries";
 
-type Props = {};
+type Props = {
+  onSelect?: (id: string) => void;
+  createNew: boolean;
+};
 
 // Controlled (state)
 const PlaylistList = React.memo(
-  ({}: Props) => {
+  ({ onSelect, createNew = true }: Props) => {
     // const playlists = useAppSelector(playlistsSlice.selectors.playlists);
     const navigate = useNavigate();
 
@@ -22,6 +25,14 @@ const PlaylistList = React.memo(
         <div className="divide-y divide-slate-300 divide-solid">
           {playlists.map((playlist, i) => (
             <NavLink
+              onClick={(e) => {
+                {
+                  if (onSelect) {
+                    e.preventDefault();
+                    onSelect(playlist.id);
+                  }
+                }
+              }}
               to={`/playlists/${playlist.id}`}
               className={({ isActive }) =>
                 `p-4 block ${
@@ -37,9 +48,11 @@ const PlaylistList = React.memo(
           ))}
         </div>
 
-        <Button onClick={() => navigate("/playlists/create")}>
-          Create new
-        </Button>
+        {createNew && (
+          <Button onClick={() => navigate("/playlists/create")}>
+            Create new
+          </Button>
+        )}
       </div>
     );
   }

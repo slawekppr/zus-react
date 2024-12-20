@@ -5,21 +5,31 @@ import { useQuery } from "@tanstack/react-query";
 import AlbumCard from "../components/AlbumCard";
 import { mockAlbums } from "../../common/fixtures/mockAlbums";
 import { ProgressSpinner } from "primereact/progressspinner";
+import AddToPlaylistDialog from "./AddToPlaylistDialog";
 
 type Props = {};
 
 const AlbumDetailView = (props: Props) => {
   const { albumId } = useParams();
 
-  const { data: album, error, refetch } = useQuery({
+  const {
+    data: album,
+    error,
+    refetch,
+  } = useQuery({
     queryKey: ["albums/", albumId],
     queryFn: ({ signal }) => fetchAlbumById(albumId, { signal }),
     // enabled: false,
     // initialData: mockAlbums[0]
   });
 
-  if(error instanceof Error) return <div className="text-red-500 p-5">{error.message}</div>
+  if (error instanceof Error)
+    return <div className="text-red-500 p-5">{error.message}</div>;
   if (!album) return <ProgressSpinner />;
+
+  const addTrackToPlaylist = (trackId: string, playlistId: string) => {
+    console.log("addTrackToPlaylist", trackId, playlistId);
+  };
 
   return (
     <div>
@@ -43,6 +53,13 @@ const AlbumDetailView = (props: Props) => {
             {album.tracks.items.map((track, index) => (
               <div className="px-2 py-3">
                 {index + 1}. {track.name}
+                
+                <AddToPlaylistDialog
+                  data={track}
+                  onAdd={(playlistId) => {
+                    addTrackToPlaylist(track.id, playlistId);
+                  }}
+                />
               </div>
             ))}
           </div>
