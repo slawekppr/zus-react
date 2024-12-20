@@ -41,6 +41,7 @@ import PlaylistDetails from "./playlists/components/PlaylistDetails.tsx";
 import PlaylistEditor from "./playlists/components/PlaylistEditor.tsx";
 import { Playlist } from "./common/model/Playlist.tsx";
 import { mockPlaylists } from "./common/fixtures/mockPlaylists.tsx";
+import { playlistsSlice } from "./store/playlists.ts";
 
 export const queryClient = new QueryClient({
   defaultOptions: {
@@ -63,7 +64,9 @@ export const PlaylistDetailsLoader: LoaderFunction<Playlist> = ({
   request,
   context,
 }) => {
-  debugger;
+  store.dispatch(
+    playlistsSlice.actions.LoadPlaylist({ data: mockPlaylists[0] })
+  );
   return mockPlaylists[0];
 };
 

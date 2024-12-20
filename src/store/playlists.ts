@@ -15,6 +15,10 @@ export const initialState: State = {
   items: [],
 };
 
+type DataOrError<T> =
+  | { data: T; error?: never }
+  | { error: string & {}; data?: never };
+
 export const playlistsSlice = createSlice({
   name: "playlists",
   initialState,
@@ -31,18 +35,23 @@ export const playlistsSlice = createSlice({
     Cancel(state) {
       state.mode = "details";
     },
-    LoadPlaylists(
-      state,
-      action: PayloadAction<
-        | { data: Playlist[]; error?: never }
-        | { error: string & {}; data?: never }
-      >
-    ) {
+    LoadPlaylist(state, action: PayloadAction<DataOrError<Playlist>>) {
       if (action.payload.error) {
         state.error = action.payload.error;
-      } else {
-        state.items = action.payload.data!;
+        return;
       }
+      const draft = action.payload.data!;
+      for (let index in state.items) {
+        if (state.items[index].id !== draft.id) continue;
+        state.items[index] = draft;
+      }
+    },
+    LoadPlaylists(state, action: PayloadAction<DataOrError<Playlist[]>>) {
+      if (action.payload.error) {
+        state.error = action.payload.error;
+        return;
+      }
+      state.items = action.payload.data!;
     },
     SavePlaylist(state, action: PayloadAction<Playlist>) {
       state.mode = "details";

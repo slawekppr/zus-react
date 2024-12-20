@@ -40,7 +40,7 @@ const PlaylistView = () => {
 
   useEffect(() => {
     fetchMyPlaylists()
-      .then((data) => dispatch(actions.LoadPlaylists({ data })))
+      .then((data) => dispatch(actions.LoadPlaylists({ data:mockPlaylists })))
       .catch((error) =>
         dispatch(actions.LoadPlaylists({ error: error.message }))
       );
