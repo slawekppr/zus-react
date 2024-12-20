@@ -8,12 +8,10 @@ import {
   fetchPlaylistById,
 } from "../../common/services/MusicAPI";
 import RichEditor from "../../common/components/RichEditor";
+import { useAppDispatch, useAppSelector } from "../../store";
+import { playlistsSlice } from "../../store/playlists";
 
-type Props = {
-  playlist?: Playlist;
-  onCancel: () => void;
-  onSave(draft: Playlist): void;
-};
+type Props = {};
 
 const EMPTY_PLAYLIST = {
   id: "",
@@ -22,15 +20,14 @@ const EMPTY_PLAYLIST = {
   public: false,
 };
 
-const PlaylistEditor = ({
-  onCancel,
-  onSave,
-  playlist: playlistFromParent = EMPTY_PLAYLIST,
-}: Props) => {
-  const [playlist, setPlaylist] = useState(playlistFromParent);
+const PlaylistEditor = ({}: Props) => {
+  const dispatch = useAppDispatch();
+
+  const playlistOriginal = useAppSelector(playlistsSlice.selectors.selected);
+  const [playlist, setPlaylist] = useState(playlistOriginal ?? EMPTY_PLAYLIST);
 
   const submit = () => {
-    onSave(playlist);
+    dispatch(playlistsSlice.actions.SavePlaylist(playlist));
   };
   const changeHandler = (
     event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
@@ -88,7 +85,10 @@ const PlaylistEditor = ({
         </div>
 
         <div className="flex justify-between">
-          <Button severity="warning" onClick={onCancel}>
+          <Button
+            severity="warning"
+            onClick={() => dispatch(playlistsSlice.actions.Cancel())}
+          >
             Cancel
           </Button>
           <Button onClick={submit}>Save</Button>

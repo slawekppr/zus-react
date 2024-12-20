@@ -39,55 +39,26 @@ const PlaylistView = () => {
   const dispatch = useAppDispatch();
 
   const mode = useAppSelector(selectors.mode);
-  const playlists = useAppSelector(selectors.playlists);
   const selectedId = useAppSelector(selectors.selectedId);
-
-  const selected = useAppSelector((state) =>
-    selectors.selectedById(state, selectedId)
-  );
 
   useEffect(() => {
     fetchMyPlaylists()
       .then((data) => dispatch(actions.LoadPlaylists({ data })))
-      .catch((error) => dispatch(actions.LoadPlaylists({ error })));
+      .catch((error) =>
+        dispatch(actions.LoadPlaylists({ error: error.message }))
+      );
   }, []);
-
-  const onSelect = (payload: string) => dispatch(actions.Select(payload));
 
   return (
     <div>
       <div className="grid grid-cols-2 gap-5">
         <div className="grid gap-5">
-          <PlaylistList
-            playlists={playlists}
-            selectedId={selectedId}
-            onSelect={onSelect}
-          />
-          <Button onClick={() => dispatch(actions.ShowCreator())}>
-            Create new
-          </Button>
+          <PlaylistList />
         </div>
 
         <div className="grid gap-5">
-          {mode == "details" && (
-            <PlaylistDetails
-              playlist={selected}
-              onEdit={() => dispatch(actions.ShowEditor())}
-            />
-          )}
-          {mode == "editor" && (
-            <PlaylistEditor
-              playlist={selected}
-              onCancel={() => dispatch(actions.Cancel())}
-              onSave={(draft) => dispatch(actions.SavePlaylist(draft))}
-            />
-          )}
-          {mode == "creator" && (
-            <PlaylistEditor
-              onCancel={() => dispatch(actions.Cancel())}
-              onSave={(draft) => dispatch(actions.CreatePlaylist(draft))}
-            />
-          )}
+          {mode == "details" && <PlaylistDetails playlistId={selectedId} />}
+          {(mode == "editor" || mode == "creator") && <PlaylistEditor />}
         </div>
       </div>
     </div>

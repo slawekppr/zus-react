@@ -2,17 +2,28 @@
 import { Button } from "primereact/button";
 import React from "react";
 import type { Playlist } from "../../common/model/Playlist";
+import { useAppDispatch, useAppSelector } from "../../store";
+import { playlistsSlice } from "../../store/playlists";
 
 type Props = {
-  playlist?: Playlist;
-  onEdit: () => void;
+  playlistId?: Playlist["id"];
 };
 
-const PlaylistDetails = ({ onEdit, playlist }: Props) => {
+const PlaylistDetails = ({ playlistId }: Props) => {
+  const dispatch = useAppDispatch();
 
-  if(!playlist) return <div 
-  className="text-blue-500 p-5 border border-solid">No playlist selected</div>
-  
+  // const playlist = useAppSelector(playlistsSlice.selectors.selected);
+  const playlist = useAppSelector((state) =>
+    playlistsSlice.selectors.selectedById(state, playlistId)
+  );
+
+  if (!playlist)
+    return (
+      <div className="text-blue-500 p-5 border border-solid">
+        No playlist selected
+      </div>
+    );
+
   return (
     <div>
       <div
@@ -44,7 +55,9 @@ const PlaylistDetails = ({ onEdit, playlist }: Props) => {
         </div>
 
         <div className="flex justify-between">
-          <Button onClick={onEdit}>Edit</Button>
+          <Button onClick={() => dispatch(playlistsSlice.actions.ShowEditor())}>
+            Edit
+          </Button>
         </div>
       </div>
     </div>

@@ -1,17 +1,19 @@
 import React, { useState } from "react";
 import { mockPlaylists } from "../../common/fixtures/mockPlaylists";
 import type { Playlist } from "../../common/model/Playlist";
+import { useAppDispatch, useAppSelector } from "../../store";
+import { playlistsSlice } from "../../store/playlists";
+import { Button } from "primereact/button";
 
-type Props = {
-  playlists: Playlist[];
-  onSelect: (id: string) => void;
-  selectedId?: string;
-};
+type Props = {};
 
 // Controlled (state)
 const PlaylistList = React.memo(
-  ({ playlists, onSelect, selectedId }: Props) => {
-    
+  ({}: Props) => {
+    const playlists = useAppSelector(playlistsSlice.selectors.playlists);
+    const selectedId = useAppSelector(playlistsSlice.selectors.selectedId);
+    const dispatch = useAppDispatch();
+
     return (
       <div>
         <div className="divide-y divide-slate-300 divide-solid">
@@ -22,13 +24,19 @@ const PlaylistList = React.memo(
                   ? "bg-pink-500 text-white"
                   : "cursor-pointer hover:bg-pink-200"
               }`}
-              onClick={() => onSelect(playlist.id)}
+              onClick={() =>
+                dispatch(playlistsSlice.actions.Select(playlist.id))
+              }
               key={playlist.id}
             >
               {i + 1}. {playlist.name}
             </div>
           ))}
         </div>
+
+        <Button onClick={() => dispatch(playlistsSlice.actions.ShowCreator())}>
+          Create new
+        </Button>
       </div>
     );
   }

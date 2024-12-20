@@ -5,7 +5,7 @@ type Modes = "details" | "editor" | "creator";
 
 type State = {
   mode: Modes;
-  error?: Error;
+  error?: string;
   items: Playlist[];
   selectedId?: Playlist["id"];
 };
@@ -34,13 +34,14 @@ export const playlistsSlice = createSlice({
     LoadPlaylists(
       state,
       action: PayloadAction<
-        { data: Playlist[]; error?: never } | { error: Error; data?: never }
+        | { data: Playlist[]; error?: never }
+        | { error: string & {}; data?: never }
       >
     ) {
       if (action.payload.error) {
         state.error = action.payload.error;
       } else {
-        state.items = action.payload.data;
+        state.items = action.payload.data!;
       }
     },
     SavePlaylist(state, action: PayloadAction<Playlist>) {
