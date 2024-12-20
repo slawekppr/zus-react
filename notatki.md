@@ -387,3 +387,6 @@ npm install @reduxjs/toolkit react-redux
 
 # Immer
 https://immerjs.github.io/immer/
+
+# Native Script
+https://nativescript.org/
