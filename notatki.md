@@ -396,3 +396,7 @@ https://chromewebstore.google.com/detail/redux-devtools/lmhkpmbekcpmknklioeibfkp
 
 # Redux Promise Action
 https://github.com/pburtchaell/redux-promise-middleware/blob/HEAD/docs/introduction.md
+
+
+## ,,Warsztaty: React in Depth”w dniach 18-20 grudnia 2024 r. 
+ https://sages.link/316147 - a to w piatek na koniec 
