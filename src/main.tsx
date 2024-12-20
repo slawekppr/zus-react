@@ -12,15 +12,18 @@ import UserContextProvider from "./common/context/UserContext.tsx";
 import {
   Route,
   BrowserRouter,
+  DataRouter,
   redirect,
   RouterProvider,
   Navigate,
   Routes,
   Outlet,
+  LoaderFunction,
+  createRoutesFromElements,
+  createBrowserRouter,
 } from "react-router";
 import App from "./App.tsx";
 import { checkLogin } from "./common/services/Auth.ts";
-import { router } from "./router.tsx";
 import PlaylistView from "./playlists/containers/PlaylistView.tsx";
 import AlbumSearchView from "./music/containers/AlbumSearchView.tsx";
 import AlbumDetailView from "./music/containers/AlbumDetailView.tsx";
@@ -36,6 +39,8 @@ import { Provider } from "react-redux";
 import { store } from "./store.ts";
 import PlaylistDetails from "./playlists/components/PlaylistDetails.tsx";
 import PlaylistEditor from "./playlists/components/PlaylistEditor.tsx";
+import { Playlist } from "./common/model/Playlist.tsx";
+import { mockPlaylists } from "./common/fixtures/mockPlaylists.tsx";
 
 export const queryClient = new QueryClient({
   defaultOptions: {
@@ -53,58 +58,65 @@ export const queryClient = new QueryClient({
   // queryCache: new QueryCache({}),
 });
 
+const PlaylistDetailsLoader: LoaderFunction<Playlist> = ({
+  params,
+  request,
+  context,
+}) => {
+  debugger;
+  return mockPlaylists[0];
+};
+
+const routes = createRoutesFromElements(
+  <Route
+    path="/"
+    element={<App />}
+    loader={() => {
+      checkLogin();
+      return true;
+    }}
+  >
+    <Route index element={<Navigate to="/music/search" />} />
+    <Route path="analytics" element={<AnalyticsView />} />
+
+    <Route path="playlists" element={<PlaylistView />}>
+      <Route path="create" element={<PlaylistEditor />} />
+
+      <Route
+        path=":playlistId"
+        loader={PlaylistDetailsLoader}
+        element={<PlaylistDetails />}
+      />
+
+      <Route path=":playlistId/edit" element={<PlaylistEditor />} />
+    </Route>
+
+    <Route path="music">
+      <Route index element={<Navigate to="/music/search" />} />
+      <Route
+        path="search"
+        element={
+          <div>
+            <AlbumSearchView />
+          </div>
+        }
+      />
+      <Route path="albums/:albumId" element={<AlbumDetailView />} />
+    </Route>
+    <Route path="callback" element={<Navigate to="/music/search" />} />
+    <Route path="*" element={<PageNotFound />} />
+  </Route>
+);
+
+const router = createBrowserRouter(routes);
+
 root.render(
   <StrictMode>
     <QueryClientProvider client={queryClient}>
       <Provider store={store}>
         <UserContextProvider>
-          {/* <RouterProvider router={router}/> */}
           <PrimeReactProvider>
-            <BrowserRouter>
-              <Routes>
-                <Route
-                  path="/"
-                  element={<App />}
-                  loader={() => {
-                    checkLogin();
-                    return true;
-                  }}
-                >
-                  <Route index element={<Navigate to="/music/search" />} />
-                  <Route path="analytics" element={<AnalyticsView />} />
-
-                  <Route path="playlists" element={<PlaylistView />}>
-                    <Route path="create" element={<PlaylistEditor />} />
-                    <Route path=":playlistId" element={<PlaylistDetails />} />
-                    <Route
-                      path=":playlistId/edit"
-                      element={<PlaylistEditor />}
-                    />
-                  </Route>
-
-                  <Route path="music">
-                    <Route index element={<Navigate to="/music/search" />} />
-                    <Route
-                      path="search"
-                      element={
-                        <div>
-                          <AlbumSearchView />
-                        </div>
-                      }
-                    />
-                    <Route
-                      path="albums/:albumId"
-                      element={<AlbumDetailView />}
-                    />
-                  </Route>
-                  <Route
-                    path="callback"
-                    element={<Navigate to="/music/search" />}
-                  />
-                  <Route path="*" element={<PageNotFound />} />
-                </Route>
-              </Routes>
-            </BrowserRouter>
+            <RouterProvider router={router} />
           </PrimeReactProvider>
         </UserContextProvider>
       </Provider>
