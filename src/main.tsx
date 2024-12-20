@@ -73,13 +73,14 @@ root.render(
                   <Route index element={<Navigate to="/music/search" />} />
                   <Route path="analytics" element={<AnalyticsView />} />
 
-
                   <Route path="playlists" element={<PlaylistView />}>
-                    <Route path="create" element={<PlaylistEditor/>} />
-                    <Route path=":playlistId" element={<PlaylistDetails/>} />
-                    <Route path=":playlistId/edit" element={<PlaylistEditor/>} />
+                    <Route path="create" element={<PlaylistEditor />} />
+                    <Route path=":playlistId" element={<PlaylistDetails />} />
+                    <Route
+                      path=":playlistId/edit"
+                      element={<PlaylistEditor />}
+                    />
                   </Route>
-
 
                   <Route path="music">
                     <Route index element={<Navigate to="/music/search" />} />

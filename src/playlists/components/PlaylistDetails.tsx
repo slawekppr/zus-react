@@ -12,6 +12,7 @@ const PlaylistDetails = ({}: Props) => {
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
   
+
   const { playlistId } = useParams();
   const playlist = useAppSelector((state) =>
     playlistsSlice.selectors.selectedById(state, playlistId)
