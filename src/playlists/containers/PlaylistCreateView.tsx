@@ -1,12 +1,20 @@
 import { InputText } from "primereact/inputtext";
 import React from "react";
-import { useForm } from "react-hook-form";
+import {
+  Control,
+  Controller,
+  FieldValues,
+  Path,
+  useForm,
+} from "react-hook-form";
 import { mockAlbums } from "../../common/fixtures/mockAlbums";
 import { mockPlaylists } from "../../common/fixtures/mockPlaylists";
 import { Button } from "primereact/button";
 
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
+import { Playlist } from "../../common/model/Playlist";
+import AddToPlaylistDialog from "../../music/containers/AddToPlaylistDialog";
 
 const playlistSchema = z.object({
   name: z
@@ -34,8 +42,8 @@ const PlaylistCreateView = () => {
     reset,
   } = useForm({
     defaultValues: playlist,
-    mode: "onChange",
-    reValidateMode: "onChange",
+    // mode: "onChange",
+    // reValidateMode: "onChange",
     resolver: zodResolver(playlistSchema),
   });
 
@@ -56,15 +64,23 @@ const PlaylistCreateView = () => {
           {isValidating && "sprawdzam"}
         </div>
 
-        <div className="grid grid-cols-2">
+        <CustomInputCounter control={control} label="Name" name="name" />
+
+        <CustomInputCounter
+          control={control}
+          label="Description"
+          name="description"
+        />
+
+        {/* <div className="grid grid-cols-2">
           <label>Name</label>
           <div>
-            <input type="text" {...register("name")} />
+            <InputText {...register("name")} />
             {errors["name"] && (
               <p className="text-red-500">{errors["name"]?.message}</p>
             )}
           </div>
-        </div>
+        </div> */}
         <div className="grid grid-cols-2">
           <label>Public</label>
           <input type="checkbox" {...register("public")} />
@@ -90,3 +106,30 @@ const PlaylistCreateView = () => {
 };
 
 export default PlaylistCreateView;
+
+const CustomInputCounter = <T extends FieldValues>({
+  control,
+  label,
+  name,
+}: {
+  label: string;
+  name: Path<T>;
+  control: Control<T, any>;
+}) => {
+  return (
+    <Controller
+      control={control}
+      name={name}
+      render={({ field, fieldState: { error } }) => (
+        <div className="grid grid-cols-2">
+          <label>{label}</label>
+          <div>
+            <InputText {...field} />
+            {error && <p className="text-red-500 my-2">{error?.message}</p>}
+            {!error && <>{field.value.length} / 100</>}
+          </div>
+        </div>
+      )}
+    />
+  );
+};
