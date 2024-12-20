@@ -49,3 +49,5 @@ const PlaylistView = () => {
 };
 
 export default PlaylistView;
+
+export const Component = PlaylistView;

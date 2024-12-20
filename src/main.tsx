@@ -98,13 +98,12 @@ const routes = createRoutesFromElements(
       <Route index element={<Navigate to="/music/search" />} />
       <Route
         path="search"
-        element={
-          <div>
-            <AlbumSearchView />
-          </div>
-        }
+        lazy={() => import("./music/containers/AlbumSearchView.tsx")}
       />
-      <Route path="albums/:albumId" element={<AlbumDetailView />} />
+      <Route
+        path="albums/:albumId"
+        lazy={() => import("./music/containers/AlbumDetailView.tsx")}
+      />
     </Route>
     <Route path="callback" element={<Navigate to="/music/search" />} />
     <Route path="*" element={<PageNotFound />} />
