@@ -1,4 +1,9 @@
-import { configureStore, Middleware, MiddlewareAPI } from "@reduxjs/toolkit";
+import {
+  configureStore,
+  Middleware,
+  MiddlewareAPI,
+  Tuple,
+} from "@reduxjs/toolkit";
 import { counterSlice } from "./store/counter";
 import { playlistsSlice } from "./store/playlists";
 
@@ -12,7 +17,6 @@ const logger: Middleware =
     return state;
   };
 
-  
 export const store = configureStore({
   reducer: {
     [counterSlice.name]: counterSlice.reducer,
@@ -20,7 +24,7 @@ export const store = configureStore({
   },
   devTools: true,
   middleware(getDefaultMiddleware) {
-    return getDefaultMiddleware().concat([logger, logger, logger]);
+    return getDefaultMiddleware(); //.concat([logger]);
   },
 });
 

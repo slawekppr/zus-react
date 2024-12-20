@@ -29,21 +29,26 @@ import {
   CreatePlaylist,
   LoadPlaylists,
 } from "../../store/PlaylistsStore";
-import { useAppDispatch, useAppSelector } from "../../store";
+import { AppDispatch, useAppDispatch, useAppSelector } from "../../store";
 import { playlistsSlice } from "../../store/playlists";
 import { Outlet } from "react-router";
+import { Store, ThunkDispatch } from "@reduxjs/toolkit";
 
 const { actions, selectors } = playlistsSlice;
+
+const LoadPlaylistsThunkAction = () => (dispatch: AppDispatch) => {
+  fetchMyPlaylists()
+    .then((data) => dispatch(actions.LoadPlaylists({ data: mockPlaylists })))
+    .catch((error) =>
+      dispatch(actions.LoadPlaylists({ error: error.message }))
+    );
+};
 
 const PlaylistView = () => {
   const dispatch = useAppDispatch();
 
   useEffect(() => {
-    fetchMyPlaylists()
-      .then((data) => dispatch(actions.LoadPlaylists({ data: mockPlaylists })))
-      .catch((error) =>
-        dispatch(actions.LoadPlaylists({ error: error.message }))
-      );
+    dispatch(LoadPlaylistsThunkAction()); // ThunkMiddleware
   }, []);
 
   return (
