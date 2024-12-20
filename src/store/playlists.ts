@@ -18,8 +18,10 @@ export const initialState: State = {
 export const playlistsSlice = createSlice({
   name: "playlists",
   initialState,
-  reducers: {
+  reducers: { // switch(action.type){
+    // { type: playlists/Select }
     Select(state, action: PayloadAction<Playlist["id"]>) {
+      // immuable - immer.js is included
       state.selectedId = action.payload;
     },
     ShowCreator(state) {

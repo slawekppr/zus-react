@@ -36,10 +36,8 @@ const actions = playlistsSlice.actions;
 const selectors = playlistsSlice.selectors;
 
 const PlaylistView = () => {
-  // const [state, dispatch] = useReducer(playlistsReducer, initialState);
   const dispatch = useAppDispatch();
 
-  // const mode = useAppSelector((state) => state.playlists.mode);
   const mode = useAppSelector(selectors.mode);
   const playlists = useAppSelector(selectors.playlists);
   const selectedId = useAppSelector(selectors.selectedId);

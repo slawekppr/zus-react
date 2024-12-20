@@ -43,7 +43,7 @@ type Action = ReturnType<
 
 export const playlistsReducer = (state: State, action: Action): State => {
   console.log("Action", action.type, action);
-
+  
   switch (action.type) {
     case "Select":
       return { ...state, selectedId: action.payload };
