@@ -5,8 +5,8 @@ type Modes = "details" | "editor" | "creator";
 
 type State = {
   mode: Modes;
-  items: Playlist[];
   error?: Error;
+  items: Playlist[];
   selectedId?: Playlist["id"];
 };
 
@@ -18,10 +18,8 @@ export const initialState: State = {
 export const playlistsSlice = createSlice({
   name: "playlists",
   initialState,
-  reducers: { // switch(action.type){
-    // { type: playlists/Select }
+  reducers: {
     Select(state, action: PayloadAction<Playlist["id"]>) {
-      // immuable - immer.js is included
       state.selectedId = action.payload;
     },
     ShowCreator(state) {
@@ -48,8 +46,12 @@ export const playlistsSlice = createSlice({
     SavePlaylist(state, action: PayloadAction<Playlist>) {
       state.mode = "details";
       state.selectedId = action.payload.id;
+      const draft = action.payload;
 
-      state.items = updateItem(action.payload)(state.items);
+      for (let index in state.items) {
+        if (state.items[index].id !== draft.id) continue;
+        state.items[index] = draft;
+      }
     },
     CreatePlaylist(state, action: PayloadAction<Playlist>) {
       state.mode = "details";
@@ -62,6 +64,9 @@ export const playlistsSlice = createSlice({
     selectedId: (state) => state.selectedId,
     mode: (state) => state.mode,
     error: (state) => state.error,
+    // useMemo:
     selected: (state) => state.items.find((p) => p.id == state.selectedId),
+    selectedById: (state, id?: Playlist["id"]) =>
+      state.items.find((p) => p.id == id),
   },
 });

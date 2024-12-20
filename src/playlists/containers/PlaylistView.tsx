@@ -41,7 +41,10 @@ const PlaylistView = () => {
   const mode = useAppSelector(selectors.mode);
   const playlists = useAppSelector(selectors.playlists);
   const selectedId = useAppSelector(selectors.selectedId);
-  const selected = useAppSelector(selectors.selected);
+
+  const selected = useAppSelector((state) =>
+    selectors.selectedById(state, selectedId)
+  );
 
   useEffect(() => {
     fetchMyPlaylists()
