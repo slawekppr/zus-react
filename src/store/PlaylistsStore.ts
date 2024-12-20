@@ -44,11 +44,16 @@ type Action = ReturnType<
 import immer from "immer";
 
 const UpdatePlaylist = immer.produce((state: Playlist[], item: Playlist) => {
-  const index = state.findIndex((p) => p.id === item.id);
-  state[index] = item;
+  // const index = state.findIndex((p) => p.id === item.id);
+  // state[index] = item;
+  for (let index in state) {
+    if (state[index].id !== item.id) continue;
+    state[index] = item;
+  }
 });
-                            // reducer ( state       ,   data/action )
-const updatedPlaylists = UpdatePlaylist(mockPlaylists, mockPlaylists[0])
+
+// reducer ( state       ,   data/action )
+const updatedPlaylists = UpdatePlaylist(mockPlaylists, mockPlaylists[0]);
 
 const SaveCase = immer.produce(
   (state: State, action: ReturnType<typeof SavePlaylist>) => {
