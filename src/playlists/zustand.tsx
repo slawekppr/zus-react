@@ -1,5 +1,6 @@
 import { create } from "zustand";
 import { immer } from "zustand/middleware/immer";
+import { devtools } from "zustand/middleware";
 
 type Store = {
   count: number;
@@ -8,19 +9,21 @@ type Store = {
 };
 
 const useCounterStore = create<Store>()(
-  immer((set) => ({
-    count: 1,
-    value: "2",
-    inc: () =>
-      set((state) => {
-        state.count++;
-      }),
-    dec() {
-      set((state) => {
-        state.count--;
-      });
-    },
-  }))
+  devtools(
+    immer((set) => ({
+      count: 1,
+      value: "2",
+      inc: () =>
+        set((state) => {
+          state.count++;
+        }),
+      dec() {
+        set((state) => {
+          state.count--;
+        });
+      },
+    }))
+  )
 );
 
 function Counter() {
