@@ -6,19 +6,18 @@ import { useAppDispatch, useAppSelector } from "../../store";
 import { playlistsSlice } from "../../store/playlists";
 import { useLoaderData, useNavigate, useParams } from "react-router";
 import { PlaylistDetailsLoader } from "../../main";
+import { useGetPlaylistByIdQuery } from "../../api/musicAPIQueries";
 
 type Props = {};
 
 const PlaylistDetails = ({}: Props) => {
-  const dispatch = useAppDispatch();
   const navigate = useNavigate();
 
-  const data = useLoaderData<Playlist>();
-  
   const { playlistId } = useParams();
-  const playlist = useAppSelector((state) =>
-    playlistsSlice.selectors.selectedById(state, playlistId)
-  );
+  // const playlist = useAppSelector((state) =>
+  //   playlistsSlice.selectors.selectedById(state, playlistId)
+  // );
+  const { data: playlist } = useGetPlaylistByIdQuery(playlistId!);
 
   if (!playlist)
     return (

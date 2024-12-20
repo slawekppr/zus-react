@@ -5,14 +5,17 @@ import { useAppDispatch, useAppSelector } from "../../store";
 import { playlistsSlice } from "../../store/playlists";
 import { Button } from "primereact/button";
 import { NavLink, useNavigate } from "react-router";
+import { useGetPlaylistsQuery } from "../../api/musicAPIQueries";
 
 type Props = {};
 
 // Controlled (state)
 const PlaylistList = React.memo(
   ({}: Props) => {
-    const playlists = useAppSelector(playlistsSlice.selectors.playlists);
+    // const playlists = useAppSelector(playlistsSlice.selectors.playlists);
     const navigate = useNavigate();
+
+    const { data: playlists = [] } = useGetPlaylistsQuery();
 
     return (
       <div>

@@ -9,14 +9,10 @@ import PlaylistList from "../components/PlaylistList";
 import PlaylistDetails from "../components/PlaylistDetails";
 import PlaylistEditor from "../components/PlaylistEditor";
 import { Button } from "primereact/button";
-import { mockPlaylists } from "../../common/fixtures/mockPlaylists";
 import type { Playlist } from "../../common/model/Playlist";
 import { appendItem, updateItem } from "./utils";
 import { useQueries, useQuery } from "@tanstack/react-query";
-import {
-  fetchMyPlaylists,
-  fetchPlaylistById,
-} from "../../common/services/MusicAPI";
+import { fetchPlaylistById } from "../../common/services/MusicAPI";
 import { queryClient } from "../../main";
 import {
   playlistsReducer,
@@ -29,29 +25,14 @@ import {
   CreatePlaylist,
   LoadPlaylists,
 } from "../../store/PlaylistsStore";
-import { AppDispatch, useAppDispatch, useAppSelector } from "../../store";
+import { useAppDispatch, useAppSelector } from "../../store";
 import { playlistsSlice } from "../../store/playlists";
 import { Outlet } from "react-router";
 import { Store, ThunkDispatch } from "@reduxjs/toolkit";
-
-const { actions, selectors } = playlistsSlice;
-
-const LoadPlaylistsThunkAction = () => (dispatch: AppDispatch) => {
-  fetchMyPlaylists()
-    .then((data) => {
-      dispatch(actions.LoadPlaylists({ data: mockPlaylists }));
-    })
-    .catch((error) =>
-      dispatch(actions.LoadPlaylists({ error: error.message }))
-    );
-};
+import { LoadPlaylistsThunkAction } from "./LoadPlaylistsThunkAction";
+import { musicAPI } from "../../api/musicAPIQueries";
 
 const PlaylistView = () => {
-  const dispatch = useAppDispatch();
-
-  useEffect(() => {
-    dispatch(LoadPlaylistsThunkAction()); // ThunkMiddleware
-  }, []);
 
   return (
     <div>

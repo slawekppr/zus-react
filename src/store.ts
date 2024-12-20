@@ -21,10 +21,14 @@ export const store = configureStore({
   reducer: {
     [counterSlice.name]: counterSlice.reducer,
     [playlistsSlice.name]: playlistsSlice.reducer,
+    [musicAPI.reducerPath]: musicAPI.reducer,
   },
   devTools: true,
   middleware(getDefaultMiddleware) {
-    return getDefaultMiddleware(); //.concat([logger]);
+    return getDefaultMiddleware().concat([
+      // logger,
+      musicAPI.middleware,
+    ]);
   },
 });
 
@@ -37,6 +41,7 @@ export type RootState = ReturnType<typeof store.getState>;
 export type AppDispatch = typeof store.dispatch;
 
 import { useDispatch, useSelector } from "react-redux";
+import { musicAPI } from "./api/musicAPIQueries";
 
 // Use throughout your app instead of plain `useDispatch` and `useSelector`
 export const useAppSelector = useSelector.withTypes<RootState>();
