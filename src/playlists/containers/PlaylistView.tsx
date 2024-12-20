@@ -31,15 +31,12 @@ import {
 } from "../../store/PlaylistsStore";
 import { useAppDispatch, useAppSelector } from "../../store";
 import { playlistsSlice } from "../../store/playlists";
+import { Outlet } from "react-router";
 
-const actions = playlistsSlice.actions;
-const selectors = playlistsSlice.selectors;
+const { actions, selectors } = playlistsSlice;
 
 const PlaylistView = () => {
   const dispatch = useAppDispatch();
-
-  const mode = useAppSelector(selectors.mode);
-  const selectedId = useAppSelector(selectors.selectedId);
 
   useEffect(() => {
     fetchMyPlaylists()
@@ -57,8 +54,7 @@ const PlaylistView = () => {
         </div>
 
         <div className="grid gap-5">
-          {mode == "details" && <PlaylistDetails playlistId={selectedId} />}
-          {(mode == "editor" || mode == "creator") && <PlaylistEditor />}
+          <Outlet />
         </div>
       </div>
     </div>

@@ -10,6 +10,7 @@ import {
 import RichEditor from "../../common/components/RichEditor";
 import { useAppDispatch, useAppSelector } from "../../store";
 import { playlistsSlice } from "../../store/playlists";
+import { useNavigate, useParams } from "react-router";
 
 type Props = {};
 
@@ -23,11 +24,17 @@ const EMPTY_PLAYLIST = {
 const PlaylistEditor = ({}: Props) => {
   const dispatch = useAppDispatch();
 
-  const playlistOriginal = useAppSelector(playlistsSlice.selectors.selected);
+  const navigate = useNavigate();
+  const { playlistId } = useParams();
+  const playlistOriginal = useAppSelector((state) =>
+    playlistsSlice.selectors.selectedById(state, playlistId)
+  );
+
   const [playlist, setPlaylist] = useState(playlistOriginal ?? EMPTY_PLAYLIST);
 
   const submit = () => {
     dispatch(playlistsSlice.actions.SavePlaylist(playlist));
+    navigate(`/playlists/${playlist.id}`)
   };
   const changeHandler = (
     event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
@@ -87,7 +94,7 @@ const PlaylistEditor = ({}: Props) => {
         <div className="flex justify-between">
           <Button
             severity="warning"
-            onClick={() => dispatch(playlistsSlice.actions.Cancel())}
+            onClick={() => navigate(`/playlists/${playlist.id}`)}
           >
             Cancel
           </Button>

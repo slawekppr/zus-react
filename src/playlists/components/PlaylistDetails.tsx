@@ -4,15 +4,15 @@ import React from "react";
 import type { Playlist } from "../../common/model/Playlist";
 import { useAppDispatch, useAppSelector } from "../../store";
 import { playlistsSlice } from "../../store/playlists";
+import { useNavigate, useParams } from "react-router";
 
-type Props = {
-  playlistId?: Playlist["id"];
-};
+type Props = {};
 
-const PlaylistDetails = ({ playlistId }: Props) => {
+const PlaylistDetails = ({}: Props) => {
   const dispatch = useAppDispatch();
-
-  // const playlist = useAppSelector(playlistsSlice.selectors.selected);
+  const navigate = useNavigate();
+  
+  const { playlistId } = useParams();
   const playlist = useAppSelector((state) =>
     playlistsSlice.selectors.selectedById(state, playlistId)
   );
@@ -55,7 +55,7 @@ const PlaylistDetails = ({ playlistId }: Props) => {
         </div>
 
         <div className="flex justify-between">
-          <Button onClick={() => dispatch(playlistsSlice.actions.ShowEditor())}>
+          <Button onClick={() => navigate(`/playlists/${playlist.id}/edit`)}>
             Edit
           </Button>
         </div>
