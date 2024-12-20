@@ -3,28 +3,67 @@ import React from "react";
 import { useForm } from "react-hook-form";
 import { mockAlbums } from "../../common/fixtures/mockAlbums";
 import { mockPlaylists } from "../../common/fixtures/mockPlaylists";
+import { Button } from "primereact/button";
 
-type Props = {};
+import { zodResolver } from "@hookform/resolvers/zod";
+import { z } from "zod";
 
-const PlaylistCreateView = (props: Props) => {
+const playlistSchema = z.object({
+  name: z
+    .string()
+    .nonempty("Name is required")
+    .min(3, "Value too short")
+    .regex(/[A-Z].*/, "Must start with Capital Letter"),
+  public: z.boolean(),
+  description: z.string().optional(),
+});
+
+type Playlsit2 = z.infer<typeof playlistSchema>;
+const result = playlistSchema.parse(mockPlaylists[0]); // Playlist | Exception!
+
+const PlaylistCreateView = () => {
   const playlist = mockPlaylists[0];
 
-  const { formState, control, getValues, register, handleSubmit, watch } =
-    useForm({
-      defaultValues: playlist,
-    });
-
-  // const name = watch('name') // state -> rerender
-
-  // const { name, onBlur, onChange, ref, disabled } = register("name");
-  // <input type="text" value={} onChange={} onBlur={} ref={} />
+  const {
+    formState: { errors, isSubmitting, isValidating },
+    control,
+    getValues,
+    register,
+    handleSubmit,
+    watch,
+    reset,
+  } = useForm({
+    defaultValues: playlist,
+    mode: "onChange",
+    reValidateMode: "onChange",
+    resolver: zodResolver(playlistSchema),
+  });
 
   return (
-    <div>
+    <form
+      onSubmit={handleSubmit(
+        async (data) => {
+          debugger;
+        },
+        async (error) => {
+          debugger;
+        }
+      )}
+    >
       <div className="grid gap-5">
+        <div>
+          {isSubmitting && "wysylam"}
+          {isValidating && "sprawdzam"}
+        </div>
+
         <div className="grid grid-cols-2">
           <label>Name</label>
-          <input type="text" {...register("name")} />
+          <div>
+            <input type="text" {...register("name")} />
+            {errors["name"] && (
+              <p className="text-red-500">{errors["name"]?.message}</p>
+            )}
+          </div>
         </div>
         <div className="grid grid-cols-2">
           <label>Public</label>
@@ -35,9 +74,18 @@ const PlaylistCreateView = (props: Props) => {
           <textarea {...register("description")} />
         </div>
 
-        <div></div>
+        <div className="flex gap-5">
+          <Button type="submit">Submit</Button>
+          <Button
+            type="button"
+            severity="warning"
+            onClick={() => reset(playlist)}
+          >
+            Reset
+          </Button>
+        </div>
       </div>
-    </div>
+    </form>
   );
 };
 
