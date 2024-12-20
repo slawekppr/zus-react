@@ -41,38 +41,72 @@ type Action = ReturnType<
   | typeof LoadPlaylists
 >;
 
+import immer from "immer";
+
+const UpdatePlaylist = immer.produce((state: Playlist[], item: Playlist) => {
+  const index = state.findIndex((p) => p.id === item.id);
+  state[index] = item;
+});
+                            // reducer ( state       ,   data/action )
+const updatedPlaylists = UpdatePlaylist(mockPlaylists, mockPlaylists[0])
+
+const SaveCase = immer.produce(
+  (state: State, action: ReturnType<typeof SavePlaylist>) => {
+    const draft = action.payload;
+
+    state.mode = "details";
+    state.selectedId = draft.id;
+    state.items = updateItem(draft)(state.items);
+
+    return state;
+  }
+);
+
 export const playlistsReducer = (state: State, action: Action): State => {
   console.log("Action", action.type, action);
-  
+
   switch (action.type) {
     case "Select":
-      return { ...state, selectedId: action.payload };
+      // return { ...state, selectedId: action.payload };
+      return immer.produce(state, (state /* Proxy<state> */) => {
+        state.selectedId = action.payload;
+      });
     case "Cancel":
       return { ...state, mode: "details" };
     case "ShowCreator":
       return { ...state, mode: "creator" };
     case "ShowEditor":
       return { ...state, mode: "editor" };
-    case "CreatePlaylist": {
-      const draft = action.payload;
-      return {
-        ...state,
-        mode: "details",
-        selectedId: draft.id,
-        items: [...state.items, draft],
-      };
-    }
+    case "CreatePlaylist":
+      // return {
+      //   ...state,
+      //   mode: "details",
+      //   selectedId: draft.id,
+      //   items: [...state.items, draft],
+      //   items: appendItem(draft) ( state.items ),
+      // };
+
+      return immer.produce(state, (state) => {
+        const draft = action.payload;
+        state.mode = "details";
+        state.selectedId = draft.id;
+        state.items.push(draft);
+      });
+
     case "Save": {
-      const draft = action.payload;
-      return {
-        ...state,
-        mode: "details",
-        selectedId: draft.id,
-        items: updateItem(draft)(state.items),
-      };
+      return SaveCase(state, action);
+
+      // const draft = action.payload;
+      // return {
+      //   ...state,
+      //   mode: "details",
+      //   selectedId: draft.id,
+      //   items: updateItem(draft)(state.items),
+      // };
     }
     case "Load":
-      if (action.payload.error) return { ...state, error: action.payload.error };
+      if (action.payload.error)
+        return { ...state, error: action.payload.error };
       return { ...state, items: action.payload.data };
 
     default:

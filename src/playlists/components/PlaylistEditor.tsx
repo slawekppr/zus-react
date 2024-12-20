@@ -9,7 +9,6 @@ import {
 } from "../../common/services/MusicAPI";
 import RichEditor from "../../common/components/RichEditor";
 
-
 type Props = {
   playlist?: Playlist;
   onCancel: () => void;
@@ -37,12 +36,12 @@ const PlaylistEditor = ({
     event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
   ): void => {
     const target = event.target;
+    const name = event.target.name;
 
     let value: string | boolean = target.value;
     target.type;
 
     if (target instanceof HTMLInputElement && target.type == "checkbox") {
-      // if ("checked" in target) {
       value = target.checked;
     }
 
