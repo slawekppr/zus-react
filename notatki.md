@@ -399,4 +399,36 @@ https://github.com/pburtchaell/redux-promise-middleware/blob/HEAD/docs/introduct
 
 
 ## ,,Warsztaty: React in Depth”w dniach 18-20 grudnia 2024 r. 
- https://sages.link/316147 - a to w piatek na koniec 
+ https://sages.link/316147 - a to w piatek n
+ 
+ ## Build
+ npm run build 
+
+> vite-project@0.0.0 build
+> tsc -b && vite build
+
+vite v6.0.2 building for production...
+✓ 182 modules transformed.
+dist/index.html                                    0.50 kB │ gzip:   0.31 kB
+dist/assets/primeicons-C6QP2o4f.woff2             35.15 kB
+dist/assets/primeicons-MpK4pl85.ttf               84.98 kB
+dist/assets/primeicons-WjwUDZjB.woff              85.06 kB
+dist/assets/primeicons-DMOk5skT.eot               85.16 kB
+dist/assets/primeicons-Dr5RGzOO.svg              342.53 kB │ gzip: 105.26 kB
+dist/assets/InterVariable-CWi-zmRD.woff2         345.59 kB
+dist/assets/InterVariable-Italic-d6KXgdvN.woff2  380.90 kB
+dist/assets/index-CE9jPgp6.css                   383.14 kB │ gzip:  43.44 kB
+dist/assets/useFocus-fcv5Sjft.js                   0.17 kB │ gzip:   0.16 kB
+dist/assets/PlaylistList-DIyW4jiG.js               0.58 kB │ gzip:   0.40 kB
+dist/assets/PlaylistView-8XJ-tl_3.js               2.69 kB │ gzip:   1.00 kB
+dist/assets/MusicAPI-D7O-v7jG.js                  11.73 kB │ gzip:   4.58 kB
+dist/assets/AlbumSearchView-Chhd2345.js           20.87 kB │ gzip:   7.44 kB
+dist/assets/AlbumDetailView-C61tZmY0.js           41.94 kB │ gzip:  12.59 kB
+dist/assets/index-BgLvvF5a.js                    625.53 kB │ gzip: 203.45 kB
+
+(!) Some chunks are larger than 500 kB after minification. Consider:
+- Using dynamic import() to code-split the application
+- Use build.rollupOptions.output.manualChunks to improve chunking: https://rollupjs.org/configuration-options/#output-manualchunks
+- Adjust chunk size limit for this warning via build.chunkSizeWarningLimit.
+✓ built in 2.38s
+

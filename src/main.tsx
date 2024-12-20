@@ -1,8 +1,6 @@
-import React, { StrictMode } from "react";
+import { StrictMode } from "react";
 import { createRoot } from "react-dom/client";
 import "./index.css";
-
-const root = createRoot(document.getElementById("root")!);
 
 import "primereact/resources/themes/lara-light-cyan/theme.css";
 
@@ -11,37 +9,25 @@ import "primeicons/primeicons.css";
 import UserContextProvider from "./common/context/UserContext.tsx";
 import {
   Route,
-  BrowserRouter,
-  DataRouter,
-  redirect,
   RouterProvider,
   Navigate,
-  Routes,
-  Outlet,
   LoaderFunction,
   createRoutesFromElements,
   createBrowserRouter,
 } from "react-router";
 import App from "./App.tsx";
 import { checkLogin } from "./common/services/Auth.ts";
-import PlaylistView from "./playlists/containers/PlaylistView.tsx";
-import AlbumSearchView from "./music/containers/AlbumSearchView.tsx";
-import AlbumDetailView from "./music/containers/AlbumDetailView.tsx";
 import { PageNotFound } from "./PageNotFound.tsx";
-import {
-  QueryCache,
-  QueryClient,
-  QueryClientProvider,
-} from "@tanstack/react-query";
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { HTTPError } from "ky";
 import AnalyticsView from "./admin/AnalyticsView.tsx";
 import { Provider } from "react-redux";
 import { store } from "./store.ts";
-import PlaylistDetails from "./playlists/components/PlaylistDetails.tsx";
-import PlaylistEditor from "./playlists/components/PlaylistEditor.tsx";
 import { Playlist } from "./common/model/Playlist.tsx";
 import { mockPlaylists } from "./common/fixtures/mockPlaylists.tsx";
 import { playlistsSlice } from "./store/playlists.ts";
+
+const root = createRoot(document.getElementById("root")!);
 
 export const queryClient = new QueryClient({
   defaultOptions: {

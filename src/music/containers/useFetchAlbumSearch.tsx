@@ -35,9 +35,9 @@ export function useFetch<T, TParam>(
   };
 }
 
-export function useFetchAlbumSearch(query: string) {
-  return useFetch(query, fetchAlbumSearchResults);
-}
+// export function useFetchAlbumSearch(query: string) {
+//   return useFetch(query, fetchAlbumSearchResults);
+// }
 
 // export function useFetchPlaylist(query: string) {
 //   return useFetch(query, fetchPlaylists);

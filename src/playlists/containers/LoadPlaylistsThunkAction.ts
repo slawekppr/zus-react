@@ -1,12 +1,13 @@
 import { mockPlaylists } from "../../common/fixtures/mockPlaylists";
 import { fetchMyPlaylists } from "../../common/services/MusicAPI";
 import { AppDispatch } from "../../store";
+import { playlistsSlice } from "../../store/playlists";
 
 export const LoadPlaylistsThunkAction = () => (dispatch: AppDispatch) => {
   fetchMyPlaylists()
     .then((data) => {
-      dispatch(actions.LoadPlaylists({ data: mockPlaylists }));
+      dispatch(playlistsSlice.actions.LoadPlaylists({ data: mockPlaylists }));
     })
-    .catch((error) => dispatch(actions.LoadPlaylists({ error: error.message }))
+    .catch((error) => dispatch(playlistsSlice.actions.LoadPlaylists({ error: error.message }))
     );
 };
