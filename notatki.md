@@ -390,3 +390,6 @@ https://immerjs.github.io/immer/
 
 # Native Script
 https://nativescript.org/
+
+# REdux devtools
+https://chromewebstore.google.com/detail/redux-devtools/lmhkpmbekcpmknklioeibfkpmmfibljd?hl=en
